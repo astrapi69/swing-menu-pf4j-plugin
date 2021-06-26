@@ -1,12 +1,15 @@
 package io.github.astrapi69.menu.pf4j.plugin;
 
 import io.github.astrapi69.menu.pf4j.extension.DesktopMenuExtensionPoint;
+import org.pf4j.DefaultExtensionFinder;
 import org.pf4j.DefaultPluginManager;
+import org.pf4j.ExtensionFinder;
 import org.pf4j.Plugin;
 import org.pf4j.PluginManager;
 import org.pf4j.PluginWrapper;
 
 import java.util.List;
+import java.util.Set;
 
 public class DesktopMenuPlugin extends Plugin
 {
@@ -33,8 +36,17 @@ public class DesktopMenuPlugin extends Plugin
 
 	public static void main(String[] args) {
 		// create the plugin manager
-		PluginManager pluginManager = new DefaultPluginManager(); // or "new ZipPluginManager() / new DefaultPluginManager()"
+		// create the plugin manager
+		final PluginManager pluginManager = new DefaultPluginManager() {
 
+			protected ExtensionFinder createExtensionFinder() {
+				DefaultExtensionFinder extensionFinder = (DefaultExtensionFinder) super.createExtensionFinder();
+				extensionFinder.addServiceProviderExtensionFinder(); // to activate "HowdyGreeting" extension
+
+				return extensionFinder;
+			}
+
+		};
 		// start and load all plugins of application
 		pluginManager.loadPlugins();
 		pluginManager.startPlugins();
@@ -44,7 +56,10 @@ public class DesktopMenuPlugin extends Plugin
 		for (DesktopMenuExtensionPoint menuExtensionPoint : extensions) {
 			System.out.println(">>> " + menuExtensionPoint);
 		}
-
+		Set<String> extensionClassNames = pluginManager.getExtensionClassNames(null);
+		for (String extension : extensionClassNames) {
+			System.out.println("   " + extension);
+		}
 		// stop and unload all plugins
 		pluginManager.stopPlugins();
 		pluginManager.unloadPlugins();
