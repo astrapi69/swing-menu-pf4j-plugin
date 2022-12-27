@@ -9,6 +9,7 @@ dependencies {
     implementation("org.pf4j:pf4j:$pf4jVersion")
     implementation("io.github.astrapi69:menu-action:$menuActionVersion")
     implementation("io.github.astrapi69:gen-tree:$genTreeVersion")
+    testImplementation("io.github.astrapi69:silly-collection:$sillyCollectionVersion")
     testImplementation("io.github.astrapi69:silly-io:$sillyIoVersion")
     testImplementation("io.github.astrapi69:file-worker:$fileWorkerVersion")
     testImplementation("io.github.astrapi69:throwable:$throwableVersion")
