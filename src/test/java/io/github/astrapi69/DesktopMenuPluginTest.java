@@ -3,7 +3,6 @@ package io.github.astrapi69;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
