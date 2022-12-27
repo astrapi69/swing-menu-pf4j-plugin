@@ -14,7 +14,7 @@
 
 </div>
 
-pf4j plugin for create a simple swing menu.
+pf4j plugin for create a simple swing menu bar
 
 > Please support this project by simply putting a Github <a class="github-button" href="https://github.com/astrapi69/swing-menu-pf4j-plugin" data-icon="octicon-star" aria-label="Star astrapi69/swing-menu-pf4j-plugin on GitHub">
 > Star ⭐</a>
