@@ -35,6 +35,8 @@ public interface DesktopMenuExtensionPoint extends ExtensionPoint
 {
 
 	JMenuBar buildMenuBar(String xml, Map<String, ActionListener> actionListenerMap);
-	JMenu buildAndAddMenuToExistingJMenuBar(String xml, Map<String, ActionListener> actionListenerMap);
+
+	JMenu buildAndAddMenuToExistingJMenuBar(String xml,
+		Map<String, ActionListener> actionListenerMap);
 
 }

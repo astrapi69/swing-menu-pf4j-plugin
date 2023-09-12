@@ -29,10 +29,10 @@ import java.util.Map;
 
 import javax.swing.*;
 
-import io.github.astrapi69.swing.menu.factory.JMenuFactory;
 import org.pf4j.Extension;
 
 import io.github.astrapi69.swing.menu.factory.JMenuBarFactory;
+import io.github.astrapi69.swing.menu.factory.JMenuFactory;
 import io.github.astrapi69.swing.menu.model.transform.MenuInfoTreeNodeConverter;
 
 @Extension
