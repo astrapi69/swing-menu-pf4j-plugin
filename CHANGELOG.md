@@ -7,7 +7,7 @@ Version 1-SNAPSHOT
 ADDED:
 
 - new CHANGELOG.md file created
-- new dependency menu-action in version 3
+- new dependency menu-action in version 3.1
 - new dependency gen-tree in version 8.4
 
 Notable links:
