@@ -24,10 +24,10 @@
  */
 package io.github.astrapi69.menu.pf4j.transform;
 
-import java.util.Comparator;
-
 import io.github.astrapi69.gen.tree.BaseTreeNode;
 import io.github.astrapi69.swing.menu.model.MenuInfo;
+
+import java.util.Comparator;
 
 /**
  * The class {@link BaseTreeNodeByMenuInfoOrdinalComparator} compares tree nodes over its ordinal

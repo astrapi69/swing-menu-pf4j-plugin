@@ -1,21 +1,5 @@
 package io.github.astrapi69;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import java.awt.BorderLayout;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.util.*;
-
-import javax.swing.*;
-
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.pf4j.DefaultExtensionFinder;
-import org.pf4j.DefaultPluginManager;
-import org.pf4j.ExtensionFinder;
-import org.pf4j.PluginManager;
-
 import io.github.astrapi69.collection.list.ListExtensions;
 import io.github.astrapi69.file.create.FileFactory;
 import io.github.astrapi69.file.read.ReadFileExtensions;
@@ -28,6 +12,24 @@ import io.github.astrapi69.swing.action.ToggleFullScreenAction;
 import io.github.astrapi69.swing.menu.enumeration.BaseMenuId;
 import io.github.astrapi69.throwable.RuntimeExceptionDecorator;
 import io.github.astrapi69.window.adapter.CloseWindow;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.pf4j.DefaultExtensionFinder;
+import org.pf4j.DefaultPluginManager;
+import org.pf4j.ExtensionFinder;
+import org.pf4j.PluginManager;
+
+import javax.swing.JFrame;
+import javax.swing.JMenuBar;
+import java.awt.BorderLayout;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class DesktopMenuPluginTest
 {

@@ -24,20 +24,6 @@
  */
 package io.github.astrapi69.menu.pf4j.factory;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.swing.*;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-
 import io.github.astrapi69.file.create.FileFactory;
 import io.github.astrapi69.file.read.ReadFileExtensions;
 import io.github.astrapi69.file.search.PathFinder;
@@ -55,6 +41,20 @@ import io.github.astrapi69.swing.menu.model.MenuInfo;
 import io.github.astrapi69.swing.menu.model.transform.MenuInfoTreeNodeConverter;
 import io.github.astrapi69.swing.menu.model.transform.MenuItemInfoConverter;
 import io.github.astrapi69.throwable.RuntimeExceptionDecorator;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.KeyStroke;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class JMenuFactoryTest
 {

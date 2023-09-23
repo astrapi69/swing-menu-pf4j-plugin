@@ -24,9 +24,7 @@
  */
 package io.github.astrapi69.menu.pf4j.plugin;
 
-import java.util.List;
-import java.util.Set;
-
+import io.github.astrapi69.menu.pf4j.extension.DesktopMenuExtensionPoint;
 import org.pf4j.DefaultExtensionFinder;
 import org.pf4j.DefaultPluginManager;
 import org.pf4j.ExtensionFinder;
@@ -34,7 +32,8 @@ import org.pf4j.Plugin;
 import org.pf4j.PluginManager;
 import org.pf4j.PluginWrapper;
 
-import io.github.astrapi69.menu.pf4j.extension.DesktopMenuExtensionPoint;
+import java.util.List;
+import java.util.Set;
 
 public class DesktopMenuPlugin extends Plugin
 {

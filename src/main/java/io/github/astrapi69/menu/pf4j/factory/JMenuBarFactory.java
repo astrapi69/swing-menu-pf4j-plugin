@@ -24,17 +24,18 @@
  */
 package io.github.astrapi69.menu.pf4j.factory;
 
-import java.awt.event.ActionListener;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
-import javax.swing.*;
-
 import io.github.astrapi69.gen.tree.BaseTreeNode;
 import io.github.astrapi69.swing.menu.enumeration.BaseMenuId;
 import io.github.astrapi69.swing.menu.factory.MenuVisitorExtensions;
 import io.github.astrapi69.swing.menu.model.MenuInfo;
 import lombok.NonNull;
+
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import java.awt.event.ActionListener;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * A factory {@link JMenuBarFactory} provides factory methods for create JMenuBar objects
