@@ -1,26 +1,7 @@
 package io.github.astrapi69;
 
-import io.github.astrapi69.collection.list.ListExtensions;
-import io.github.astrapi69.file.create.FileFactory;
-import io.github.astrapi69.file.read.ReadFileExtensions;
-import io.github.astrapi69.file.search.PathFinder;
-import io.github.astrapi69.junit.jupiter.callback.before.test.IgnoreHeadlessExceptionExtension;
-import io.github.astrapi69.menu.pf4j.extension.DesktopMenuExtensionPoint;
-import io.github.astrapi69.swing.action.ExitApplicationAction;
-import io.github.astrapi69.swing.action.NoAction;
-import io.github.astrapi69.swing.action.ToggleFullScreenAction;
-import io.github.astrapi69.swing.menu.enumeration.BaseMenuId;
-import io.github.astrapi69.throwable.RuntimeExceptionDecorator;
-import io.github.astrapi69.window.adapter.CloseWindow;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.pf4j.DefaultExtensionFinder;
-import org.pf4j.DefaultPluginManager;
-import org.pf4j.ExtensionFinder;
-import org.pf4j.PluginManager;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import javax.swing.JFrame;
-import javax.swing.JMenuBar;
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -29,7 +10,28 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import javax.swing.JFrame;
+import javax.swing.JMenuBar;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.pf4j.DefaultExtensionFinder;
+import org.pf4j.DefaultPluginManager;
+import org.pf4j.ExtensionFinder;
+import org.pf4j.PluginManager;
+
+import io.github.astrapi69.awt.action.NoAction;
+import io.github.astrapi69.awt.window.adapter.CloseWindow;
+import io.github.astrapi69.collection.list.ListExtensions;
+import io.github.astrapi69.file.create.FileFactory;
+import io.github.astrapi69.file.read.ReadFileExtensions;
+import io.github.astrapi69.file.search.PathFinder;
+import io.github.astrapi69.junit.jupiter.callback.before.test.IgnoreHeadlessExceptionExtension;
+import io.github.astrapi69.menu.pf4j.extension.DesktopMenuExtensionPoint;
+import io.github.astrapi69.swing.action.ExitApplicationAction;
+import io.github.astrapi69.swing.action.ToggleFullScreenAction;
+import io.github.astrapi69.swing.menu.enumeration.BaseMenuId;
+import io.github.astrapi69.throwable.RuntimeExceptionDecorator;
 
 public class DesktopMenuPluginTest
 {

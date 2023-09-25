@@ -24,12 +24,13 @@
  */
 package io.github.astrapi69.menu.pf4j.extension;
 
-import org.pf4j.ExtensionPoint;
+import java.awt.event.ActionListener;
+import java.util.Map;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import java.awt.event.ActionListener;
-import java.util.Map;
+
+import org.pf4j.ExtensionPoint;
 
 public interface DesktopMenuExtensionPoint extends ExtensionPoint
 {

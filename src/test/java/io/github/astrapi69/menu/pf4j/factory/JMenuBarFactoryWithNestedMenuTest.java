@@ -24,6 +24,21 @@
  */
 package io.github.astrapi69.menu.pf4j.factory;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import javax.swing.JFrame;
+import javax.swing.JMenuBar;
+import javax.swing.KeyStroke;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import io.github.astrapi69.awt.action.NoAction;
 import io.github.astrapi69.awt.window.adapter.CloseWindow;
 import io.github.astrapi69.file.create.FileFactory;
@@ -31,6 +46,7 @@ import io.github.astrapi69.file.read.ReadFileExtensions;
 import io.github.astrapi69.file.search.PathFinder;
 import io.github.astrapi69.gen.tree.BaseTreeNode;
 import io.github.astrapi69.id.generate.LongIdGenerator;
+import io.github.astrapi69.menu.pf4j.transform.MenuInfoTreeNodeConverter;
 import io.github.astrapi69.swing.action.ExitApplicationAction;
 import io.github.astrapi69.swing.action.ToggleFullScreenAction;
 import io.github.astrapi69.swing.menu.MenuExtensions;
@@ -38,22 +54,8 @@ import io.github.astrapi69.swing.menu.enumeration.BaseMenuId;
 import io.github.astrapi69.swing.menu.enumeration.MenuType;
 import io.github.astrapi69.swing.menu.model.KeyStrokeInfo;
 import io.github.astrapi69.swing.menu.model.MenuInfo;
-import io.github.astrapi69.menu.pf4j.transform.MenuInfoTreeNodeConverter;
 import io.github.astrapi69.swing.menu.model.transform.MenuItemInfoConverter;
 import io.github.astrapi69.throwable.RuntimeExceptionDecorator;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import javax.swing.JFrame;
-import javax.swing.JMenuBar;
-import javax.swing.KeyStroke;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * The unit test class for the class {@link JMenuBarFactory}

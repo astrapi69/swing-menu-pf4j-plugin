@@ -24,15 +24,17 @@
  */
 package io.github.astrapi69.menu.pf4j.extension;
 
-import io.github.astrapi69.menu.pf4j.factory.JMenuBarFactory;
-import io.github.astrapi69.menu.pf4j.factory.JMenuFactory;
-import io.github.astrapi69.menu.pf4j.transform.MenuInfoTreeNodeConverter;
-import org.pf4j.Extension;
+import java.awt.event.ActionListener;
+import java.util.Map;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import java.awt.event.ActionListener;
-import java.util.Map;
+
+import org.pf4j.Extension;
+
+import io.github.astrapi69.menu.pf4j.factory.JMenuBarFactory;
+import io.github.astrapi69.menu.pf4j.factory.JMenuFactory;
+import io.github.astrapi69.menu.pf4j.transform.MenuInfoTreeNodeConverter;
 
 
 @Extension
