@@ -211,7 +211,6 @@ public class JMenuFactoryTest
 		assertEquals(menuInfoLongBaseTreeNode, menuBarTreeNode);
 	}
 
-
 	@Test
 	public void testBuildRootTreeNodeFromXmlForEditMenu()
 	{
