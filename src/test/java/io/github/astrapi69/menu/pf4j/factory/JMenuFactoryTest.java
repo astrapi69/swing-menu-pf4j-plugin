@@ -44,6 +44,7 @@ import io.github.astrapi69.awt.action.NoAction;
 import io.github.astrapi69.file.create.FileFactory;
 import io.github.astrapi69.file.read.ReadFileExtensions;
 import io.github.astrapi69.file.search.PathFinder;
+import io.github.astrapi69.file.write.WriteFileExtensions;
 import io.github.astrapi69.gen.tree.BaseTreeNode;
 import io.github.astrapi69.id.generate.LongIdGenerator;
 import io.github.astrapi69.junit.jupiter.callback.before.test.IgnoreHeadlessExceptionExtension;
@@ -179,7 +180,8 @@ public class JMenuFactoryTest
 		menuBarTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
 			.value(menuBarInfo).build();
 
-		fileMenuInfo = MenuInfo.builder().mnemonic(MenuExtensions.toMnemonic('F')).ordinal(1100)
+		fileMenuInfo = MenuInfo.builder().type(MenuType.MENU)
+			.mnemonic(MenuExtensions.toMnemonic('F')).ordinal(1100)
 			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("alt pressed F")))
 			.text("File").name(BaseMenuId.FILE.propertiesKey()).build();
 		fileTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
@@ -206,6 +208,10 @@ public class JMenuFactoryTest
 
 		treeNodeAsXml = MenuInfoTreeNodeConverter.toXml(menuBarTreeNode);
 
+		RuntimeExceptionDecorator.decorate(() -> WriteFileExtensions.writeStringToFile(
+			FileFactory.newFileQuietly(PathFinder.getSrcTestResourcesDir(), "app-file-menu.xml"),
+			treeNodeAsXml, "UTF-8"));
+
 		menuInfoLongBaseTreeNode = MenuInfoTreeNodeConverter.toMenuInfoTreeNode(treeNodeAsXml);
 		assertNotNull(menuInfoLongBaseTreeNode);
 		assertEquals(menuInfoLongBaseTreeNode, menuBarTreeNode);
@@ -230,7 +236,8 @@ public class JMenuFactoryTest
 		menuBarTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
 			.value(menuBarInfo).build();
 
-		editMenuInfo = MenuInfo.builder().mnemonic(MenuExtensions.toMnemonic('E')).ordinal(1200)
+		editMenuInfo = MenuInfo.builder().type(MenuType.MENU)
+			.mnemonic(MenuExtensions.toMnemonic('E')).ordinal(1200)
 			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("alt pressed E")))
 			.text("Edit").name(BaseMenuId.EDIT.propertiesKey()).build();
 
@@ -241,6 +248,10 @@ public class JMenuFactoryTest
 		menuBarTreeNode.addChild(editTreeNode);
 
 		treeNodeAsXml = MenuInfoTreeNodeConverter.toXml(menuBarTreeNode);
+
+		RuntimeExceptionDecorator.decorate(() -> WriteFileExtensions.writeStringToFile(
+			FileFactory.newFileQuietly(PathFinder.getSrcTestResourcesDir(), "app-edit-menu.xml"),
+			treeNodeAsXml, "UTF-8"));
 
 		menuInfoLongBaseTreeNode = MenuInfoTreeNodeConverter.toMenuInfoTreeNode(treeNodeAsXml);
 		assertNotNull(menuInfoLongBaseTreeNode);
@@ -274,8 +285,9 @@ public class JMenuFactoryTest
 		menuBarTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
 			.value(menuBarInfo).build();
 
-		helpMenuInfo = MenuInfo.builder().mnemonic(MenuExtensions.toMnemonic('H')).text("Help")
-			.ordinal(1300).name(BaseMenuId.HELP.propertiesKey()).build();
+		helpMenuInfo = MenuInfo.builder().type(MenuType.MENU)
+			.mnemonic(MenuExtensions.toMnemonic('H')).text("Help").ordinal(1300)
+			.name(BaseMenuId.HELP.propertiesKey()).build();
 		helpTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
 			.value(helpMenuInfo).build();
 
@@ -308,6 +320,9 @@ public class JMenuFactoryTest
 		helpTreeNode.addChild(infoTreeNode);
 
 		treeNodeAsXml = MenuInfoTreeNodeConverter.toXml(menuBarTreeNode);
+		RuntimeExceptionDecorator.decorate(() -> WriteFileExtensions.writeStringToFile(
+			FileFactory.newFileQuietly(PathFinder.getSrcTestResourcesDir(), "app-help-menu.xml"),
+			treeNodeAsXml, "UTF-8"));
 
 		menuInfoLongBaseTreeNode = MenuInfoTreeNodeConverter.toMenuInfoTreeNode(treeNodeAsXml);
 		assertNotNull(menuInfoLongBaseTreeNode);

@@ -32,19 +32,19 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import io.github.astrapi69.collection.map.MapExtensions;
-import io.github.astrapi69.jaxb.menu.model.MenuModel;
-import lombok.NonNull;
 import io.github.astrapi69.collection.list.ListExtensions;
+import io.github.astrapi69.collection.map.MapExtensions;
 import io.github.astrapi69.gen.tree.BaseTreeNode;
 import io.github.astrapi69.gen.tree.TreeIdNode;
 import io.github.astrapi69.gen.tree.convert.BaseTreeNodeTransformer;
 import io.github.astrapi69.gen.tree.handler.IBaseTreeNodeHandlerExtensions;
 import io.github.astrapi69.id.generate.LongIdGenerator;
-import io.github.astrapi69.swing.menu.model.MenuInfo;
-import io.github.astrapi69.throwable.RuntimeExceptionDecorator;
 import io.github.astrapi69.jaxb.ObjectToXmlExtensions;
 import io.github.astrapi69.jaxb.XmlToObjectExtensions;
+import io.github.astrapi69.jaxb.menu.model.MenuModel;
+import io.github.astrapi69.swing.menu.model.MenuInfo;
+import io.github.astrapi69.throwable.RuntimeExceptionDecorator;
+import lombok.NonNull;
 
 /**
  * The class {@link MenuInfoJaxbTreeNodeConverter} converts xml representations of {@link MenuInfo}
@@ -64,9 +64,10 @@ public class MenuInfoJaxbTreeNodeConverter
 	public static BaseTreeNode<MenuInfo, Long> toMenuInfoTreeNode(final @NonNull String xml)
 	{
 		List<TreeIdNode<MenuInfo, Long>> treeIdNodes = RuntimeExceptionDecorator
-				.decorate(() -> XmlToObjectExtensions.toObject(xml, List.class));
+			.decorate(() -> XmlToObjectExtensions.toObject(xml, List.class));
 		Map<Long, TreeIdNode<MenuInfo, Long>> treeIdNodeMap = new LinkedHashMap<>();
-		for(TreeIdNode<MenuInfo, Long> treeIdNode : treeIdNodes) {
+		for (TreeIdNode<MenuInfo, Long> treeIdNode : treeIdNodes)
+		{
 			treeIdNodeMap.put(treeIdNode.getId(), treeIdNode);
 		}
 		return BaseTreeNodeTransformer.getRoot(treeIdNodeMap);
@@ -86,7 +87,8 @@ public class MenuInfoJaxbTreeNodeConverter
 			.toKeyMap(root);
 		List<TreeIdNode<MenuInfo, Long>> treeIdNodes = MapExtensions.valuesAsList(treeIdNodeMap);
 		List<TreeIdNode<MenuModel, Long>> treeModelNodes = new ArrayList<>();
-		for (TreeIdNode<MenuInfo, Long> treeIdNode : treeIdNodes) {
+		for (TreeIdNode<MenuInfo, Long> treeIdNode : treeIdNodes)
+		{
 
 		}
 		return RuntimeExceptionDecorator.decorate(() -> ObjectToXmlExtensions.toXml(treeIdNodes));

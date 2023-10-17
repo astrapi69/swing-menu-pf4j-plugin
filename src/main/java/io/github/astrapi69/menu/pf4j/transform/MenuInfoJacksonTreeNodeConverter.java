@@ -34,11 +34,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.JavaType;
-import io.github.astrapi69.collection.map.MapExtensions;
-import io.github.astrapi69.xml.jackson.factory.JavaTypeFactory;
-import io.github.astrapi69.xml.jackson.factory.XmlMapperFactory;
-import lombok.NonNull;
+
 import io.github.astrapi69.collection.list.ListExtensions;
+import io.github.astrapi69.collection.map.MapExtensions;
 import io.github.astrapi69.gen.tree.BaseTreeNode;
 import io.github.astrapi69.gen.tree.TreeIdNode;
 import io.github.astrapi69.gen.tree.convert.BaseTreeNodeTransformer;
@@ -48,10 +46,13 @@ import io.github.astrapi69.swing.menu.model.MenuInfo;
 import io.github.astrapi69.throwable.RuntimeExceptionDecorator;
 import io.github.astrapi69.xml.jackson.ObjectToXmlExtensions;
 import io.github.astrapi69.xml.jackson.XmlToObjectExtensions;
+import io.github.astrapi69.xml.jackson.factory.JavaTypeFactory;
+import io.github.astrapi69.xml.jackson.factory.XmlMapperFactory;
+import lombok.NonNull;
 
 /**
- * The class {@link MenuInfoJacksonTreeNodeConverter} converts xml representations of {@link MenuInfo}
- * objects to a single root {@link BaseTreeNode} object and back
+ * The class {@link MenuInfoJacksonTreeNodeConverter} converts xml representations of
+ * {@link MenuInfo} objects to a single root {@link BaseTreeNode} object and back
  */
 public class MenuInfoJacksonTreeNodeConverter
 {
@@ -68,12 +69,13 @@ public class MenuInfoJacksonTreeNodeConverter
 	{
 		JavaType mapType;
 		JavaType longType = JavaTypeFactory.newJavaType(Long.class);
-		JavaType treeNodeType = JavaTypeFactory.newParametricType(TreeIdNode.class, MenuInfo.class, Long.class);
-//		mapType = JavaTypeFactory.newMapType(Map.class, Long.class, TreeIdNode.class);
+		JavaType treeNodeType = JavaTypeFactory.newParametricType(TreeIdNode.class, MenuInfo.class,
+			Long.class);
+		// mapType = JavaTypeFactory.newMapType(Map.class, Long.class, TreeIdNode.class);
 		mapType = JavaTypeFactory.newMapType(Map.class, longType, treeNodeType);
 		JavaType javaType = JavaTypeFactory.newCollectionType(List.class, treeNodeType);
 		List<TreeIdNode<MenuInfo, Long>> treeIdNodes = RuntimeExceptionDecorator
-				.decorate(() -> XmlToObjectExtensions.toObject(xml, javaType));
+			.decorate(() -> XmlToObjectExtensions.toObject(xml, javaType));
 		Map<Long, TreeIdNode<MenuInfo, Long>> treeIdNodeMap = RuntimeExceptionDecorator
 			.decorate(() -> XmlToObjectExtensions.toObject(xml, javaType));
 		return BaseTreeNodeTransformer.getRoot(treeIdNodeMap);

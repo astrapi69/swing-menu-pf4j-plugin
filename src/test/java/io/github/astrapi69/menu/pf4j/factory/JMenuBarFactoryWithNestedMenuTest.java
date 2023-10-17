@@ -44,6 +44,7 @@ import io.github.astrapi69.awt.window.adapter.CloseWindow;
 import io.github.astrapi69.file.create.FileFactory;
 import io.github.astrapi69.file.read.ReadFileExtensions;
 import io.github.astrapi69.file.search.PathFinder;
+import io.github.astrapi69.file.write.WriteFileExtensions;
 import io.github.astrapi69.gen.tree.BaseTreeNode;
 import io.github.astrapi69.id.generate.LongIdGenerator;
 import io.github.astrapi69.menu.pf4j.transform.MenuInfoTreeNodeConverter;
@@ -147,6 +148,7 @@ public class JMenuBarFactoryWithNestedMenuTest
 		MenuInfo toggleFullscreenMenuInfo;
 		MenuInfo exitMenuInfo;
 		LongIdGenerator idGenerator;
+		String treeNodeAsXml;
 
 		BaseTreeNode<MenuInfo, Long> menuInfoLongBaseTreeNode;
 
@@ -157,7 +159,8 @@ public class JMenuBarFactoryWithNestedMenuTest
 		menuBarTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
 			.value(menuBarInfo).build();
 
-		fileMenuInfo = MenuInfo.builder().mnemonic(MenuExtensions.toMnemonic('F')).ordinal(1100)
+		fileMenuInfo = MenuInfo.builder().type(MenuType.MENU)
+			.mnemonic(MenuExtensions.toMnemonic('F')).ordinal(1100)
 			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("alt pressed F")))
 			.text("File").name(BaseMenuId.FILE.propertiesKey()).build();
 		fileTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
@@ -178,7 +181,8 @@ public class JMenuBarFactoryWithNestedMenuTest
 		exitTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
 			.leaf(true).parent(fileTreeNode).value(exitMenuInfo).build();
 
-		helpMenuInfo = MenuInfo.builder().mnemonic(MenuExtensions.toMnemonic('H')).ordinal(13000)
+		helpMenuInfo = MenuInfo.builder().type(MenuType.MENU)
+			.mnemonic(MenuExtensions.toMnemonic('H')).ordinal(13000)
 			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("alt pressed H")))
 			.text("Help").name(BaseMenuId.HELP.propertiesKey()).build();
 		helpTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
@@ -198,9 +202,9 @@ public class JMenuBarFactoryWithNestedMenuTest
 		donateTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
 			.leaf(true).value(donateMenuInfo).build();
 
-		diagnosticMenuInfo = MenuInfo.builder().mnemonic(MenuExtensions.toMnemonic('G'))
-			.ordinal(13300).text("Diagnostic >").name(TestMenuId.HELP_DIAGNOSTIC.propertiesKey())
-			.build();
+		diagnosticMenuInfo = MenuInfo.builder().type(MenuType.MENU)
+			.mnemonic(MenuExtensions.toMnemonic('G')).ordinal(13300).text("Diagnostic >")
+			.name(TestMenuId.HELP_DIAGNOSTIC.propertiesKey()).build();
 		diagnosticTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
 			.value(diagnosticMenuInfo).build();
 
@@ -251,6 +255,11 @@ public class JMenuBarFactoryWithNestedMenuTest
 		diagnosticTreeNode.addChild(diagnosticActivityTreeNode);
 		diagnosticTreeNode.addChild(diagnosticProfileTreeNode);
 		diagnosticTreeNode.addChild(diagnosticUsageTreeNode);
+
+		treeNodeAsXml = MenuInfoTreeNodeConverter.toXml(menuBarTreeNode);
+		RuntimeExceptionDecorator.decorate(() -> WriteFileExtensions.writeStringToFile(
+			FileFactory.newFileQuietly(PathFinder.getSrcTestResourcesDir(), "app-tree-menubar.xml"),
+			treeNodeAsXml, "UTF-8"));
 
 		menuInfoLongBaseTreeNode = MenuInfoTreeNodeConverter.toMenuInfoTreeNode(xml);
 		assertNotNull(menuInfoLongBaseTreeNode);
