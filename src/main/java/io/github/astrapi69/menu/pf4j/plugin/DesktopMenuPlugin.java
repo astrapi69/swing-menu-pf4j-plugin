@@ -1,7 +1,7 @@
 /**
  * The MIT License
  *
- * Copyright (C) 2022 Asterios Raptis
+ * Copyright (C) 2023 Asterios Raptis
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -45,24 +45,6 @@ public class DesktopMenuPlugin extends Plugin
 		// ...)
 	}
 
-	@Override
-	public void start()
-	{
-		System.err.println("DesktopMenuPlugin.start()");
-	}
-
-	@Override
-	public void stop()
-	{
-		System.err.println("DesktopMenuPlugin.stop()");
-	}
-
-	@Override
-	public void delete()
-	{
-		System.err.println("DesktopMenuPlugin.delete()");
-	}
-
 	public static void main(String[] args)
 	{
 		// create the plugin manager
@@ -99,5 +81,23 @@ public class DesktopMenuPlugin extends Plugin
 		// stop and unload all plugins
 		pluginManager.stopPlugins();
 		pluginManager.unloadPlugins();
+	}
+
+	@Override
+	public void start()
+	{
+		System.err.println("DesktopMenuPlugin.start()");
+	}
+
+	@Override
+	public void stop()
+	{
+		System.err.println("DesktopMenuPlugin.stop()");
+	}
+
+	@Override
+	public void delete()
+	{
+		System.err.println("DesktopMenuPlugin.delete()");
 	}
 }

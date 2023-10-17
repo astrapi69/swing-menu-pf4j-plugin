@@ -1,7 +1,7 @@
 /**
  * The MIT License
  *
- * Copyright (C) 2021 Asterios Raptis
+ * Copyright (C) 2023 Asterios Raptis
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -41,11 +41,10 @@ public enum TestMenuId
 			TestMenuId.HELP_DIAGNOSTIC_PROFILE_KEY), HELP_DIAGNOSTIC_USAGE(
 				TestMenuId.HELP_DIAGNOSTIC_USAGE_KEY);
 
-	/** the properties key from the current menu */
-	String propertiesKey;
-
 	public static final String HELP_DIAGNOSTIC_KEY = "global.menu.help.diagnostic";
 	public static final String HELP_DIAGNOSTIC_ACTIVITY_KEY = "global.menu.help.diagnostic.activity";
 	public static final String HELP_DIAGNOSTIC_PROFILE_KEY = "global.menu.help.diagnostic.profile";
 	public static final String HELP_DIAGNOSTIC_USAGE_KEY = "global.menu.help.diagnostic.usage";
+	/** the properties key from the current menu */
+	String propertiesKey;
 }

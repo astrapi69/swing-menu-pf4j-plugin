@@ -1,7 +1,7 @@
 /**
  * The MIT License
  *
- * Copyright (C) 2021 Asterios Raptis
+ * Copyright (C) 2023 Asterios Raptis
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -26,8 +26,6 @@ package io.github.astrapi69.menu.pf4j.transform;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -47,7 +45,6 @@ import io.github.astrapi69.throwable.RuntimeExceptionDecorator;
 import io.github.astrapi69.xml.jackson.ObjectToXmlExtensions;
 import io.github.astrapi69.xml.jackson.XmlToObjectExtensions;
 import io.github.astrapi69.xml.jackson.factory.JavaTypeFactory;
-import io.github.astrapi69.xml.jackson.factory.XmlMapperFactory;
 import lombok.NonNull;
 
 /**
