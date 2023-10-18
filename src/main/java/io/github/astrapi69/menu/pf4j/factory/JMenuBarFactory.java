@@ -59,4 +59,17 @@ public class JMenuBarFactory
 		return menuBarMap.get(BaseMenuId.MENU_BAR.propertiesKey());
 	}
 
+	public static JMenuBar buildMenuBar(final @NonNull BaseTreeNode<MenuInfo, Long> root)
+	{
+		final Map<String, JMenu> menuMap = new LinkedHashMap<>();
+		final Map<String, JMenuItem> menuItemMap = new LinkedHashMap<>();
+		final Map<String, JMenuBar> menuBarMap = new LinkedHashMap<>();
+		MenuPluginVisitorExtensions.visitAndAddToMap(root, menuMap, menuItemMap, menuBarMap);
+		root.accept(menuInfoLongBaseTreeNode -> MenuPluginVisitorExtensions
+			.visitAndAddToMap(menuInfoLongBaseTreeNode, menuMap, menuItemMap, menuBarMap));
+		root.accept(menuInfoLongBaseTreeNode -> MenuPluginVisitorExtensions
+			.visitAndAddToMenu(menuInfoLongBaseTreeNode, menuMap, menuItemMap, menuBarMap));
+		return menuBarMap.get(BaseMenuId.MENU_BAR.propertiesKey());
+	}
+
 }
