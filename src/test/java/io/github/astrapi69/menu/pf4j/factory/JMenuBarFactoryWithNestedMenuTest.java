@@ -72,37 +72,18 @@ public class JMenuBarFactoryWithNestedMenuTest
 		JFrame frame;
 		String filename;
 		filename = "app-tree-menubar.xml";
-		frame = new JFrame("Test Menu with xml");
 		File xmlFile = FileFactory.newFileQuietly(PathFinder.getSrcTestResourcesDir(), filename);
 		String xml = RuntimeExceptionDecorator.decorate(() -> ReadFileExtensions.fromFile(xmlFile));
 
-		Map<String, ActionListener> actionListenerMap;
 		BaseTreeNode<MenuInfo, Long> menuInfoLongBaseTreeNode;
 
 		menuInfoLongBaseTreeNode = MenuInfoTreeNodeConverter.toMenuInfoTreeNode(xml);
-		actionListenerMap = new LinkedHashMap<>();
-
-		actionListenerMap.put(BaseMenuId.TOGGLE_FULLSCREEN.propertiesKey(),
-			new ToggleFullScreenAction("Fullscreen", frame));
-		actionListenerMap.put(BaseMenuId.EXIT.propertiesKey(), new ExitApplicationAction("Exit"));
-		actionListenerMap.put(BaseMenuId.FILE.propertiesKey(), new NoAction());
-		actionListenerMap.put(BaseMenuId.MENU_BAR.propertiesKey(), new NoAction());
-		actionListenerMap.put(BaseMenuId.HELP.propertiesKey(), new NoAction());
-		actionListenerMap.put(BaseMenuId.HELP_CONTENT.propertiesKey(), new NoAction());
-		actionListenerMap.put(BaseMenuId.HELP_DONATE.propertiesKey(), new NoAction());
-		actionListenerMap.put(TestMenuId.HELP_DIAGNOSTIC.propertiesKey(), new NoAction());
-		actionListenerMap.put(TestMenuId.HELP_DIAGNOSTIC_ACTIVITY.propertiesKey(), new NoAction());
-		actionListenerMap.put(TestMenuId.HELP_DIAGNOSTIC_PROFILE.propertiesKey(), new NoAction());
-		actionListenerMap.put(TestMenuId.HELP_DIAGNOSTIC_USAGE.propertiesKey(), new NoAction());
-		actionListenerMap.put(BaseMenuId.HELP_LICENSE.propertiesKey(), new NoAction());
-		actionListenerMap.put(BaseMenuId.HELP_INFO.propertiesKey(), new NoAction());
 
 		final JMenuBar menuBar = JMenuBarFactory.buildMenuBar(menuInfoLongBaseTreeNode);
 
-
+		frame = new JFrame("Test Menu with xml");
 		frame.setJMenuBar(menuBar);
 		frame.addWindowListener(new CloseWindow());
-
 		frame.setSize(400, 200);
 		frame.setVisible(true);
 	}

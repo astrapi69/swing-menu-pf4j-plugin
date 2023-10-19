@@ -26,7 +26,6 @@ dependencies {
     testImplementation("io.github.astrapi69:awt-extensions:$awtExtensionsVersion")
     testImplementation("io.github.astrapi69:silly-io:$sillyIoVersion")
     testImplementation("io.github.astrapi69:file-worker:$fileWorkerVersion")
-    testImplementation("io.github.astrapi69:gradle-migration-data:$gradleMigrationDataVersion")
     testImplementation("org.apache.commons:commons-text:$commonsTextVersion")
     testImplementation("com.github.meanbeanlib:meanbean:$meanbeanVersion")
     testImplementation("io.github.astrapi69:junit-jupiter-extensions:$junitJupiterExtensionsVersion")

@@ -146,37 +146,45 @@ public class MenuPluginVisitorExtensions
 	{
 		final MenuInfo menuInfo = menuInfoLongBaseTreeNode.getValue();
 		String actionCommand = menuInfo.getActionCommand();
-		Optional<Object> actionOptional = ReflectionExtensions
-			.newInstance(actionCommand);
-		if (actionOptional.isPresent())
+		String menuInfoName = menuInfo.getName();
+		if (actionCommand == null)
 		{
-			ActionListener actionListener = (ActionListener)actionOptional.get();
-
-			final MenuItemInfo menuItemInfo = menuInfo.toMenuItemInfo(actionListener);
-			MenuType menuType = menuInfo.getType();
-			switch (menuType)
+			throw new RuntimeException("actionCommand from " + menuInfoName + " is null");
+		}
+		else
+		{
+			Optional<Object> actionOptional = ReflectionExtensions.newInstance(actionCommand);
+			if (actionOptional.isPresent())
 			{
-				case MENU_BAR :
-					final JMenuBar menuBar = menuItemInfo.toJMenuBar();
-					menuBarMap.put(menuInfo.getName(), menuBar);
-					break;
-				case MENU_ITEM :
-					final JMenuItem menuItem = menuItemInfo.toJMenuItem();
-					menuItemMap.put(menuInfo.getName(), menuItem);
-					break;
-				case RADIO_BUTTON_MENU_ITEM :
-					final JRadioButtonMenuItem radioButtonMenuItem = menuItemInfo
-						.toJRadioButtonMenuItem();
-					menuItemMap.put(menuInfo.getName(), radioButtonMenuItem);
-					break;
-				case CHECK_BOX_MENU_ITEM :
-					final JCheckBoxMenuItem checkBoxMenuItem = menuItemInfo.toJCheckBoxMenuItem();
-					menuItemMap.put(menuInfo.getName(), checkBoxMenuItem);
-					break;
-				case MENU :
-					final JMenu menu = menuItemInfo.toJMenu();
-					menuMap.put(menuInfo.getName(), menu);
-					break;
+				ActionListener actionListener = (ActionListener)actionOptional.get();
+
+				final MenuItemInfo menuItemInfo = menuInfo.toMenuItemInfo(actionListener);
+				MenuType menuType = menuInfo.getType();
+				switch (menuType)
+				{
+					case MENU_BAR :
+						final JMenuBar menuBar = menuItemInfo.toJMenuBar();
+						menuBarMap.put(menuInfoName, menuBar);
+						break;
+					case MENU_ITEM :
+						final JMenuItem menuItem = menuItemInfo.toJMenuItem();
+						menuItemMap.put(menuInfoName, menuItem);
+						break;
+					case RADIO_BUTTON_MENU_ITEM :
+						final JRadioButtonMenuItem radioButtonMenuItem = menuItemInfo
+							.toJRadioButtonMenuItem();
+						menuItemMap.put(menuInfoName, radioButtonMenuItem);
+						break;
+					case CHECK_BOX_MENU_ITEM :
+						final JCheckBoxMenuItem checkBoxMenuItem = menuItemInfo
+							.toJCheckBoxMenuItem();
+						menuItemMap.put(menuInfoName, checkBoxMenuItem);
+						break;
+					case MENU :
+						final JMenu menu = menuItemInfo.toJMenu();
+						menuMap.put(menuInfoName, menu);
+						break;
+				}
 			}
 		}
 	}

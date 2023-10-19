@@ -38,9 +38,8 @@ import io.github.astrapi69.menu.pf4j.extension.DesktopMenuExtensionPoint;
 
 public class DesktopMenuPlugin extends Plugin
 {
-	public DesktopMenuPlugin(PluginWrapper wrapper)
+	public DesktopMenuPlugin()
 	{
-		super(wrapper);
 		// you can use "wrapper" to have access to the plugin context (plugin manager, descriptor,
 		// ...)
 	}
