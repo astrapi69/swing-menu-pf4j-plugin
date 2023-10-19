@@ -43,24 +43,22 @@ import lombok.NonNull;
 public class JMenuFactory
 {
 
-	public static JMenu buildMenu(final @NonNull BaseTreeNode<MenuInfo, Long> root,
-		final @NonNull Map<String, ActionListener> actionListenerMap)
+	public static JMenu buildMenu(final @NonNull BaseTreeNode<MenuInfo, Long> root)
 	{
-		return buildMenu(root.getValue().getName(), root, actionListenerMap);
+		return buildMenu(root.getValue().getName(), root);
 	}
 
 	public static JMenu buildMenu(final @NonNull String menuId,
-		final @NonNull BaseTreeNode<MenuInfo, Long> root,
-		final @NonNull Map<String, ActionListener> actionListenerMap)
+		final @NonNull BaseTreeNode<MenuInfo, Long> root)
 	{
 		final Map<String, JMenu> menuMap = new HashMap<>();
 		final Map<String, JMenuItem> menuItemMap = new HashMap<>();
 		final Map<String, JMenuBar> menuBarMap = new HashMap<>();
-		MenuVisitorExtensions.visitAndAddToMap(root, actionListenerMap, menuMap, menuItemMap,
+		MenuPluginVisitorExtensions.visitAndAddToMap(root, menuMap, menuItemMap,
 			menuBarMap);
-		root.accept(menuInfoLongBaseTreeNode -> MenuVisitorExtensions.visitAndAddToMap(
-			menuInfoLongBaseTreeNode, actionListenerMap, menuMap, menuItemMap, menuBarMap));
-		root.accept(menuInfoLongBaseTreeNode -> MenuVisitorExtensions
+		root.accept(menuInfoLongBaseTreeNode -> MenuPluginVisitorExtensions.visitAndAddToMap(
+			menuInfoLongBaseTreeNode, menuMap, menuItemMap, menuBarMap));
+		root.accept(menuInfoLongBaseTreeNode -> MenuPluginVisitorExtensions
 			.visitAndAddToMenu(menuInfoLongBaseTreeNode, menuMap, menuItemMap, menuBarMap));
 		return menuMap.get(menuId);
 	}

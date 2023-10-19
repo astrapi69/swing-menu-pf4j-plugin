@@ -91,23 +91,23 @@ public class JMenuFactoryTest
 	@Test
 	public void testBuildFileMenuFromXml()
 	{
-		Map<String, ActionListener> actionListenerMap;
 		BaseTreeNode<MenuInfo, Long> menuInfoLongBaseTreeNode;
 		JMenu menu;
+
+//		Map<String, ActionListener> actionListenerMap;
+//		actionListenerMap = new HashMap<>();
+//
+//		actionListenerMap.put(BaseMenuId.TOGGLE_FULLSCREEN.propertiesKey(),
+//				new ToggleFullScreenAction("Fullscreen", new JFrame()));
+//		actionListenerMap.put(BaseMenuId.EXIT.propertiesKey(), new ExitApplicationAction("Exit"));
+//		actionListenerMap.put(BaseMenuId.FILE.propertiesKey(), new NoAction());
 
 		menuInfoLongBaseTreeNode = MenuInfoTreeNodeConverter.toMenuInfoTreeNode(fileMenuXml);
 		assertNotNull(menuInfoLongBaseTreeNode);
 		assertEquals(menuInfoLongBaseTreeNode.getId(), 0);
 
-		actionListenerMap = new HashMap<>();
 
-		actionListenerMap.put(BaseMenuId.TOGGLE_FULLSCREEN.propertiesKey(),
-			new ToggleFullScreenAction("Fullscreen", new JFrame()));
-		actionListenerMap.put(BaseMenuId.EXIT.propertiesKey(), new ExitApplicationAction("Exit"));
-		actionListenerMap.put(BaseMenuId.FILE.propertiesKey(), new NoAction());
-
-		menu = JMenuFactory.buildMenu(BaseMenuId.FILE.propertiesKey(), menuInfoLongBaseTreeNode,
-			actionListenerMap);
+		menu = JMenuFactory.buildMenu(BaseMenuId.FILE.propertiesKey(), menuInfoLongBaseTreeNode);
 		assertNotNull(menu);
 	}
 
@@ -115,20 +115,20 @@ public class JMenuFactoryTest
 	@Test
 	public void testBuildEditMenuFromXml()
 	{
-		Map<String, ActionListener> actionListenerMap;
 		BaseTreeNode<MenuInfo, Long> menuInfoLongBaseTreeNode;
 		JMenu menu;
+
+//		Map<String, ActionListener> actionListenerMap;
+//		actionListenerMap = new HashMap<>();
+//
+//		actionListenerMap.put(BaseMenuId.EDIT.propertiesKey(), new NoAction());
 
 		menuInfoLongBaseTreeNode = MenuInfoTreeNodeConverter.toMenuInfoTreeNode(editMenuXml);
 		assertNotNull(menuInfoLongBaseTreeNode);
 		assertEquals(menuInfoLongBaseTreeNode.getId(), 0);
 
-		actionListenerMap = new HashMap<>();
 
-		actionListenerMap.put(BaseMenuId.EDIT.propertiesKey(), new NoAction());
-
-		menu = JMenuFactory.buildMenu(BaseMenuId.EDIT.propertiesKey(), menuInfoLongBaseTreeNode,
-			actionListenerMap);
+		menu = JMenuFactory.buildMenu(BaseMenuId.EDIT.propertiesKey(), menuInfoLongBaseTreeNode);
 		assertNotNull(menu);
 	}
 
@@ -136,24 +136,25 @@ public class JMenuFactoryTest
 	@Test
 	public void testBuildHelpMenuFromXml()
 	{
-		Map<String, ActionListener> actionListenerMap;
 		BaseTreeNode<MenuInfo, Long> menuInfoLongBaseTreeNode;
 		JMenu menu;
+//		Map<String, ActionListener> actionListenerMap;
+//		actionListenerMap = new HashMap<>();
+//
+//		actionListenerMap.put(BaseMenuId.HELP.propertiesKey(), new NoAction());
+//		actionListenerMap.put(BaseMenuId.HELP_CONTENT.propertiesKey(), new NoAction());
+//		actionListenerMap.put(BaseMenuId.HELP_DONATE.propertiesKey(), new NoAction());
+//		actionListenerMap.put(BaseMenuId.HELP_LICENSE.propertiesKey(), new NoAction());
+//		actionListenerMap.put(BaseMenuId.HELP_INFO.propertiesKey(), new NoAction());
 
 		menuInfoLongBaseTreeNode = MenuInfoTreeNodeConverter.toMenuInfoTreeNode(helpMenuXml);
 		assertNotNull(menuInfoLongBaseTreeNode);
 		assertEquals(menuInfoLongBaseTreeNode.getId(), 0);
 
-		actionListenerMap = new HashMap<>();
 
-		actionListenerMap.put(BaseMenuId.HELP.propertiesKey(), new NoAction());
-		actionListenerMap.put(BaseMenuId.HELP_CONTENT.propertiesKey(), new NoAction());
-		actionListenerMap.put(BaseMenuId.HELP_DONATE.propertiesKey(), new NoAction());
-		actionListenerMap.put(BaseMenuId.HELP_LICENSE.propertiesKey(), new NoAction());
-		actionListenerMap.put(BaseMenuId.HELP_INFO.propertiesKey(), new NoAction());
 
-		menu = JMenuFactory.buildMenu(BaseMenuId.HELP.propertiesKey(), menuInfoLongBaseTreeNode,
-			actionListenerMap);
+		menu = JMenuFactory.buildMenu(BaseMenuId.HELP.propertiesKey(), menuInfoLongBaseTreeNode
+			);
 		assertNotNull(menu);
 	}
 

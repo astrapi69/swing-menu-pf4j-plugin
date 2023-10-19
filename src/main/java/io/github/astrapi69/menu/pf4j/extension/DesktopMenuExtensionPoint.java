@@ -35,9 +35,8 @@ import org.pf4j.ExtensionPoint;
 public interface DesktopMenuExtensionPoint extends ExtensionPoint
 {
 
-	JMenuBar buildMenuBar(String xml, Map<String, ActionListener> actionListenerMap);
+	JMenuBar buildMenuBar(String xml);
 
-	JMenu buildAndAddMenuToExistingJMenuBar(String xml,
-		Map<String, ActionListener> actionListenerMap);
+	JMenu buildAndAddMenuToExistingJMenuBar(String xml);
 
 }

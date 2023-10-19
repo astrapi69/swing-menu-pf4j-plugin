@@ -118,7 +118,7 @@ public class DesktopMenuPluginTest
 				filename);
 			String xml = RuntimeExceptionDecorator
 				.decorate(() -> ReadFileExtensions.fromFile(xmlFile));
-			JMenuBar jMenuBar = desktopMenuExtensionPoint.buildMenuBar(xml, actionListenerMap);
+			JMenuBar jMenuBar = desktopMenuExtensionPoint.buildMenuBar(xml);
 
 			JFrame frame = new JFrame();
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -192,7 +192,7 @@ public class DesktopMenuPluginTest
 				filename);
 			String xml = RuntimeExceptionDecorator
 				.decorate(() -> ReadFileExtensions.fromFile(xmlFile));
-			JMenuBar jMenuBar = desktopMenuExtensionPoint.buildMenuBar(xml, actionListenerMap);
+			JMenuBar jMenuBar = desktopMenuExtensionPoint.buildMenuBar(xml);
 			assertNotNull(jMenuBar);
 		}
 
