@@ -32,7 +32,6 @@ import org.pf4j.DefaultPluginManager;
 import org.pf4j.ExtensionFinder;
 import org.pf4j.Plugin;
 import org.pf4j.PluginManager;
-import org.pf4j.PluginWrapper;
 
 import io.github.astrapi69.menu.pf4j.extension.DesktopMenuExtensionPoint;
 

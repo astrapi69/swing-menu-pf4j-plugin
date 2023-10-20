@@ -24,9 +24,6 @@
  */
 package io.github.astrapi69.menu.pf4j.extension;
 
-import java.awt.event.ActionListener;
-import java.util.Map;
-
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 

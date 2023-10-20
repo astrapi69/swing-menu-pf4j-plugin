@@ -17,6 +17,7 @@
           <keystrokeAsString>alt pressed H</keystrokeAsString>
         </keyStrokeInfo>
         <type>MENU_ITEM</type>
+        <actionCommand>io.github.astrapi69.awt.action.NoAction</actionCommand>
       </value>
       <leaf>true</leaf>
     </io.github.astrapi69.gen.tree.TreeIdNode>
@@ -32,6 +33,7 @@
         <text>Donate</text>
         <ordinal>13200</ordinal>
         <type>MENU_ITEM</type>
+        <actionCommand>io.github.astrapi69.awt.action.NoAction</actionCommand>
       </value>
       <leaf>true</leaf>
     </io.github.astrapi69.gen.tree.TreeIdNode>
@@ -47,6 +49,7 @@
         <text>Licence</text>
         <ordinal>13300</ordinal>
         <type>MENU_ITEM</type>
+        <actionCommand>io.github.astrapi69.awt.action.NoAction</actionCommand>
       </value>
       <leaf>true</leaf>
     </io.github.astrapi69.gen.tree.TreeIdNode>
@@ -62,6 +65,7 @@
         <text>Info</text>
         <ordinal>13400</ordinal>
         <type>MENU_ITEM</type>
+        <actionCommand>io.github.astrapi69.awt.action.NoAction</actionCommand>
       </value>
       <leaf>true</leaf>
     </io.github.astrapi69.gen.tree.TreeIdNode>
@@ -83,6 +87,7 @@
         <mnemonic>72</mnemonic>
         <ordinal>1300</ordinal>
         <type>MENU</type>
+        <actionCommand>io.github.astrapi69.awt.action.NoAction</actionCommand>
       </value>
       <leaf>false</leaf>
     </io.github.astrapi69.gen.tree.TreeIdNode>
@@ -98,6 +103,7 @@
         <name>global.menu.bar</name>
         <ordinal>100</ordinal>
         <type>MENU_BAR</type>
+        <actionCommand>io.github.astrapi69.awt.action.NoAction</actionCommand>
       </value>
       <leaf>false</leaf>
     </io.github.astrapi69.gen.tree.TreeIdNode>

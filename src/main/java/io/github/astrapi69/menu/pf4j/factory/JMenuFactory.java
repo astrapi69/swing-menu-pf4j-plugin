@@ -24,7 +24,6 @@
  */
 package io.github.astrapi69.menu.pf4j.factory;
 
-import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,7 +32,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import io.github.astrapi69.gen.tree.BaseTreeNode;
-import io.github.astrapi69.swing.menu.factory.MenuVisitorExtensions;
 import io.github.astrapi69.swing.menu.model.MenuInfo;
 import lombok.NonNull;
 
@@ -54,10 +52,9 @@ public class JMenuFactory
 		final Map<String, JMenu> menuMap = new HashMap<>();
 		final Map<String, JMenuItem> menuItemMap = new HashMap<>();
 		final Map<String, JMenuBar> menuBarMap = new HashMap<>();
-		MenuPluginVisitorExtensions.visitAndAddToMap(root, menuMap, menuItemMap,
-			menuBarMap);
-		root.accept(menuInfoLongBaseTreeNode -> MenuPluginVisitorExtensions.visitAndAddToMap(
-			menuInfoLongBaseTreeNode, menuMap, menuItemMap, menuBarMap));
+		MenuPluginVisitorExtensions.visitAndAddToMap(root, menuMap, menuItemMap, menuBarMap);
+		root.accept(menuInfoLongBaseTreeNode -> MenuPluginVisitorExtensions
+			.visitAndAddToMap(menuInfoLongBaseTreeNode, menuMap, menuItemMap, menuBarMap));
 		root.accept(menuInfoLongBaseTreeNode -> MenuPluginVisitorExtensions
 			.visitAndAddToMenu(menuInfoLongBaseTreeNode, menuMap, menuItemMap, menuBarMap));
 		return menuMap.get(menuId);

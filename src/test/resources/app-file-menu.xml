@@ -17,6 +17,7 @@
           <keystrokeAsString>alt pressed F11</keystrokeAsString>
         </keyStrokeInfo>
         <type>MENU_ITEM</type>
+        <actionCommand>io.github.astrapi69.swing.action.ToggleFullScreenAction</actionCommand>
       </value>
       <leaf>true</leaf>
     </io.github.astrapi69.gen.tree.TreeIdNode>
@@ -39,6 +40,7 @@
           <keystrokeAsString>alt pressed F4</keystrokeAsString>
         </keyStrokeInfo>
         <type>MENU_ITEM</type>
+        <actionCommand>io.github.astrapi69.swing.action.ExitApplicationAction</actionCommand>
       </value>
       <leaf>true</leaf>
     </io.github.astrapi69.gen.tree.TreeIdNode>
@@ -64,6 +66,7 @@
           <keystrokeAsString>alt pressed F</keystrokeAsString>
         </keyStrokeInfo>
         <type>MENU</type>
+        <actionCommand>io.github.astrapi69.awt.action.NoAction</actionCommand>
       </value>
       <leaf>false</leaf>
     </io.github.astrapi69.gen.tree.TreeIdNode>
@@ -79,6 +82,7 @@
         <name>global.menu.bar</name>
         <ordinal>100</ordinal>
         <type>MENU_BAR</type>
+        <actionCommand>io.github.astrapi69.awt.action.NoAction</actionCommand>
       </value>
       <leaf>false</leaf>
     </io.github.astrapi69.gen.tree.TreeIdNode>

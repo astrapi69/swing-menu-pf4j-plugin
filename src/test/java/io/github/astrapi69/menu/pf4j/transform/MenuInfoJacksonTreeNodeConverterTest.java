@@ -77,7 +77,8 @@ class MenuInfoJacksonTreeNodeConverterTest
 		toggleFullscreenMenuInfo = MenuInfo.builder().type(MenuType.MENU_ITEM).ordinal(11100)
 			.mnemonic(MenuExtensions.toMnemonic('T'))
 			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("alt pressed F11")))
-			.text("Toggle Fullscreen").name(BaseMenuId.TOGGLE_FULLSCREEN.propertiesKey()).build();
+			.text("Toggle Fullscreen").name(BaseMenuId.TOGGLE_FULLSCREEN.propertiesKey())
+			.actionCommand("io.github.astrapi69.swing.action.ToggleFullScreenAction").build();
 		toggleFullscreenTreeNode = BaseTreeNode.<MenuInfo, Long> builder()
 			.id(idGenerator.getNextId()).parent(fileTreeNode).value(toggleFullscreenMenuInfo)
 			.leaf(true).build();
@@ -85,7 +86,8 @@ class MenuInfoJacksonTreeNodeConverterTest
 		exitMenuInfo = MenuInfo.builder().type(MenuType.MENU_ITEM).ordinal(11200)
 			.mnemonic(MenuExtensions.toMnemonic('E'))
 			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("alt pressed F4")))
-			.text("Exit").name(BaseMenuId.EXIT.propertiesKey()).build();
+			.text("Exit").name(BaseMenuId.EXIT.propertiesKey())
+			.actionCommand("io.github.astrapi69.swing.action.ExitApplicationAction").build();
 		exitTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
 			.leaf(true).parent(fileTreeNode).value(exitMenuInfo).build();
 
