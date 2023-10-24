@@ -40,6 +40,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.MenuElement;
 
+import io.github.astrapi69.reflection.InstanceFactory;
+import lombok.NonNull;
 import io.github.astrapi69.collection.list.ListExtensions;
 import io.github.astrapi69.collection.list.ListFactory;
 import io.github.astrapi69.gen.tree.BaseTreeNode;
@@ -48,7 +50,6 @@ import io.github.astrapi69.swing.menu.ParentMenuResolver;
 import io.github.astrapi69.swing.menu.enumeration.MenuType;
 import io.github.astrapi69.swing.menu.model.MenuInfo;
 import io.github.astrapi69.swing.menu.model.MenuItemInfo;
-import lombok.NonNull;
 
 public class MenuPluginVisitorExtensions
 {
@@ -153,7 +154,7 @@ public class MenuPluginVisitorExtensions
 		}
 		else
 		{
-			Optional<Object> actionOptional = ReflectionExtensions.newInstance(actionCommand);
+			Optional<ActionListener> actionOptional = InstanceFactoryDecorator.newInstance(actionCommand);
 			if (actionOptional.isPresent())
 			{
 				ActionListener actionListener = (ActionListener)actionOptional.get();
@@ -185,6 +186,8 @@ public class MenuPluginVisitorExtensions
 						menuMap.put(menuInfoName, menu);
 						break;
 				}
+			} else {
+				throw new RuntimeException("");
 			}
 		}
 	}

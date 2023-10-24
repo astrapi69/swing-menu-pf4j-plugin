@@ -32,6 +32,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import lombok.NonNull;
 import io.github.astrapi69.collection.list.ListExtensions;
 import io.github.astrapi69.collection.map.MapExtensions;
 import io.github.astrapi69.gen.tree.BaseTreeNode;
@@ -44,7 +45,6 @@ import io.github.astrapi69.jaxb.XmlToObjectExtensions;
 import io.github.astrapi69.jaxb.menu.model.MenuModel;
 import io.github.astrapi69.swing.menu.model.MenuInfo;
 import io.github.astrapi69.throwable.RuntimeExceptionDecorator;
-import lombok.NonNull;
 
 /**
  * The class {@link MenuInfoJaxbTreeNodeConverter} converts xml representations of {@link MenuInfo}
