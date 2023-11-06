@@ -27,7 +27,10 @@ package io.github.astrapi69.menu.pf4j.factory;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
@@ -36,6 +39,7 @@ import javax.swing.KeyStroke;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import io.github.astrapi69.awt.action.NoAction;
 import io.github.astrapi69.awt.window.adapter.CloseWindow;
 import io.github.astrapi69.file.create.FileFactory;
 import io.github.astrapi69.file.read.ReadFileExtensions;
@@ -44,6 +48,8 @@ import io.github.astrapi69.file.write.StoreFileExtensions;
 import io.github.astrapi69.gen.tree.BaseTreeNode;
 import io.github.astrapi69.id.generate.LongIdGenerator;
 import io.github.astrapi69.menu.pf4j.transform.MenuInfoTreeNodeConverter;
+import io.github.astrapi69.swing.action.ExitApplicationAction;
+import io.github.astrapi69.swing.action.ToggleFullScreenAction;
 import io.github.astrapi69.swing.menu.MenuExtensions;
 import io.github.astrapi69.swing.menu.enumeration.BaseMenuId;
 import io.github.astrapi69.swing.menu.enumeration.MenuType;
@@ -65,17 +71,36 @@ public class JMenuBarFactoryWithNestedMenuTest
 	{
 		JFrame frame;
 		String filename;
+
+		frame = new JFrame("Test Menu with xml");
 		filename = "app-tree-menubar.xml";
 		File xmlFile = FileFactory.newFileQuietly(PathFinder.getSrcTestResourcesDir(), filename);
 		String xml = RuntimeExceptionDecorator.decorate(() -> ReadFileExtensions.fromFile(xmlFile));
 
+		Map<String, ActionListener> actionListenerMap;
 		BaseTreeNode<MenuInfo, Long> menuInfoLongBaseTreeNode;
 
 		menuInfoLongBaseTreeNode = MenuInfoTreeNodeConverter.toMenuInfoTreeNode(xml);
+		actionListenerMap = new LinkedHashMap<>();
 
-		final JMenuBar menuBar = JMenuBarFactory.buildMenuBar(menuInfoLongBaseTreeNode);
+		actionListenerMap.put(BaseMenuId.TOGGLE_FULLSCREEN.propertiesKey(),
+			new ToggleFullScreenAction("Fullscreen", frame));
+		actionListenerMap.put(BaseMenuId.EXIT.propertiesKey(), new ExitApplicationAction("Exit"));
+		actionListenerMap.put(BaseMenuId.FILE.propertiesKey(), new NoAction());
+		actionListenerMap.put(BaseMenuId.MENU_BAR.propertiesKey(), new NoAction());
+		actionListenerMap.put(BaseMenuId.HELP.propertiesKey(), new NoAction());
+		actionListenerMap.put(BaseMenuId.HELP_CONTENT.propertiesKey(), new NoAction());
+		actionListenerMap.put(BaseMenuId.HELP_DONATE.propertiesKey(), new NoAction());
+		actionListenerMap.put(TestMenuId.HELP_DIAGNOSTIC.propertiesKey(), new NoAction());
+		actionListenerMap.put(TestMenuId.HELP_DIAGNOSTIC_ACTIVITY.propertiesKey(), new NoAction());
+		actionListenerMap.put(TestMenuId.HELP_DIAGNOSTIC_PROFILE.propertiesKey(), new NoAction());
+		actionListenerMap.put(TestMenuId.HELP_DIAGNOSTIC_USAGE.propertiesKey(), new NoAction());
+		actionListenerMap.put(BaseMenuId.HELP_LICENSE.propertiesKey(), new NoAction());
+		actionListenerMap.put(BaseMenuId.HELP_INFO.propertiesKey(), new NoAction());
 
-		frame = new JFrame("Test Menu with xml");
+		final JMenuBar menuBar = JMenuBarFactory.buildMenuBar(menuInfoLongBaseTreeNode,
+			actionListenerMap);
+
 		frame.setJMenuBar(menuBar);
 		frame.addWindowListener(new CloseWindow());
 		frame.setSize(400, 200);

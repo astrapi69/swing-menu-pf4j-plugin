@@ -40,16 +40,16 @@ import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.MenuElement;
 
-import io.github.astrapi69.reflection.InstanceFactory;
-import lombok.NonNull;
 import io.github.astrapi69.collection.list.ListExtensions;
 import io.github.astrapi69.collection.list.ListFactory;
 import io.github.astrapi69.gen.tree.BaseTreeNode;
+import io.github.astrapi69.reflection.InstanceFactory;
 import io.github.astrapi69.reflection.ReflectionExtensions;
 import io.github.astrapi69.swing.menu.ParentMenuResolver;
 import io.github.astrapi69.swing.menu.enumeration.MenuType;
 import io.github.astrapi69.swing.menu.model.MenuInfo;
 import io.github.astrapi69.swing.menu.model.MenuItemInfo;
+import lombok.NonNull;
 
 public class MenuPluginVisitorExtensions
 {
@@ -154,40 +154,33 @@ public class MenuPluginVisitorExtensions
 		}
 		else
 		{
-			Optional<ActionListener> actionOptional = InstanceFactoryDecorator.newInstance(actionCommand);
-			if (actionOptional.isPresent())
-			{
-				ActionListener actionListener = (ActionListener)actionOptional.get();
+			ActionListener actionListener = InstanceFactory.newInstance(actionCommand);
 
-				final MenuItemInfo menuItemInfo = menuInfo.toMenuItemInfo(actionListener);
-				MenuType menuType = menuInfo.getType();
-				switch (menuType)
-				{
-					case MENU_BAR :
-						final JMenuBar menuBar = menuItemInfo.toJMenuBar();
-						menuBarMap.put(menuInfoName, menuBar);
-						break;
-					case MENU_ITEM :
-						final JMenuItem menuItem = menuItemInfo.toJMenuItem();
-						menuItemMap.put(menuInfoName, menuItem);
-						break;
-					case RADIO_BUTTON_MENU_ITEM :
-						final JRadioButtonMenuItem radioButtonMenuItem = menuItemInfo
-							.toJRadioButtonMenuItem();
-						menuItemMap.put(menuInfoName, radioButtonMenuItem);
-						break;
-					case CHECK_BOX_MENU_ITEM :
-						final JCheckBoxMenuItem checkBoxMenuItem = menuItemInfo
-							.toJCheckBoxMenuItem();
-						menuItemMap.put(menuInfoName, checkBoxMenuItem);
-						break;
-					case MENU :
-						final JMenu menu = menuItemInfo.toJMenu();
-						menuMap.put(menuInfoName, menu);
-						break;
-				}
-			} else {
-				throw new RuntimeException("");
+			final MenuItemInfo menuItemInfo = menuInfo.toMenuItemInfo(actionListener);
+			MenuType menuType = menuInfo.getType();
+			switch (menuType)
+			{
+				case MENU_BAR :
+					final JMenuBar menuBar = menuItemInfo.toJMenuBar();
+					menuBarMap.put(menuInfoName, menuBar);
+					break;
+				case MENU_ITEM :
+					final JMenuItem menuItem = menuItemInfo.toJMenuItem();
+					menuItemMap.put(menuInfoName, menuItem);
+					break;
+				case RADIO_BUTTON_MENU_ITEM :
+					final JRadioButtonMenuItem radioButtonMenuItem = menuItemInfo
+						.toJRadioButtonMenuItem();
+					menuItemMap.put(menuInfoName, radioButtonMenuItem);
+					break;
+				case CHECK_BOX_MENU_ITEM :
+					final JCheckBoxMenuItem checkBoxMenuItem = menuItemInfo.toJCheckBoxMenuItem();
+					menuItemMap.put(menuInfoName, checkBoxMenuItem);
+					break;
+				case MENU :
+					final JMenu menu = menuItemInfo.toJMenu();
+					menuMap.put(menuInfoName, menu);
+					break;
 			}
 		}
 	}

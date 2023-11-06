@@ -31,8 +31,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import lombok.NonNull;
-
 import com.fasterxml.jackson.databind.JavaType;
 
 import io.github.astrapi69.collection.list.ListExtensions;
@@ -47,6 +45,7 @@ import io.github.astrapi69.throwable.RuntimeExceptionDecorator;
 import io.github.astrapi69.xml.jackson.ObjectToXmlExtensions;
 import io.github.astrapi69.xml.jackson.XmlToObjectExtensions;
 import io.github.astrapi69.xml.jackson.factory.JavaTypeFactory;
+import lombok.NonNull;
 
 /**
  * The class {@link MenuInfoJacksonTreeNodeConverter} converts xml representations of

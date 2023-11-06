@@ -24,6 +24,7 @@
  */
 package io.github.astrapi69.menu.pf4j.factory;
 
+import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,9 +32,10 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import lombok.NonNull;
 import io.github.astrapi69.gen.tree.BaseTreeNode;
+import io.github.astrapi69.swing.menu.factory.MenuVisitorExtensions;
 import io.github.astrapi69.swing.menu.model.MenuInfo;
+import lombok.NonNull;
 
 /**
  * A factory {@link JMenuFactory} provides factory methods for create JMenu objects
@@ -56,6 +58,29 @@ public class JMenuFactory
 		root.accept(menuInfoLongBaseTreeNode -> MenuPluginVisitorExtensions
 			.visitAndAddToMap(menuInfoLongBaseTreeNode, menuMap, menuItemMap, menuBarMap));
 		root.accept(menuInfoLongBaseTreeNode -> MenuPluginVisitorExtensions
+			.visitAndAddToMenu(menuInfoLongBaseTreeNode, menuMap, menuItemMap, menuBarMap));
+		return menuMap.get(menuId);
+	}
+
+
+	public static JMenu buildMenu(final @NonNull BaseTreeNode<MenuInfo, Long> root,
+		final @NonNull Map<String, ActionListener> actionListenerMap)
+	{
+		return buildMenu(root.getValue().getName(), root, actionListenerMap);
+	}
+
+	public static JMenu buildMenu(final @NonNull String menuId,
+		final @NonNull BaseTreeNode<MenuInfo, Long> root,
+		final @NonNull Map<String, ActionListener> actionListenerMap)
+	{
+		final Map<String, JMenu> menuMap = new HashMap<>();
+		final Map<String, JMenuItem> menuItemMap = new HashMap<>();
+		final Map<String, JMenuBar> menuBarMap = new HashMap<>();
+		MenuVisitorExtensions.visitAndAddToMap(root, actionListenerMap, menuMap, menuItemMap,
+			menuBarMap);
+		root.accept(menuInfoLongBaseTreeNode -> MenuVisitorExtensions.visitAndAddToMap(
+			menuInfoLongBaseTreeNode, actionListenerMap, menuMap, menuItemMap, menuBarMap));
+		root.accept(menuInfoLongBaseTreeNode -> MenuVisitorExtensions
 			.visitAndAddToMenu(menuInfoLongBaseTreeNode, menuMap, menuItemMap, menuBarMap));
 		return menuMap.get(menuId);
 	}

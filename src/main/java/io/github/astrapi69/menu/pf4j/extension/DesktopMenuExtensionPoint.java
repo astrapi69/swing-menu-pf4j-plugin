@@ -24,6 +24,9 @@
  */
 package io.github.astrapi69.menu.pf4j.extension;
 
+import java.awt.event.ActionListener;
+import java.util.Map;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 
@@ -35,5 +38,10 @@ public interface DesktopMenuExtensionPoint extends ExtensionPoint
 	JMenuBar buildMenuBar(String xml);
 
 	JMenu buildAndAddMenuToExistingJMenuBar(String xml);
+
+	JMenuBar buildMenuBar(String xml, Map<String, ActionListener> actionListenerMap);
+
+	JMenu buildAndAddMenuToExistingJMenuBar(String xml,
+		Map<String, ActionListener> actionListenerMap);
 
 }
