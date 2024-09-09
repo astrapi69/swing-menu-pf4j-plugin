@@ -1,34 +1,32 @@
-
 dependencies {
-    compileOnly("org.projectlombok:lombok:$lombokVersion")
-    annotationProcessor("org.projectlombok:lombok:$lombokVersion")
-    testCompileOnly("org.projectlombok:lombok:$lombokVersion")
-    testAnnotationProcessor("org.projectlombok:lombok:$lombokVersion")
-    annotationProcessor("org.pf4j:pf4j:$pf4jVersion")
-    testAnnotationProcessor("org.pf4j:pf4j:$pf4jVersion")
-    implementation("org.pf4j:pf4j:$pf4jVersion")
-    implementation("io.github.astrapi69:menu-action:$menuActionVersion")
-    implementation("io.github.astrapi69:tree-api:$treeApiVersion")
-    implementation("io.github.astrapi69:gen-tree:$genTreeVersion")
-    implementation("io.github.astrapi69:silly-collection:$sillyCollectionVersion")
-    implementation("io.github.astrapi69:id-generate:$idGenerateVersion")
-    implementation("io.github.astrapi69:data-api:$dataApiVersion")
-    implementation("io.github.astrapi69:throwable:$throwableVersion")
-    implementation("io.github.astrapi69:xstream-extensions:$xstreamExtensionsVersion")
-    implementation("io.github.astrapi69:visitor:$designPatternsVersion")
-    implementation("io.github.astrapi69:jaxb-extensions:$jaxbExtensionsVersion")
-    implementation("io.github.astrapi69:menu-jaxb-model:$menuJaxbModelVersion")
-    implementation("io.github.astrapi69:xml-jackson-extensions:$xmlJacksonExtensionsVersion")
-    implementation("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
-    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:$jacksonVersion")
 
-    implementation("io.github.astrapi69:jobj-reflect:$jobjReflectVersion")
-    testImplementation("io.github.astrapi69:awt-extensions:$awtExtensionsVersion")
-    testImplementation("io.github.astrapi69:silly-io:$sillyIoVersion")
-    testImplementation("io.github.astrapi69:file-worker:$fileWorkerVersion")
-    testImplementation("org.apache.commons:commons-text:$commonsTextVersion")
-    testImplementation("com.github.meanbeanlib:meanbean:$meanbeanVersion")
-    testImplementation("io.github.astrapi69:junit-jupiter-extensions:$junitJupiterExtensionsVersion")
-    testImplementation("org.junit.jupiter:junit-jupiter:$junitJupiterVersion")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher:$junitPlatformLauncherVersion")
+    compileOnly libs.lombok
+    annotationProcessor libs.lombok
+    annotationProcessor libs.pf4j
+
+    testCompileOnly libs.lombok
+    testAnnotationProcessor libs.lombok
+    testAnnotationProcessor libs.pf4j
+
+    implementation libs.pf4j
+    implementation libs.menu.action
+    implementation libs.tree.api
+    implementation libs.gen.tree
+    implementation libs.silly.collection
+    implementation libs.id.generate
+    implementation libs.data.api
+    implementation libs.throwable
+    implementation libs.xstream.extensions
+    implementation libs.visitor
+    implementation libs.jaxb.extensions
+    implementation libs.menu.jaxb.model
+    implementation libs.xml.jackson.extensions
+    implementation libs.jackson.databind
+    implementation libs.jackson.dataformat.xml
+    implementation libs.jobj.reflect
+
+    // Note: use of bundles...
+    testImplementation libs.bundles.unit.testing
+    testRuntimeOnly libs.junit.platform.launcher
+
 }

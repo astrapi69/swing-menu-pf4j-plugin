@@ -72,7 +72,7 @@ public class DesktopMenuPluginTest
 		pluginManager.loadPlugins();
 		pluginManager.startPlugins();
 
-		// retrieve all extension points for "Greeting" extension point
+		// retrieve all extension points for "menu-plugin" extension point
 		List<DesktopMenuExtensionPoint> extensionPoints = pluginManager
 			.getExtensions(DesktopMenuExtensionPoint.class);
 		Optional<DesktopMenuExtensionPoint> desktopMenuExtensionPointOptional = ListExtensions
