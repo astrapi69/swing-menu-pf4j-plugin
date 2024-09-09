@@ -40,8 +40,24 @@ import io.github.astrapi69.swing.menu.model.KeyStrokeInfo;
 import io.github.astrapi69.swing.menu.model.MenuInfo;
 import io.github.astrapi69.swing.menu.model.transform.MenuItemInfoConverter;
 
+/**
+ * Test class for {@link MenuInfoTreeNodeConverter}
+ */
 class MenuInfoTreeNodeConverterTest
 {
+
+	/**
+	 * Test method for building a tree node from XML with xstream for the file menu and verifying
+	 * the integrity of the structure after conversion to and from XML
+	 *
+	 * The methods that are tested in this test case include:
+	 * <ul>
+	 * <li>{@link MenuInfoTreeNodeConverter#toXml(BaseTreeNode)} - Converts a tree node to its XML
+	 * representation</li>
+	 * <li>{@link MenuInfoTreeNodeConverter#toMenuInfoTreeNode(String)} - Converts an XML
+	 * representation back to a tree node</li>
+	 * </ul>
+	 */
 	@Test
 	public void testBuildRootTreeNodeFromJaxbXmlForFileMenu()
 	{
@@ -58,19 +74,24 @@ class MenuInfoTreeNodeConverterTest
 
 		BaseTreeNode<MenuInfo, Long> menuInfoLongBaseTreeNode;
 
+		// Create a LongIdGenerator starting from 0
 		idGenerator = LongIdGenerator.of(0L);
 
+		// Create MenuInfo for the root menu bar
 		menuBarInfo = MenuItemInfoConverter.fromJMenuBar();
 
+		// Create the root tree node for the menu bar
 		menuBarTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
 			.value(menuBarInfo).build();
 
+		// Create MenuInfo for the File menu with a mnemonic and shortcut
 		fileMenuInfo = MenuInfo.builder().mnemonic(MenuExtensions.toMnemonic('F')).ordinal(1100)
 			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("alt pressed F")))
 			.text("File").name(BaseMenuId.FILE.propertiesKey()).build();
 		fileTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
 			.value(fileMenuInfo).build();
 
+		// Create MenuInfo for Toggle Fullscreen menu item with a mnemonic and shortcut
 		toggleFullscreenMenuInfo = MenuInfo.builder().type(MenuType.MENU_ITEM).ordinal(11100)
 			.mnemonic(MenuExtensions.toMnemonic('T'))
 			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("alt pressed F11")))
@@ -80,6 +101,7 @@ class MenuInfoTreeNodeConverterTest
 			.id(idGenerator.getNextId()).parent(fileTreeNode).value(toggleFullscreenMenuInfo)
 			.leaf(true).build();
 
+		// Create MenuInfo for Exit menu item with a mnemonic and shortcut
 		exitMenuInfo = MenuInfo.builder().type(MenuType.MENU_ITEM).ordinal(11200)
 			.mnemonic(MenuExtensions.toMnemonic('E'))
 			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("alt pressed F4")))
@@ -88,15 +110,19 @@ class MenuInfoTreeNodeConverterTest
 		exitTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
 			.leaf(true).parent(fileTreeNode).value(exitMenuInfo).build();
 
+		// Add File menu node to the menu bar and add the sub-menu items to the File menu
 		menuBarTreeNode.addChild(fileTreeNode);
 		fileTreeNode.addChild(toggleFullscreenTreeNode);
 		fileTreeNode.addChild(exitTreeNode);
 
+		// Convert the tree node to XML
 		treeNodeAsXml = MenuInfoTreeNodeConverter.toXml(menuBarTreeNode);
 
+		// Convert the XML back to a tree node and verify
 		menuInfoLongBaseTreeNode = MenuInfoTreeNodeConverter.toMenuInfoTreeNode(treeNodeAsXml);
 		assertNotNull(menuInfoLongBaseTreeNode);
+
+		// Verify that the converted tree node matches the original tree node
 		assertEquals(menuInfoLongBaseTreeNode, menuBarTreeNode);
 	}
-
 }
