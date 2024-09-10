@@ -38,16 +38,33 @@ import io.github.astrapi69.swing.menu.model.MenuInfo;
 import lombok.NonNull;
 
 /**
- * A factory {@link JMenuFactory} provides factory methods for create JMenu objects
+ * A factory {@link JMenuFactory} provides factory methods for creating {@link JMenu} objects.
  */
 public class JMenuFactory
 {
 
+	/**
+	 * Builds a {@link JMenu} from the given root {@link BaseTreeNode} object.
+	 *
+	 * @param root
+	 *            the root node of the {@link BaseTreeNode} tree structure
+	 * @return the constructed {@link JMenu} object
+	 */
 	public static JMenu buildMenu(final @NonNull BaseTreeNode<MenuInfo, Long> root)
 	{
 		return buildMenu(root.getValue().getName(), root);
 	}
 
+	/**
+	 * Builds a {@link JMenu} from the given root {@link BaseTreeNode} object and a specific menu
+	 * ID.
+	 *
+	 * @param menuId
+	 *            the identifier of the menu
+	 * @param root
+	 *            the root node of the {@link BaseTreeNode} tree structure
+	 * @return the constructed {@link JMenu} object
+	 */
 	public static JMenu buildMenu(final @NonNull String menuId,
 		final @NonNull BaseTreeNode<MenuInfo, Long> root)
 	{
@@ -62,13 +79,34 @@ public class JMenuFactory
 		return menuMap.get(menuId);
 	}
 
-
+	/**
+	 * Builds a {@link JMenu} from the given root {@link BaseTreeNode} object with a map of
+	 * {@link ActionListener}.
+	 *
+	 * @param root
+	 *            the root node of the {@link BaseTreeNode} tree structure
+	 * @param actionListenerMap
+	 *            the map of {@link ActionListener} objects
+	 * @return the constructed {@link JMenu} object
+	 */
 	public static JMenu buildMenu(final @NonNull BaseTreeNode<MenuInfo, Long> root,
 		final @NonNull Map<String, ActionListener> actionListenerMap)
 	{
 		return buildMenu(root.getValue().getName(), root, actionListenerMap);
 	}
 
+	/**
+	 * Builds a {@link JMenu} from the given root {@link BaseTreeNode} object, a specific menu ID,
+	 * and a map of {@link ActionListener}.
+	 *
+	 * @param menuId
+	 *            the identifier of the menu
+	 * @param root
+	 *            the root node of the {@link BaseTreeNode} tree structure
+	 * @param actionListenerMap
+	 *            the map of {@link ActionListener} objects
+	 * @return the constructed {@link JMenu} object
+	 */
 	public static JMenu buildMenu(final @NonNull String menuId,
 		final @NonNull BaseTreeNode<MenuInfo, Long> root,
 		final @NonNull Map<String, ActionListener> actionListenerMap)

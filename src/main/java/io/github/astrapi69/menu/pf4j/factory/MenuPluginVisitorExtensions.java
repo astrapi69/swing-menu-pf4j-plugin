@@ -1,7 +1,7 @@
 /**
  * The MIT License
  *
- * Copyright (C) 2021 Asterios Raptis
+ * Copyright (C) 2023 Asterios Raptis
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -31,7 +31,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
@@ -44,17 +43,33 @@ import io.github.astrapi69.collection.list.ListExtensions;
 import io.github.astrapi69.collection.list.ListFactory;
 import io.github.astrapi69.gen.tree.BaseTreeNode;
 import io.github.astrapi69.reflection.InstanceFactory;
-import io.github.astrapi69.reflection.ReflectionExtensions;
 import io.github.astrapi69.swing.menu.ParentMenuResolver;
 import io.github.astrapi69.swing.menu.enumeration.MenuType;
 import io.github.astrapi69.swing.menu.model.MenuInfo;
 import io.github.astrapi69.swing.menu.model.MenuItemInfo;
 import lombok.NonNull;
 
+/**
+ * The class {@link MenuPluginVisitorExtensions} provides utility methods for visiting and adding
+ * {@link MenuInfo} objects to various Swing components such as {@link JMenu}, {@link JMenuBar}, and
+ * {@link JMenuItem}.
+ */
 public class MenuPluginVisitorExtensions
 {
 
-
+	/**
+	 * Visits the given {@link BaseTreeNode} and adds it to the corresponding menu, menu bar, or
+	 * menu item, depending on its type.
+	 *
+	 * @param menuInfoLongBaseTreeNode
+	 *            the {@link BaseTreeNode} containing the {@link MenuInfo}
+	 * @param menuMap
+	 *            the map of menu names and corresponding {@link JMenu} objects
+	 * @param menuItemMap
+	 *            the map of menu item names and corresponding {@link JMenuItem} objects
+	 * @param menuBarMap
+	 *            the map of menu bar names and corresponding {@link JMenuBar} objects
+	 */
 	public static void visitAndAddToMenu(
 		final @NonNull BaseTreeNode<MenuInfo, Long> menuInfoLongBaseTreeNode,
 		final @NonNull Map<String, JMenu> menuMap,
@@ -139,6 +154,19 @@ public class MenuPluginVisitorExtensions
 		return list;
 	}
 
+	/**
+	 * Visits the given {@link BaseTreeNode} and adds it to the corresponding maps based on its
+	 * type.
+	 *
+	 * @param menuInfoLongBaseTreeNode
+	 *            the {@link BaseTreeNode} containing the {@link MenuInfo}
+	 * @param menuMap
+	 *            the map of menu names and corresponding {@link JMenu} objects
+	 * @param menuItemMap
+	 *            the map of menu item names and corresponding {@link JMenuItem} objects
+	 * @param menuBarMap
+	 *            the map of menu bar names and corresponding {@link JMenuBar} objects
+	 */
 	public static void visitAndAddToMap(
 		final @NonNull BaseTreeNode<MenuInfo, Long> menuInfoLongBaseTreeNode,
 		final @NonNull Map<String, JMenu> menuMap,

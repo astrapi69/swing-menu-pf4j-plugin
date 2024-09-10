@@ -65,8 +65,6 @@
           <onKeyRelease>false</onKeyRelease>
           <keystrokeAsString>alt pressed F</keystrokeAsString>
         </keyStrokeInfo>
-        <type>MENU</type>
-        <actionCommand>io.github.astrapi69.awt.action.NoAction</actionCommand>
       </value>
       <leaf>false</leaf>
     </io.github.astrapi69.gen.tree.TreeIdNode>
@@ -82,7 +80,6 @@
         <name>global.menu.bar</name>
         <ordinal>100</ordinal>
         <type>MENU_BAR</type>
-        <actionCommand>io.github.astrapi69.awt.action.NoAction</actionCommand>
       </value>
       <leaf>false</leaf>
     </io.github.astrapi69.gen.tree.TreeIdNode>

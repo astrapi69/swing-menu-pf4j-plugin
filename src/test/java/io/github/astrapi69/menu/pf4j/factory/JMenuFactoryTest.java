@@ -46,13 +46,21 @@ import io.github.astrapi69.swing.menu.enumeration.BaseMenuId;
 import io.github.astrapi69.swing.menu.model.MenuInfo;
 import io.github.astrapi69.throwable.RuntimeExceptionDecorator;
 
+/**
+ * The test class {@link JMenuFactoryTest} provides unit tests for building {@link JMenu} objects
+ * from tree nodes and XML representations.
+ */
 public class JMenuFactoryTest
 {
+
 	File xmlFile;
 	String fileMenuXml;
 	String editMenuXml;
 	String helpMenuXml;
 
+	/**
+	 * Sets up the environment before each test.
+	 */
 	@BeforeEach
 	public void beforeEach()
 	{
@@ -73,6 +81,10 @@ public class JMenuFactoryTest
 			.decorate(() -> ReadFileExtensions.fromFile(xmlFile));
 	}
 
+	/**
+	 * Test for building a file menu from XML. This test is disabled since action classes require
+	 * initialization.
+	 */
 	@ExtendWith(IgnoreHeadlessExceptionExtension.class)
 	@Test
 	@Disabled("Action classes can not instantiated without init args. Have to be specified and enable again for further tests")
@@ -89,6 +101,9 @@ public class JMenuFactoryTest
 		assertNotNull(menu);
 	}
 
+	/**
+	 * Test for building an edit menu from XML.
+	 */
 	@ExtendWith(IgnoreHeadlessExceptionExtension.class)
 	@Test
 	public void testBuildEditMenuFromXml()
@@ -104,6 +119,9 @@ public class JMenuFactoryTest
 		assertNotNull(menu);
 	}
 
+	/**
+	 * Test for building a help menu from XML.
+	 */
 	@ExtendWith(IgnoreHeadlessExceptionExtension.class)
 	@Test
 	public void testBuildHelpMenuFromXml()
@@ -118,5 +136,4 @@ public class JMenuFactoryTest
 		menu = JMenuFactory.buildMenu(BaseMenuId.HELP.propertiesKey(), menuInfoLongBaseTreeNode);
 		assertNotNull(menu);
 	}
-
 }

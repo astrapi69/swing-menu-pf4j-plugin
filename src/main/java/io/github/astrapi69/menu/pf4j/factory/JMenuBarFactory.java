@@ -39,11 +39,21 @@ import io.github.astrapi69.swing.menu.model.MenuInfo;
 import lombok.NonNull;
 
 /**
- * A factory {@link JMenuBarFactory} provides factory methods for create JMenuBar objects
+ * A factory {@link JMenuBarFactory} provides factory methods for creating {@link JMenuBar} objects.
  */
 public class JMenuBarFactory
 {
 
+	/**
+	 * Builds a {@link JMenuBar} from the given root {@link BaseTreeNode} object and a map of
+	 * {@link ActionListener}.
+	 *
+	 * @param root
+	 *            the root node of the {@link BaseTreeNode} tree structure
+	 * @param actionListenerMap
+	 *            the map of {@link ActionListener} objects
+	 * @return the constructed {@link JMenuBar} object
+	 */
 	public static JMenuBar buildMenuBar(final @NonNull BaseTreeNode<MenuInfo, Long> root,
 		final @NonNull Map<String, ActionListener> actionListenerMap)
 	{
@@ -59,6 +69,13 @@ public class JMenuBarFactory
 		return menuBarMap.get(BaseMenuId.MENU_BAR.propertiesKey());
 	}
 
+	/**
+	 * Builds a {@link JMenuBar} from the given root {@link BaseTreeNode} object.
+	 *
+	 * @param root
+	 *            the root node of the {@link BaseTreeNode} tree structure
+	 * @return the constructed {@link JMenuBar} object
+	 */
 	public static JMenuBar buildMenuBar(final @NonNull BaseTreeNode<MenuInfo, Long> root)
 	{
 		final Map<String, JMenu> menuMap = new LinkedHashMap<>();

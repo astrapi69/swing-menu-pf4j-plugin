@@ -44,19 +44,19 @@ import io.github.astrapi69.xstream.XmlToObjectExtensions;
 import lombok.NonNull;
 
 /**
- * The class {@link MenuInfoTreeNodeConverter} converts xml representations of {@link MenuInfo}
- * objects to a single root {@link BaseTreeNode} object and back
+ * The class {@link MenuInfoTreeNodeConverter} provides utility methods for converting XML
+ * representations of {@link MenuInfo} objects to a single root {@link BaseTreeNode} and vice versa
  */
 public class MenuInfoTreeNodeConverter
 {
 
 	/**
-	 * Factory method that creates a {@link BaseTreeNode} object from the given xml {@link String}
-	 * object that represents a {@link BaseTreeNode} object of {@link MenuInfo} objects
+	 * Factory method that creates a {@link BaseTreeNode} object from the given XML {@link String}
+	 * which represents a {@link BaseTreeNode} of {@link MenuInfo} objects
 	 *
 	 * @param xml
-	 *            the xml representations of {@link MenuInfo} objects
-	 * @return the new created {@link BaseTreeNode} object
+	 *            the XML representation of {@link MenuInfo} objects
+	 * @return the newly created {@link BaseTreeNode} object
 	 */
 	public static BaseTreeNode<MenuInfo, Long> toMenuInfoTreeNode(final @NonNull String xml)
 	{
@@ -66,12 +66,12 @@ public class MenuInfoTreeNodeConverter
 	}
 
 	/**
-	 * Converts the given {@link BaseTreeNode} object to a xml {@link String} object that represents
-	 * a {@link BaseTreeNode} object of {@link MenuInfo} objects
-	 * 
+	 * Converts the given {@link BaseTreeNode} object into an XML {@link String} that represents a
+	 * {@link BaseTreeNode} of {@link MenuInfo} objects
+	 *
 	 * @param root
 	 *            the {@link BaseTreeNode} object
-	 * @return the xml {@link String} object
+	 * @return the XML {@link String} object
 	 */
 	public static String toXml(final @NonNull BaseTreeNode<MenuInfo, Long> root)
 	{
@@ -81,12 +81,12 @@ public class MenuInfoTreeNodeConverter
 	}
 
 	/**
-	 * Merges several xml {@link String} objects that represents individual menu items to a single
-	 * {@link BaseTreeNode} object of {@link MenuInfo} objects
-	 * 
+	 * Merges several XML {@link String} objects, representing individual menu items, into a single
+	 * {@link BaseTreeNode} of {@link MenuInfo} objects
+	 *
 	 * @param xmls
-	 *            the xml {@link String} objects
-	 * @return the new created {@link BaseTreeNode} object
+	 *            the XML {@link String} objects
+	 * @return the newly created {@link BaseTreeNode} object
 	 */
 	public static BaseTreeNode<MenuInfo, Long> mergeMenuInfoTreeNode(final @NonNull String... xmls)
 	{
@@ -120,7 +120,6 @@ public class MenuInfoTreeNodeConverter
 		final @NonNull Optional<BaseTreeNode<T, K>> firstTreeNode,
 		final @NonNull List<BaseTreeNode<T, K>> treeNodes)
 	{
-
 		BaseTreeNode<T, K> root = null;
 		if (firstTreeNode.isPresent())
 		{
@@ -128,5 +127,4 @@ public class MenuInfoTreeNodeConverter
 		}
 		return root;
 	}
-
 }

@@ -34,7 +34,6 @@ import java.util.Map;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
-import javax.swing.KeyStroke;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -46,20 +45,17 @@ import io.github.astrapi69.file.read.ReadFileExtensions;
 import io.github.astrapi69.file.search.PathFinder;
 import io.github.astrapi69.file.write.StoreFileExtensions;
 import io.github.astrapi69.gen.tree.BaseTreeNode;
-import io.github.astrapi69.id.generate.LongIdGenerator;
 import io.github.astrapi69.menu.pf4j.transform.MenuInfoTreeNodeConverter;
+import io.github.astrapi69.menu.pf4j.transform.TestDataFactory;
 import io.github.astrapi69.swing.action.ExitApplicationAction;
 import io.github.astrapi69.swing.action.ToggleFullScreenAction;
-import io.github.astrapi69.swing.menu.MenuExtensions;
 import io.github.astrapi69.swing.menu.enumeration.BaseMenuId;
-import io.github.astrapi69.swing.menu.enumeration.MenuType;
-import io.github.astrapi69.swing.menu.model.KeyStrokeInfo;
 import io.github.astrapi69.swing.menu.model.MenuInfo;
-import io.github.astrapi69.swing.menu.model.transform.MenuItemInfoConverter;
 import io.github.astrapi69.throwable.RuntimeExceptionDecorator;
 
 /**
- * The unit test class for the class {@link JMenuBarFactory}
+ * The unit test class for the {@link JMenuBarFactory} class. It validates the creation of nested
+ * {@link JMenuBar} structures from XML using a generated tree of {@link BaseTreeNode} objects.
  */
 public class JMenuBarFactoryWithNestedMenuTest
 {
@@ -67,6 +63,12 @@ public class JMenuBarFactoryWithNestedMenuTest
 	File xmlFile;
 	String xml;
 
+	/**
+	 * Main method for running the test in a graphical user interface.
+	 *
+	 * @param args
+	 *            the command line arguments
+	 */
 	public static void main(String[] args)
 	{
 		JFrame frame;
@@ -83,11 +85,11 @@ public class JMenuBarFactoryWithNestedMenuTest
 		menuInfoLongBaseTreeNode = MenuInfoTreeNodeConverter.toMenuInfoTreeNode(xml);
 		actionListenerMap = new LinkedHashMap<>();
 
+		actionListenerMap.put(BaseMenuId.MENU_BAR.propertiesKey(), new NoAction());
+		actionListenerMap.put(BaseMenuId.FILE.propertiesKey(), new NoAction());
 		actionListenerMap.put(BaseMenuId.TOGGLE_FULLSCREEN.propertiesKey(),
 			new ToggleFullScreenAction("Fullscreen", frame));
 		actionListenerMap.put(BaseMenuId.EXIT.propertiesKey(), new ExitApplicationAction("Exit"));
-		actionListenerMap.put(BaseMenuId.FILE.propertiesKey(), new NoAction());
-		actionListenerMap.put(BaseMenuId.MENU_BAR.propertiesKey(), new NoAction());
 		actionListenerMap.put(BaseMenuId.HELP.propertiesKey(), new NoAction());
 		actionListenerMap.put(BaseMenuId.HELP_CONTENT.propertiesKey(), new NoAction());
 		actionListenerMap.put(BaseMenuId.HELP_DONATE.propertiesKey(), new NoAction());
@@ -107,6 +109,9 @@ public class JMenuBarFactoryWithNestedMenuTest
 		frame.setVisible(true);
 	}
 
+	/**
+	 * Sets up the XML file and loads it before each test.
+	 */
 	@BeforeEach
 	public void beforeEach()
 	{
@@ -116,157 +121,16 @@ public class JMenuBarFactoryWithNestedMenuTest
 		xml = RuntimeExceptionDecorator.decorate(() -> ReadFileExtensions.fromFile(xmlFile));
 	}
 
-
+	/**
+	 * Test for building a root tree node from XML and validating the structure.
+	 */
 	@Test
 	public void testBuildRootTreeNodeFromXml()
 	{
-		BaseTreeNode<MenuInfo, Long> menuBarTreeNode;
-		BaseTreeNode<MenuInfo, Long> fileTreeNode;
-		BaseTreeNode<MenuInfo, Long> toggleFullscreenTreeNode;
-		BaseTreeNode<MenuInfo, Long> exitTreeNode;
-		BaseTreeNode<MenuInfo, Long> helpTreeNode;
-		BaseTreeNode<MenuInfo, Long> helpContentTreeNode;
-		BaseTreeNode<MenuInfo, Long> donateTreeNode;
-		BaseTreeNode<MenuInfo, Long> diagnosticTreeNode;
-		BaseTreeNode<MenuInfo, Long> diagnosticActivityTreeNode;
-		BaseTreeNode<MenuInfo, Long> diagnosticProfileTreeNode;
-		BaseTreeNode<MenuInfo, Long> diagnosticUsageTreeNode;
-		BaseTreeNode<MenuInfo, Long> licenseTreeNode;
-		BaseTreeNode<MenuInfo, Long> infoTreeNode;
-		MenuInfo helpMenuInfo;
-		MenuInfo helpContentMenuInfo;
-		MenuInfo donateMenuInfo;
-		MenuInfo diagnosticMenuInfo;
-		MenuInfo diagnosticActivityMenuInfo;
-		MenuInfo diagnosticProfileMenuInfo;
-		MenuInfo diagnosticUsageMenuInfo;
-		MenuInfo licenseMenuInfo;
-		MenuInfo infoMenuInfo;
-		MenuInfo menuBarInfo;
-		MenuInfo fileMenuInfo;
-		MenuInfo toggleFullscreenMenuInfo;
-		MenuInfo exitMenuInfo;
-		LongIdGenerator idGenerator;
-		String treeNodeAsXml;
-
+		BaseTreeNode<MenuInfo, Long> menuBarTreeNode = TestDataFactory
+			.getTestFileAndHelpMenuWithMenubar();
 		BaseTreeNode<MenuInfo, Long> menuInfoLongBaseTreeNode;
-
-		idGenerator = LongIdGenerator.of(0L);
-
-		menuBarInfo = MenuItemInfoConverter.fromJMenuBar();
-		menuBarInfo.setActionCommand("io.github.astrapi69.awt.action.NoAction");
-
-		menuBarTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
-			.value(menuBarInfo).build();
-
-		fileMenuInfo = MenuInfo.builder().type(MenuType.MENU)
-			.mnemonic(MenuExtensions.toMnemonic('F')).ordinal(1100)
-			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("alt pressed F")))
-			.text("File").name(BaseMenuId.FILE.propertiesKey())
-			.actionCommand("io.github.astrapi69.awt.action.NoAction").build();
-		fileTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
-			.value(fileMenuInfo).build();
-
-		toggleFullscreenMenuInfo = MenuInfo.builder().type(MenuType.MENU_ITEM).ordinal(11100)
-			.mnemonic(MenuExtensions.toMnemonic('T'))
-			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("alt pressed F11")))
-			.text("Toggle Fullscreen").name(BaseMenuId.TOGGLE_FULLSCREEN.propertiesKey())
-			.actionCommand("io.github.astrapi69.swing.action.ToggleFullScreenAction").build();
-		toggleFullscreenTreeNode = BaseTreeNode.<MenuInfo, Long> builder()
-			.id(idGenerator.getNextId()).parent(fileTreeNode).value(toggleFullscreenMenuInfo)
-			.leaf(true).build();
-
-		exitMenuInfo = MenuInfo.builder().type(MenuType.MENU_ITEM).ordinal(11200)
-			.mnemonic(MenuExtensions.toMnemonic('E'))
-			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("alt pressed F4")))
-			.text("Exit").name(BaseMenuId.EXIT.propertiesKey())
-			.actionCommand("io.github.astrapi69.swing.action.ExitApplicationAction").build();
-		exitTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
-			.leaf(true).parent(fileTreeNode).value(exitMenuInfo).build();
-
-		helpMenuInfo = MenuInfo.builder().type(MenuType.MENU)
-			.mnemonic(MenuExtensions.toMnemonic('H')).ordinal(13000)
-			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("alt pressed H")))
-			.text("Help").name(BaseMenuId.HELP.propertiesKey())
-			.actionCommand("io.github.astrapi69.awt.action.NoAction").build();
-		helpTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
-			.value(helpMenuInfo).build();
-		helpContentMenuInfo = MenuInfo.builder().type(MenuType.MENU_ITEM).ordinal(13100)
-			.mnemonic(MenuExtensions.toMnemonic('C'))
-			.keyStrokeInfo(
-				KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("ctrl alt pressed H")))
-			.text("Help Content").name(BaseMenuId.HELP_CONTENT.propertiesKey())
-			.actionCommand("io.github.astrapi69.awt.action.NoAction").build();
-		helpContentTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
-			.leaf(true).value(helpContentMenuInfo).build();
-
-		donateMenuInfo = MenuInfo.builder().type(MenuType.MENU_ITEM).ordinal(13200)
-			.mnemonic(MenuExtensions.toMnemonic('L'))
-			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("ctrl pressed L")))
-			.text("Donate").name(BaseMenuId.HELP_DONATE.propertiesKey())
-			.actionCommand("io.github.astrapi69.awt.action.NoAction").build();
-		donateTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
-			.leaf(true).value(donateMenuInfo).build();
-
-		diagnosticMenuInfo = MenuInfo.builder().type(MenuType.MENU)
-			.mnemonic(MenuExtensions.toMnemonic('G')).ordinal(13300).text("Diagnostic >")
-			.name(TestMenuId.HELP_DIAGNOSTIC.propertiesKey())
-			.actionCommand("io.github.astrapi69.awt.action.NoAction").build();
-		diagnosticTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
-			.value(diagnosticMenuInfo).build();
-
-		diagnosticActivityMenuInfo = MenuInfo.builder().type(MenuType.CHECK_BOX_MENU_ITEM)
-			.ordinal(133100).mnemonic(MenuExtensions.toMnemonic('A'))
-			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("ctrl pressed A")))
-			.text("Activity").name(TestMenuId.HELP_DIAGNOSTIC_ACTIVITY.propertiesKey())
-			.actionCommand("io.github.astrapi69.awt.action.NoAction").build();
-		diagnosticActivityTreeNode = BaseTreeNode.<MenuInfo, Long> builder()
-			.id(idGenerator.getNextId()).leaf(true).value(diagnosticActivityMenuInfo).build();
-
-		diagnosticProfileMenuInfo = MenuInfo.builder().type(MenuType.RADIO_BUTTON_MENU_ITEM)
-			.ordinal(133200).mnemonic(MenuExtensions.toMnemonic('P'))
-			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("ctrl pressed P")))
-			.text("Profile").name(TestMenuId.HELP_DIAGNOSTIC_PROFILE.propertiesKey())
-			.actionCommand("io.github.astrapi69.awt.action.NoAction").build();
-		diagnosticProfileTreeNode = BaseTreeNode.<MenuInfo, Long> builder()
-			.id(idGenerator.getNextId()).leaf(true).value(diagnosticProfileMenuInfo).build();
-
-		diagnosticUsageMenuInfo = MenuInfo.builder().type(MenuType.MENU_ITEM).ordinal(133300)
-			.mnemonic(MenuExtensions.toMnemonic('U'))
-			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("ctrl pressed U")))
-			.text("Usage").name(TestMenuId.HELP_DIAGNOSTIC_USAGE.propertiesKey())
-			.actionCommand("io.github.astrapi69.awt.action.NoAction").build();
-		diagnosticUsageTreeNode = BaseTreeNode.<MenuInfo, Long> builder()
-			.id(idGenerator.getNextId()).leaf(true).value(diagnosticUsageMenuInfo).build();
-
-		licenseMenuInfo = MenuInfo.builder().type(MenuType.MENU_ITEM).ordinal(13400)
-			.mnemonic(MenuExtensions.toMnemonic('L'))
-			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("ctrl pressed L")))
-			.text("Licence").name(BaseMenuId.HELP_LICENSE.propertiesKey())
-			.actionCommand("io.github.astrapi69.awt.action.NoAction").build();
-		licenseTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
-			.value(licenseMenuInfo).build();
-
-		infoMenuInfo = MenuInfo.builder().type(MenuType.MENU_ITEM).ordinal(13500)
-			.mnemonic(MenuExtensions.toMnemonic('I'))
-			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("ctrl pressed I")))
-			.text("Info").name(BaseMenuId.HELP_INFO.propertiesKey())
-			.actionCommand("io.github.astrapi69.awt.action.NoAction").build();
-		infoTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
-			.value(infoMenuInfo).build();
-
-		menuBarTreeNode.addChild(fileTreeNode);
-		menuBarTreeNode.addChild(helpTreeNode);
-		fileTreeNode.addChild(toggleFullscreenTreeNode);
-		fileTreeNode.addChild(exitTreeNode);
-		helpTreeNode.addChild(helpContentTreeNode);
-		helpTreeNode.addChild(donateTreeNode);
-		helpTreeNode.addChild(diagnosticTreeNode);
-		helpTreeNode.addChild(licenseTreeNode);
-		helpTreeNode.addChild(infoTreeNode);
-		diagnosticTreeNode.addChild(diagnosticActivityTreeNode);
-		diagnosticTreeNode.addChild(diagnosticProfileTreeNode);
-		diagnosticTreeNode.addChild(diagnosticUsageTreeNode);
+		String treeNodeAsXml;
 
 		treeNodeAsXml = MenuInfoTreeNodeConverter.toXml(menuBarTreeNode);
 		RuntimeExceptionDecorator.decorate(() -> StoreFileExtensions.toFile(
