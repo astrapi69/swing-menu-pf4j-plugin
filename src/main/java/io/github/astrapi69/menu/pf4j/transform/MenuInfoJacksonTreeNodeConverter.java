@@ -26,13 +26,16 @@ package io.github.astrapi69.menu.pf4j.transform;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import io.github.astrapi69.collection.list.ListExtensions;
 import io.github.astrapi69.collection.map.MapExtensions;
 import io.github.astrapi69.gen.tree.BaseTreeNode;
@@ -45,6 +48,7 @@ import io.github.astrapi69.throwable.RuntimeExceptionDecorator;
 import io.github.astrapi69.xml.jackson.ObjectToXmlExtensions;
 import io.github.astrapi69.xml.jackson.XmlToObjectExtensions;
 import io.github.astrapi69.xml.jackson.factory.JavaTypeFactory;
+import io.github.astrapi69.xml.jackson.factory.XmlMapperFactory;
 import lombok.NonNull;
 
 /**
@@ -68,13 +72,15 @@ public class MenuInfoJacksonTreeNodeConverter
 		JavaType longType = JavaTypeFactory.newJavaType(Long.class);
 		JavaType treeNodeType = JavaTypeFactory.newParametricType(TreeIdNode.class, MenuInfo.class,
 			Long.class);
-		// mapType = JavaTypeFactory.newMapType(Map.class, Long.class, TreeIdNode.class);
 		mapType = JavaTypeFactory.newMapType(Map.class, longType, treeNodeType);
-		JavaType javaType = JavaTypeFactory.newCollectionType(List.class, treeNodeType);
-		List<TreeIdNode<MenuInfo, Long>> treeIdNodes = RuntimeExceptionDecorator
-			.decorate(() -> XmlToObjectExtensions.toObject(xml, javaType));
 		Map<Long, TreeIdNode<MenuInfo, Long>> treeIdNodeMap = RuntimeExceptionDecorator
-			.decorate(() -> XmlToObjectExtensions.toObject(xml, javaType));
+			.decorate(() -> {
+				XmlMapper xmlMapper = XmlMapperFactory.newXmlMapper();
+				// Configure Jackson to ignore unknown properties globally
+				xmlMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				return XmlToObjectExtensions.toObject(xmlMapper, xml, mapType);
+			});
+
 		return BaseTreeNodeTransformer.getRoot(treeIdNodeMap);
 	}
 
@@ -90,8 +96,12 @@ public class MenuInfoJacksonTreeNodeConverter
 	{
 		Map<Long, TreeIdNode<MenuInfo, Long>> treeIdNodeMap = BaseTreeNodeTransformer
 			.toKeyMap(root);
-		List<TreeIdNode<MenuInfo, Long>> treeIdNodes = MapExtensions.valuesAsList(treeIdNodeMap);
-		return RuntimeExceptionDecorator.decorate(() -> ObjectToXmlExtensions.toXml(treeIdNodes));
+		return RuntimeExceptionDecorator.decorate(() -> {
+			XmlMapper xmlMapper = XmlMapperFactory.newXmlMapper();
+			// Configure Jackson to ignore unknown properties globally
+			xmlMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			return ObjectToXmlExtensions.toXml(xmlMapper, treeIdNodeMap);
+		});
 	}
 
 	/**

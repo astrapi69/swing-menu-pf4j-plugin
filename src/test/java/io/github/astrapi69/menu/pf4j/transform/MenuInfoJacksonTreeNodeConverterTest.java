@@ -53,7 +53,7 @@ class MenuInfoJacksonTreeNodeConverterTest
 	 * </ul>
 	 */
 	@Test
-	@Disabled
+//	@Disabled
 	public void testBuildRootTreeNodeFromJacksonXmlForFileMenu()
 	{
 		BaseTreeNode<MenuInfo, Long> menuBarTreeNode = TestDataFactory.getTestFileMenuWithMenubar();

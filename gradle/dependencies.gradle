@@ -18,7 +18,6 @@ dependencies {
     implementation libs.throwable
     implementation libs.xstream.extensions
     implementation libs.visitor
-    implementation libs.jaxb.extensions
     implementation libs.menu.jaxb.model
     implementation libs.xml.jackson.extensions
     implementation libs.jackson.databind
