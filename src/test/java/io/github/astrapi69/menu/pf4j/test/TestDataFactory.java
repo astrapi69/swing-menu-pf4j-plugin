@@ -22,13 +22,12 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package io.github.astrapi69.menu.pf4j.transform;
+package io.github.astrapi69.menu.pf4j.test;
 
 import javax.swing.KeyStroke;
 
 import io.github.astrapi69.gen.tree.BaseTreeNode;
 import io.github.astrapi69.id.generate.LongIdGenerator;
-import io.github.astrapi69.menu.pf4j.factory.TestMenuId;
 import io.github.astrapi69.swing.menu.MenuExtensions;
 import io.github.astrapi69.swing.menu.enumeration.BaseMenuId;
 import io.github.astrapi69.swing.menu.enumeration.MenuType;
@@ -36,9 +35,18 @@ import io.github.astrapi69.swing.menu.model.KeyStrokeInfo;
 import io.github.astrapi69.swing.menu.model.MenuInfo;
 import io.github.astrapi69.swing.menu.model.transform.MenuItemInfoConverter;
 
+/**
+ * The class {@link TestDataFactory} provides factory methods for generating test data for menu
+ * structures, specifically {@link BaseTreeNode} objects containing {@link MenuInfo} for testing.
+ */
 public class TestDataFactory
 {
 
+	/**
+	 * Creates a test menu bar containing the "File" and "Help" menus, each with sub-items.
+	 *
+	 * @return the root {@link BaseTreeNode} of the menu structure
+	 */
 	public static BaseTreeNode<MenuInfo, Long> getTestFileAndHelpMenuWithMenubar()
 	{
 		BaseTreeNode<MenuInfo, Long> menuBarTreeNode;
@@ -191,6 +199,11 @@ public class TestDataFactory
 		return menuBarTreeNode;
 	}
 
+	/**
+	 * Creates a test menu bar containing the "Help" menus, each with sub-items.
+	 *
+	 * @return the root {@link BaseTreeNode} of the menu structure
+	 */
 	public static BaseTreeNode<MenuInfo, Long> getTestHelpMenuWithMenubar()
 	{
 		BaseTreeNode<MenuInfo, Long> menuBarTreeNode;
@@ -259,6 +272,11 @@ public class TestDataFactory
 		return menuBarTreeNode;
 	}
 
+	/**
+	 * Creates a test menu bar containing the "File" menus, each with sub-items.
+	 *
+	 * @return the root {@link BaseTreeNode} of the menu structure
+	 */
 	public static BaseTreeNode<MenuInfo, Long> getTestFileMenuWithMenubar()
 	{
 		BaseTreeNode<MenuInfo, Long> menuBarTreeNode;
@@ -317,6 +335,11 @@ public class TestDataFactory
 		return menuBarTreeNode;
 	}
 
+	/**
+	 * Creates a test menu bar containing the "Edit" menus, each with sub-items.
+	 *
+	 * @return the root {@link BaseTreeNode} of the menu structure
+	 */
 	public static BaseTreeNode<MenuInfo, Long> getTestEditMenuWithMenubar()
 	{
 		BaseTreeNode<MenuInfo, Long> menuBarTreeNode;

@@ -31,15 +31,31 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import io.github.astrapi69.gen.tree.BaseTreeNode;
+import io.github.astrapi69.menu.pf4j.test.TestDataFactory;
 import io.github.astrapi69.swing.menu.model.MenuInfo;
 
+/**
+ * Test class for {@link MenuInfoJaxbTreeNodeConverter}
+ */
 class MenuInfoJaxbTreeNodeConverterTest
 {
+
+	/**
+	 * Test method for building a tree node from XML with xstream for the file menu and verifying
+	 * the integrity of the structure after conversion to and from XML
+	 *
+	 * The methods that are tested in this test case include:
+	 * <ul>
+	 * <li>{@link MenuInfoJaxbTreeNodeConverter#toXml(BaseTreeNode)} - Converts a tree node to its
+	 * XML representation</li>
+	 * <li>{@link MenuInfoJaxbTreeNodeConverter#toMenuInfoTreeNode(String)} - Converts an XML
+	 * representation back to a tree node</li>
+	 * </ul>
+	 */
 	@Test
 	@Disabled
 	public void testBuildRootTreeNodeFromJaxbXmlForFileMenu()
 	{
-
 		BaseTreeNode<MenuInfo, Long> menuBarTreeNode = TestDataFactory.getTestFileMenuWithMenubar();
 		BaseTreeNode<MenuInfo, Long> menuInfoLongBaseTreeNode;
 		String treeNodeAsXml;

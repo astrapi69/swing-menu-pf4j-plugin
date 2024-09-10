@@ -27,73 +27,38 @@ package io.github.astrapi69.menu.pf4j.transform;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import javax.swing.KeyStroke;
-
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import io.github.astrapi69.gen.tree.BaseTreeNode;
-import io.github.astrapi69.id.generate.LongIdGenerator;
-import io.github.astrapi69.swing.menu.MenuExtensions;
-import io.github.astrapi69.swing.menu.enumeration.BaseMenuId;
-import io.github.astrapi69.swing.menu.enumeration.MenuType;
-import io.github.astrapi69.swing.menu.model.KeyStrokeInfo;
+import io.github.astrapi69.menu.pf4j.test.TestDataFactory;
 import io.github.astrapi69.swing.menu.model.MenuInfo;
-import io.github.astrapi69.swing.menu.model.transform.MenuItemInfoConverter;
 
+/**
+ * Test class for {@link MenuInfoJacksonTreeNodeConverter}
+ */
 class MenuInfoJacksonTreeNodeConverterTest
 {
 
+	/**
+	 * Test method for building a tree node from XML with xstream for the file menu and verifying
+	 * the integrity of the structure after conversion to and from XML
+	 *
+	 * The methods that are tested in this test case include:
+	 * <ul>
+	 * <li>{@link MenuInfoJacksonTreeNodeConverter#toXml(BaseTreeNode)} - Converts a tree node to
+	 * its XML representation</li>
+	 * <li>{@link MenuInfoJacksonTreeNodeConverter#toMenuInfoTreeNode(String)} - Converts an XML
+	 * representation back to a tree node</li>
+	 * </ul>
+	 */
 	@Test
 	@Disabled
 	public void testBuildRootTreeNodeFromJacksonXmlForFileMenu()
 	{
-		BaseTreeNode<MenuInfo, Long> menuBarTreeNode;
-		BaseTreeNode<MenuInfo, Long> fileTreeNode;
-		BaseTreeNode<MenuInfo, Long> toggleFullscreenTreeNode;
-		BaseTreeNode<MenuInfo, Long> exitTreeNode;
-		MenuInfo menuBarInfo;
-		MenuInfo fileMenuInfo;
-		MenuInfo toggleFullscreenMenuInfo;
-		MenuInfo exitMenuInfo;
-		LongIdGenerator idGenerator;
-		String treeNodeAsXml;
-
+		BaseTreeNode<MenuInfo, Long> menuBarTreeNode = TestDataFactory.getTestFileMenuWithMenubar();
 		BaseTreeNode<MenuInfo, Long> menuInfoLongBaseTreeNode;
-
-		idGenerator = LongIdGenerator.of(0L);
-
-		menuBarInfo = MenuItemInfoConverter.fromJMenuBar();
-
-		menuBarTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
-			.value(menuBarInfo).build();
-
-		fileMenuInfo = MenuInfo.builder().mnemonic(MenuExtensions.toMnemonic('F')).ordinal(1100)
-			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("alt pressed F")))
-			.text("File").name(BaseMenuId.FILE.propertiesKey()).build();
-		fileTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
-			.value(fileMenuInfo).build();
-
-		toggleFullscreenMenuInfo = MenuInfo.builder().type(MenuType.MENU_ITEM).ordinal(11100)
-			.mnemonic(MenuExtensions.toMnemonic('T'))
-			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("alt pressed F11")))
-			.text("Toggle Fullscreen").name(BaseMenuId.TOGGLE_FULLSCREEN.propertiesKey())
-			.actionCommand("io.github.astrapi69.swing.action.ToggleFullScreenAction").build();
-		toggleFullscreenTreeNode = BaseTreeNode.<MenuInfo, Long> builder()
-			.id(idGenerator.getNextId()).parent(fileTreeNode).value(toggleFullscreenMenuInfo)
-			.leaf(true).build();
-
-		exitMenuInfo = MenuInfo.builder().type(MenuType.MENU_ITEM).ordinal(11200)
-			.mnemonic(MenuExtensions.toMnemonic('E'))
-			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("alt pressed F4")))
-			.text("Exit").name(BaseMenuId.EXIT.propertiesKey())
-			.actionCommand("io.github.astrapi69.swing.action.ExitApplicationAction").build();
-		exitTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
-			.leaf(true).parent(fileTreeNode).value(exitMenuInfo).build();
-
-		menuBarTreeNode.addChild(fileTreeNode);
-		fileTreeNode.addChild(toggleFullscreenTreeNode);
-		fileTreeNode.addChild(exitTreeNode);
+		String treeNodeAsXml;
 
 		treeNodeAsXml = MenuInfoJacksonTreeNodeConverter.toXml(menuBarTreeNode);
 
