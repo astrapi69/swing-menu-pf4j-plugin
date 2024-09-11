@@ -30,13 +30,12 @@ import java.util.Map;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 
-import io.github.astrapi69.gen.tree.BaseTreeNode;
-import io.github.astrapi69.swing.menu.model.MenuInfo;
 import org.pf4j.Extension;
 
 import io.github.astrapi69.menu.pf4j.factory.JMenuBarFactory;
 import io.github.astrapi69.menu.pf4j.factory.JMenuFactory;
 import io.github.astrapi69.menu.pf4j.transform.MenuInfoTreeNodeConverter;
+import io.github.astrapi69.swing.menu.model.MenuInfo;
 
 
 @Extension
@@ -70,9 +69,8 @@ public class DesktopMenuExtension implements DesktopMenuExtensionPoint
 	}
 
 	/**
-	 * Builds a {@link JMenuBar} from the given XML representation of {@link MenuInfo} objects
-	 * 	  and a map of
-	 * {@link ActionListener}.
+	 * Builds a {@link JMenuBar} from the given XML representation of {@link MenuInfo} objects and a
+	 * map of {@link ActionListener}.
 	 *
 	 * @param xml
 	 *            the XML representation of {@link MenuInfo} objects
@@ -88,9 +86,8 @@ public class DesktopMenuExtension implements DesktopMenuExtensionPoint
 
 
 	/**
-	 * Builds a {@link JMenu} from the given XML representation of {@link MenuInfo} objects
-	 * 	  with a map of
-	 * {@link ActionListener}.
+	 * Builds a {@link JMenu} from the given XML representation of {@link MenuInfo} objects with a
+	 * map of {@link ActionListener}.
 	 *
 	 * @param xml
 	 *            the XML representation of {@link MenuInfo} objects
