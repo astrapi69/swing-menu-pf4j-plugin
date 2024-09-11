@@ -30,6 +30,8 @@ import java.util.Map;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 
+import io.github.astrapi69.gen.tree.BaseTreeNode;
+import io.github.astrapi69.swing.menu.model.MenuInfo;
 import org.pf4j.Extension;
 
 import io.github.astrapi69.menu.pf4j.factory.JMenuBarFactory;
@@ -41,24 +43,61 @@ import io.github.astrapi69.menu.pf4j.transform.MenuInfoTreeNodeConverter;
 public class DesktopMenuExtension implements DesktopMenuExtensionPoint
 {
 
+	/**
+	 * Builds a {@link JMenuBar} from the given XML representation of {@link MenuInfo} objects
+	 *
+	 * @param xml
+	 *            the XML representation of {@link MenuInfo} objects
+	 * @return the constructed {@link JMenuBar} object
+	 */
 	@Override
 	public JMenuBar buildMenuBar(String xml)
 	{
 		return JMenuBarFactory.buildMenuBar(MenuInfoTreeNodeConverter.toMenuInfoTreeNode(xml));
 	}
 
+	/**
+	 * Builds a {@link JMenu} from the given XML representation of {@link MenuInfo} objects
+	 *
+	 * @param xml
+	 *            the XML representation of {@link MenuInfo} objects
+	 * @return the constructed {@link JMenu} object
+	 */
 	@Override
 	public JMenu buildAndAddMenuToExistingJMenuBar(String xml)
 	{
 		return JMenuFactory.buildMenu(MenuInfoTreeNodeConverter.toMenuInfoTreeNode(xml));
 	}
 
+	/**
+	 * Builds a {@link JMenuBar} from the given XML representation of {@link MenuInfo} objects
+	 * 	  and a map of
+	 * {@link ActionListener}.
+	 *
+	 * @param xml
+	 *            the XML representation of {@link MenuInfo} objects
+	 * @param actionListenerMap
+	 *            the map of {@link ActionListener} objects
+	 * @return the constructed {@link JMenuBar} object
+	 */
 	public JMenuBar buildMenuBar(String xml, Map<String, ActionListener> actionListenerMap)
 	{
 		return JMenuBarFactory.buildMenuBar(MenuInfoTreeNodeConverter.toMenuInfoTreeNode(xml),
 			actionListenerMap);
 	}
 
+
+	/**
+	 * Builds a {@link JMenu} from the given XML representation of {@link MenuInfo} objects
+	 * 	  with a map of
+	 * {@link ActionListener}.
+	 *
+	 * @param xml
+	 *            the XML representation of {@link MenuInfo} objects
+	 * @param actionListenerMap
+	 *            the map of {@link ActionListener} objects
+	 * @return the constructed {@link JMenu} object
+	 */
 	@Override
 	public JMenu buildAndAddMenuToExistingJMenuBar(String xml,
 		Map<String, ActionListener> actionListenerMap)
