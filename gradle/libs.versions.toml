@@ -11,8 +11,6 @@ gradle-plugin-spotless-version = "7.0.0.BETA2"
 gradle-plugin-version-catalog-update-version = "0.8.4"
 gradle-plugin-versions-version = "0.51.0"
 id-generate-version = "1.1"
-jackson-databind-version = "2.18.0-rc1"
-jackson-dataformat-xml-version = "2.18.0-rc1"
 jobj-reflect-version = "2.4"
 junit-jupiter-extensions-version = "2"
 junit-jupiter-version = "5.11.0"
@@ -20,14 +18,12 @@ junit-platform-launcher-version = "1.11.0"
 lombok-version = "1.18.34"
 meanbean-version = "3.0.0-M9"
 menu-action-version = "3.4"
-menu-jaxb-model-version = "1"
 pf4j-version = "3.12.0"
 silly-collection-version = "28"
 silly-io-version = "3.1"
 throwable-version = "3"
 tree-api-version = "2"
 visitor-version = "6"
-xml-jackson-extensions-version = "2.2-SNAPSHOT"
 xstream-extensions-version = "1.1"
 
 [libraries]
@@ -37,8 +33,6 @@ data-api = { module = "io.github.astrapi69:data-api", version.ref = "data-api-ve
 file-worker = { module = "io.github.astrapi69:file-worker", version.ref = "file-worker-version" }
 gen-tree = { module = "io.github.astrapi69:gen-tree", version.ref = "gen-tree-version" }
 id-generate = { module = "io.github.astrapi69:id-generate", version.ref = "id-generate-version" }
-jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jackson-databind-version" }
-jackson-dataformat-xml = { module = "com.fasterxml.jackson.dataformat:jackson-dataformat-xml", version.ref = "jackson-dataformat-xml-version" }
 jobj-reflect = { module = "io.github.astrapi69:jobj-reflect", version.ref = "jobj-reflect-version" }
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit-jupiter-version" }
 junit-jupiter-extensions = { module = "io.github.astrapi69:junit-jupiter-extensions", version.ref = "junit-jupiter-extensions-version" }
@@ -46,14 +40,12 @@ junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher
 lombok = { module = "org.projectlombok:lombok", version.ref = "lombok-version" }
 meanbean = { module = "com.github.meanbeanlib:meanbean", version.ref = "meanbean-version" }
 menu-action = { module = "io.github.astrapi69:menu-action", version.ref = "menu-action-version" }
-menu-jaxb-model = { module = "io.github.astrapi69:menu-jaxb-model", version.ref = "menu-jaxb-model-version" }
 pf4j = { module = "org.pf4j:pf4j", version.ref = "pf4j-version" }
 silly-collection = { module = "io.github.astrapi69:silly-collection", version.ref = "silly-collection-version" }
 silly-io = { module = "io.github.astrapi69:silly-io", version.ref = "silly-io-version" }
 throwable = { module = "io.github.astrapi69:throwable", version.ref = "throwable-version" }
 tree-api = { module = "io.github.astrapi69:tree-api", version.ref = "tree-api-version" }
 visitor = { module = "io.github.astrapi69:visitor", version.ref = "visitor-version" }
-xml-jackson-extensions = { module = "io.github.astrapi69:xml-jackson-extensions", version.ref = "xml-jackson-extensions-version" }
 xstream-extensions = { module = "io.github.astrapi69:xstream-extensions", version.ref = "xstream-extensions-version" }
 
 [bundles]
