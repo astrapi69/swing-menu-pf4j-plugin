@@ -34,6 +34,10 @@ import org.pf4j.ExtensionPoint;
 
 import io.github.astrapi69.swing.menu.model.MenuInfo;
 
+/**
+ * Extension point interface for building menus and menu bars from XML representations of
+ * {@link MenuInfo} objects
+ */
 public interface DesktopMenuExtensionPoint extends ExtensionPoint
 {
 
@@ -57,7 +61,7 @@ public interface DesktopMenuExtensionPoint extends ExtensionPoint
 
 	/**
 	 * Builds a {@link JMenuBar} from the given XML representation of {@link MenuInfo} objects and a
-	 * map of {@link ActionListener}.
+	 * map of {@link ActionListener}
 	 *
 	 * @param xml
 	 *            the XML representation of {@link MenuInfo} objects
@@ -69,7 +73,7 @@ public interface DesktopMenuExtensionPoint extends ExtensionPoint
 
 	/**
 	 * Builds a {@link JMenu} from the given XML representation of {@link MenuInfo} objects with a
-	 * map of {@link ActionListener}.
+	 * map of {@link ActionListener}
 	 *
 	 * @param xml
 	 *            the XML representation of {@link MenuInfo} objects

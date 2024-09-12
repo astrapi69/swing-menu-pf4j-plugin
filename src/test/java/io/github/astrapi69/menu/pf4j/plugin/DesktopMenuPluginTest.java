@@ -51,15 +51,30 @@ import io.github.astrapi69.junit.jupiter.callback.before.test.IgnoreHeadlessExce
 import io.github.astrapi69.menu.pf4j.extension.DesktopMenuExtensionPoint;
 import io.github.astrapi69.throwable.RuntimeExceptionDecorator;
 
+/**
+ * Test class for the {@link DesktopMenuPlugin} plugin
+ */
 public class DesktopMenuPluginTest
 {
 
+	/**
+	 * Main method for running the plugin test, which creates and starts the plugin manager, loads
+	 * all plugins, and displays a GUI with the constructed {@link JMenuBar}
+	 *
+	 * @param args
+	 *            the program arguments
+	 */
 	public static void main(String... args)
 	{
 		// create the plugin manager
 		final PluginManager pluginManager = new DefaultPluginManager()
 		{
 
+			/**
+			 * {@inheritDoc}
+			 * <p>
+			 * Customizes the extension finder by adding a service provider extension finder
+			 */
 			protected ExtensionFinder createExtensionFinder()
 			{
 				DefaultExtensionFinder extensionFinder = (DefaultExtensionFinder)super.createExtensionFinder();
@@ -83,8 +98,7 @@ public class DesktopMenuPluginTest
 			DesktopMenuExtensionPoint desktopMenuExtensionPoint = desktopMenuExtensionPointOptional
 				.get();
 
-			String filename;
-			filename = "app-tree-menubar.xml";
+			String filename = "app-tree-menubar.xml";
 
 			File xmlFile = FileFactory.newFileQuietly(PathFinder.getSrcTestResourcesDir(),
 				filename);
@@ -104,15 +118,24 @@ public class DesktopMenuPluginTest
 		}
 	}
 
+	/**
+	 * Test method for verifying that the plugin correctly loads, starts, and constructs the
+	 * {@link JMenuBar} from the XML file
+	 */
 	@ExtendWith(IgnoreHeadlessExceptionExtension.class)
 	@Test
-	@Disabled("Action classes can not instantiated without init args. Have to be specified and enable again for further tests")
+	@Disabled("Action classes cannot be instantiated without init args. Have to be specified and enabled again for further tests")
 	public void testPlugin()
 	{
 		// create the plugin manager
 		final PluginManager pluginManager = new DefaultPluginManager()
 		{
 
+			/**
+			 * {@inheritDoc}
+			 * <p>
+			 * Customizes the extension finder by adding a service provider extension finder
+			 */
 			protected ExtensionFinder createExtensionFinder()
 			{
 				DefaultExtensionFinder extensionFinder = (DefaultExtensionFinder)super.createExtensionFinder();
@@ -136,8 +159,7 @@ public class DesktopMenuPluginTest
 			DesktopMenuExtensionPoint desktopMenuExtensionPoint = desktopMenuExtensionPointOptional
 				.get();
 
-			String filename;
-			filename = "app-tree-menubar.xml";
+			String filename = "app-tree-menubar.xml";
 
 			File xmlFile = FileFactory.newFileQuietly(PathFinder.getSrcTestResourcesDir(),
 				filename);
