@@ -3,6 +3,7 @@ awt-extensions-version = "1.2"
 commons-text-version = "1.12.0"
 data-api-version = "5"
 file-worker-version = "17.4"
+fury-extensions-version = "1"
 gen-tree-version = "10"
 gradle-plugin-grgit-version = "5.2.2"
 gradle-plugin-license-version = "0.16.1"
@@ -25,12 +26,15 @@ throwable-version = "3"
 tree-api-version = "2"
 visitor-version = "6"
 xstream-extensions-version = "1.1"
+fury-core-version = "0.7.0"
 
 [libraries]
+fury-core = { module = "org.apache.fury:fury-core", version.ref = "fury-core-version" }
 awt-extensions = { module = "io.github.astrapi69:awt-extensions", version.ref = "awt-extensions-version" }
 commons-text = { module = "org.apache.commons:commons-text", version.ref = "commons-text-version" }
 data-api = { module = "io.github.astrapi69:data-api", version.ref = "data-api-version" }
 file-worker = { module = "io.github.astrapi69:file-worker", version.ref = "file-worker-version" }
+fury-extensions = { module = "io.github.astrapi69:fury-extensions", version.ref = "fury-extensions-version" }
 gen-tree = { module = "io.github.astrapi69:gen-tree", version.ref = "gen-tree-version" }
 id-generate = { module = "io.github.astrapi69:id-generate", version.ref = "id-generate-version" }
 jobj-reflect = { module = "io.github.astrapi69:jobj-reflect", version.ref = "jobj-reflect-version" }
@@ -53,6 +57,8 @@ unit-testing = [
     "awt-extensions",
     "commons-text",
     "file-worker",
+    "fury-core",
+    "fury-extensions",
     "junit-jupiter",
     "junit-jupiter-extensions",
     "meanbean",

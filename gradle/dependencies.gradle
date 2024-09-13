@@ -19,6 +19,8 @@ dependencies {
     implementation libs.xstream.extensions
     implementation libs.visitor
     implementation libs.jobj.reflect
+    implementation libs.fury.core
+    implementation libs.fury.extensions
 
     // Note: use of bundles...
     testImplementation libs.bundles.unit.testing

@@ -33,7 +33,6 @@ import java.util.Map;
 
 import org.apache.fury.Fury;
 import org.apache.fury.config.Language;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import io.github.astrapi69.file.create.FileFactory;
@@ -51,16 +50,8 @@ import io.github.astrapisixtynine.fury.ObjectToBytesExtensions;
 /**
  * Test class for {@link MenuInfoTreeNodeConverter}
  */
-class MenuInfoTreeNodeConverterTest
+class MenuInfoTreeNodeConverterWithFuryTest
 {
-	private String testXml;
-
-	@BeforeEach
-	void setUp()
-	{
-		// Sample XML data for testing
-		testXml = MenuInfoTreeNodeConverter.toXml(TestDataFactory.getTestFileMenuWithMenubar());
-	}
 
 	@Test
 	void testWithFury() throws IOException
@@ -90,71 +81,6 @@ class MenuInfoTreeNodeConverterTest
 		BaseTreeNode<MenuInfo, Long> root = BaseTreeNodeTransformer.getRoot(object);
 		assertNotNull(root);
 		assertEquals(menuBarTreeNode, root);
-	}
-
-	/**
-	 * Test method for building a tree node from XML with xstream for the file menu and verifying
-	 * the integrity of the structure after conversion to and from XML
-	 *
-	 * The methods that are tested in this test case include:
-	 * <ul>
-	 * <li>{@link MenuInfoTreeNodeConverter#toXml(BaseTreeNode)} - Converts a tree node to its XML
-	 * representation</li>
-	 * <li>{@link MenuInfoTreeNodeConverter#toMenuInfoTreeNode(String)} - Converts an XML
-	 * representation back to a tree node</li>
-	 * </ul>
-	 */
-	@Test
-	public void testBuildRootTreeNodeFromJaxbXmlForFileMenu()
-	{
-		BaseTreeNode<MenuInfo, Long> menuBarTreeNode = TestDataFactory.getTestFileMenuWithMenubar();
-		BaseTreeNode<MenuInfo, Long> menuInfoLongBaseTreeNode;
-		String treeNodeAsXml;
-
-		// Convert the tree node to XML
-		treeNodeAsXml = MenuInfoTreeNodeConverter.toXml(menuBarTreeNode);
-
-		// Convert the XML back to a tree node and verify
-		menuInfoLongBaseTreeNode = MenuInfoTreeNodeConverter.toMenuInfoTreeNode(treeNodeAsXml);
-		assertNotNull(menuInfoLongBaseTreeNode);
-
-		// Verify that the converted tree node matches the original tree node
-		assertEquals(menuInfoLongBaseTreeNode, menuBarTreeNode);
-	}
-
-	/**
-	 * Test for {@link MenuInfoTreeNodeConverter#toMenuInfoTreeNode(String)}
-	 */
-	@Test
-	void testToMenuInfoTreeNode()
-	{
-		BaseTreeNode<MenuInfo, Long> treeNode = MenuInfoTreeNodeConverter
-			.toMenuInfoTreeNode(testXml);
-		assertNotNull(treeNode);
-	}
-
-	/**
-	 * Test for {@link MenuInfoTreeNodeConverter#toXml(BaseTreeNode)}
-	 */
-	@Test
-	void testToXml()
-	{
-		BaseTreeNode<MenuInfo, Long> treeNode = MenuInfoTreeNodeConverter
-			.toMenuInfoTreeNode(testXml);
-		String xml = MenuInfoTreeNodeConverter.toXml(treeNode);
-		assertNotNull(xml);
-	}
-
-	/**
-	 * Test for {@link MenuInfoTreeNodeConverter#mergeMenuInfoTreeNode(String...)}
-	 */
-	@Test
-	void testMergeMenuInfoTreeNode()
-	{
-		String[] xmls = { testXml, testXml };
-		BaseTreeNode<MenuInfo, Long> mergedTreeNode = MenuInfoTreeNodeConverter
-			.mergeMenuInfoTreeNode(xmls);
-		assertNotNull(mergedTreeNode);
 	}
 
 }
