@@ -31,6 +31,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
@@ -38,17 +39,17 @@ import javax.swing.JMenuBar;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import io.github.astrapi69.awt.action.NoAction;
 import io.github.astrapi69.awt.window.adapter.CloseWindow;
 import io.github.astrapi69.file.create.FileFactory;
 import io.github.astrapi69.file.read.ReadFileExtensions;
 import io.github.astrapi69.file.search.PathFinder;
 import io.github.astrapi69.file.write.StoreFileExtensions;
 import io.github.astrapi69.gen.tree.BaseTreeNode;
+import io.github.astrapi69.gen.tree.TreeIdNode;
+import io.github.astrapi69.gen.tree.convert.BaseTreeNodeTransformer;
 import io.github.astrapi69.menu.pf4j.test.TestDataFactory;
-import io.github.astrapi69.menu.pf4j.test.TestMenuId;
 import io.github.astrapi69.menu.pf4j.transform.MenuInfoTreeNodeConverter;
-import io.github.astrapi69.swing.action.ExitApplicationAction;
+import io.github.astrapi69.reflection.InstanceFactory;
 import io.github.astrapi69.swing.action.ToggleFullScreenAction;
 import io.github.astrapi69.swing.menu.enumeration.BaseMenuId;
 import io.github.astrapi69.swing.menu.model.MenuInfo;
@@ -84,22 +85,31 @@ public class JMenuBarFactoryWithNestedMenuTest
 		BaseTreeNode<MenuInfo, Long> menuInfoLongBaseTreeNode;
 
 		menuInfoLongBaseTreeNode = MenuInfoTreeNodeConverter.toMenuInfoTreeNode(xml);
-		actionListenerMap = new LinkedHashMap<>();
+		actionListenerMap = getActionListenerMap(
+			menuInfoLongBaseTreeNode);
+		// actionListenerMap = new LinkedHashMap<>();
+		//
+		// actionListenerMap.put(BaseMenuId.MENU_BAR.propertiesKey(), new NoAction());
+		// actionListenerMap.put(BaseMenuId.FILE.propertiesKey(), new NoAction());
+		// actionListenerMap.put(BaseMenuId.TOGGLE_FULLSCREEN.propertiesKey(),
+		// new ToggleFullScreenAction("Fullscreen", frame));
+		// actionListenerMap.put(BaseMenuId.EXIT.propertiesKey(), new
+		// ExitApplicationAction("Exit"));
+		// actionListenerMap.put(BaseMenuId.HELP.propertiesKey(), new NoAction());
+		// actionListenerMap.put(BaseMenuId.HELP_CONTENT.propertiesKey(), new NoAction());
+		// actionListenerMap.put(BaseMenuId.HELP_DONATE.propertiesKey(), new NoAction());
+		// actionListenerMap.put(TestMenuId.HELP_DIAGNOSTIC.propertiesKey(), new NoAction());
+		// actionListenerMap.put(TestMenuId.HELP_DIAGNOSTIC_ACTIVITY.propertiesKey(), new
+		// NoAction());
+		// actionListenerMap.put(TestMenuId.HELP_DIAGNOSTIC_PROFILE.propertiesKey(), new
+		// NoAction());
+		// actionListenerMap.put(TestMenuId.HELP_DIAGNOSTIC_USAGE.propertiesKey(), new NoAction());
+		// actionListenerMap.put(BaseMenuId.HELP_LICENSE.propertiesKey(), new NoAction());
+		// actionListenerMap.put(BaseMenuId.HELP_INFO.propertiesKey(), new NoAction());
 
-		actionListenerMap.put(BaseMenuId.MENU_BAR.propertiesKey(), new NoAction());
-		actionListenerMap.put(BaseMenuId.FILE.propertiesKey(), new NoAction());
-		actionListenerMap.put(BaseMenuId.TOGGLE_FULLSCREEN.propertiesKey(),
-			new ToggleFullScreenAction("Fullscreen", frame));
-		actionListenerMap.put(BaseMenuId.EXIT.propertiesKey(), new ExitApplicationAction("Exit"));
-		actionListenerMap.put(BaseMenuId.HELP.propertiesKey(), new NoAction());
-		actionListenerMap.put(BaseMenuId.HELP_CONTENT.propertiesKey(), new NoAction());
-		actionListenerMap.put(BaseMenuId.HELP_DONATE.propertiesKey(), new NoAction());
-		actionListenerMap.put(TestMenuId.HELP_DIAGNOSTIC.propertiesKey(), new NoAction());
-		actionListenerMap.put(TestMenuId.HELP_DIAGNOSTIC_ACTIVITY.propertiesKey(), new NoAction());
-		actionListenerMap.put(TestMenuId.HELP_DIAGNOSTIC_PROFILE.propertiesKey(), new NoAction());
-		actionListenerMap.put(TestMenuId.HELP_DIAGNOSTIC_USAGE.propertiesKey(), new NoAction());
-		actionListenerMap.put(BaseMenuId.HELP_LICENSE.propertiesKey(), new NoAction());
-		actionListenerMap.put(BaseMenuId.HELP_INFO.propertiesKey(), new NoAction());
+		ToggleFullScreenAction toggleFullScreenAction = (ToggleFullScreenAction)actionListenerMap
+			.get(BaseMenuId.TOGGLE_FULLSCREEN.propertiesKey());
+		toggleFullScreenAction.setFrame(frame);
 
 		final JMenuBar menuBar = JMenuBarFactory.buildMenuBar(menuInfoLongBaseTreeNode,
 			actionListenerMap);
@@ -108,6 +118,29 @@ public class JMenuBarFactoryWithNestedMenuTest
 		frame.addWindowListener(new CloseWindow());
 		frame.setSize(400, 200);
 		frame.setVisible(true);
+	}
+
+	public static Map<String, ActionListener> getActionListenerMap(
+		BaseTreeNode<MenuInfo, Long> root)
+	{
+		Map<Long, TreeIdNode<MenuInfo, Long>> treeIdNodeMap = BaseTreeNodeTransformer
+			.toKeyMap(root);
+		Map<String, ActionListener> actionListenerMap = new LinkedHashMap<>();
+		treeIdNodeMap.forEach((key, value) -> {
+			MenuInfo menuInfo = value.getValue();
+			String actionCommand = menuInfo.getActionCommand();
+			Optional<ActionListener> actionListenerOptional = InstanceFactory
+				.newOptionalInstance(actionCommand);
+			if (actionListenerOptional.isEmpty())
+			{
+				throw new IllegalArgumentException(
+					"actionListenerClass cannot be instantiated with actionCommand:"
+						+ actionCommand);
+			}
+			ActionListener actionListener = actionListenerOptional.get();
+			actionListenerMap.put(menuInfo.getName(), actionListener);
+		});
+		return actionListenerMap;
 	}
 
 	/**

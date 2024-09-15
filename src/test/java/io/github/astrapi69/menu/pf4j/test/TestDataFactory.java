@@ -76,14 +76,12 @@ public class TestDataFactory
 		MenuInfo toggleFullscreenMenuInfo;
 		MenuInfo exitMenuInfo;
 		LongIdGenerator idGenerator;
-		String treeNodeAsXml;
-
-		BaseTreeNode<MenuInfo, Long> menuInfoLongBaseTreeNode;
 
 		idGenerator = LongIdGenerator.of(0L);
 
 		menuBarInfo = MenuItemInfoConverter.fromJMenuBar();
 		menuBarInfo.setActionCommand("io.github.astrapi69.awt.action.NoAction");
+		menuBarInfo.setActionClass("io.github.astrapi69.awt.action.NoAction");
 
 		menuBarTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
 			.value(menuBarInfo).build();
@@ -92,7 +90,8 @@ public class TestDataFactory
 			.mnemonic(MenuExtensions.toMnemonic('F')).ordinal(1100)
 			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("alt pressed F")))
 			.text("File").name(BaseMenuId.FILE.propertiesKey())
-			.actionCommand("io.github.astrapi69.awt.action.NoAction").build();
+				.actionCommand("io.github.astrapi69.awt.action.NoAction")
+				.actionClass("io.github.astrapi69.awt.action.NoAction").build();
 		fileTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
 			.value(fileMenuInfo).build();
 
@@ -100,7 +99,8 @@ public class TestDataFactory
 			.mnemonic(MenuExtensions.toMnemonic('T'))
 			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("alt pressed F11")))
 			.text("Toggle Fullscreen").name(BaseMenuId.TOGGLE_FULLSCREEN.propertiesKey())
-			.actionCommand("io.github.astrapi69.swing.action.ToggleFullScreenAction").build();
+				.actionCommand("io.github.astrapi69.swing.action.ToggleFullScreenAction")
+				.actionClass("io.github.astrapi69.swing.action.ToggleFullScreenAction").build();
 		toggleFullscreenTreeNode = BaseTreeNode.<MenuInfo, Long> builder()
 			.id(idGenerator.getNextId()).parent(fileTreeNode).value(toggleFullscreenMenuInfo)
 			.leaf(true).build();
@@ -109,7 +109,8 @@ public class TestDataFactory
 			.mnemonic(MenuExtensions.toMnemonic('E'))
 			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("alt pressed F4")))
 			.text("Exit").name(BaseMenuId.EXIT.propertiesKey())
-			.actionCommand("io.github.astrapi69.swing.action.ExitApplicationAction").build();
+				.actionCommand("io.github.astrapi69.swing.action.ExitApplicationAction")
+				.actionClass("io.github.astrapi69.swing.action.ExitApplicationAction").build();
 		exitTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
 			.leaf(true).parent(fileTreeNode).value(exitMenuInfo).build();
 
@@ -117,7 +118,8 @@ public class TestDataFactory
 			.mnemonic(MenuExtensions.toMnemonic('H')).ordinal(13000)
 			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("alt pressed H")))
 			.text("Help").name(BaseMenuId.HELP.propertiesKey())
-			.actionCommand("io.github.astrapi69.awt.action.NoAction").build();
+				.actionCommand("io.github.astrapi69.awt.action.NoAction")
+				.actionClass("io.github.astrapi69.awt.action.NoAction").build();
 		helpTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
 			.value(helpMenuInfo).build();
 		helpContentMenuInfo = MenuInfo.builder().type(MenuType.MENU_ITEM).ordinal(13100)
@@ -125,7 +127,8 @@ public class TestDataFactory
 			.keyStrokeInfo(
 				KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("ctrl alt pressed H")))
 			.text("Help Content").name(BaseMenuId.HELP_CONTENT.propertiesKey())
-			.actionCommand("io.github.astrapi69.awt.action.NoAction").build();
+			.actionCommand("io.github.astrapi69.awt.action.NoAction")
+				.actionClass("io.github.astrapi69.awt.action.NoAction").build();
 		helpContentTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
 			.leaf(true).value(helpContentMenuInfo).build();
 
@@ -133,14 +136,16 @@ public class TestDataFactory
 			.mnemonic(MenuExtensions.toMnemonic('L'))
 			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("ctrl pressed L")))
 			.text("Donate").name(BaseMenuId.HELP_DONATE.propertiesKey())
-			.actionCommand("io.github.astrapi69.awt.action.NoAction").build();
+			.actionCommand("io.github.astrapi69.awt.action.NoAction")
+				.actionClass("io.github.astrapi69.awt.action.NoAction").build();
 		donateTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
 			.leaf(true).value(donateMenuInfo).build();
 
 		diagnosticMenuInfo = MenuInfo.builder().type(MenuType.MENU)
 			.mnemonic(MenuExtensions.toMnemonic('G')).ordinal(13300).text("Diagnostic >")
 			.name(TestMenuId.HELP_DIAGNOSTIC.propertiesKey())
-			.actionCommand("io.github.astrapi69.awt.action.NoAction").build();
+			.actionCommand("io.github.astrapi69.awt.action.NoAction")
+				.actionClass("io.github.astrapi69.awt.action.NoAction").build();
 		diagnosticTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
 			.value(diagnosticMenuInfo).build();
 
@@ -148,7 +153,8 @@ public class TestDataFactory
 			.ordinal(133100).mnemonic(MenuExtensions.toMnemonic('A'))
 			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("ctrl pressed A")))
 			.text("Activity").name(TestMenuId.HELP_DIAGNOSTIC_ACTIVITY.propertiesKey())
-			.actionCommand("io.github.astrapi69.awt.action.NoAction").build();
+			.actionCommand("io.github.astrapi69.awt.action.NoAction")
+				.actionClass("io.github.astrapi69.awt.action.NoAction").build();
 		diagnosticActivityTreeNode = BaseTreeNode.<MenuInfo, Long> builder()
 			.id(idGenerator.getNextId()).leaf(true).value(diagnosticActivityMenuInfo).build();
 
@@ -156,7 +162,8 @@ public class TestDataFactory
 			.ordinal(133200).mnemonic(MenuExtensions.toMnemonic('P'))
 			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("ctrl pressed P")))
 			.text("Profile").name(TestMenuId.HELP_DIAGNOSTIC_PROFILE.propertiesKey())
-			.actionCommand("io.github.astrapi69.awt.action.NoAction").build();
+			.actionCommand("io.github.astrapi69.awt.action.NoAction")
+				.actionClass("io.github.astrapi69.awt.action.NoAction").build();
 		diagnosticProfileTreeNode = BaseTreeNode.<MenuInfo, Long> builder()
 			.id(idGenerator.getNextId()).leaf(true).value(diagnosticProfileMenuInfo).build();
 
@@ -164,7 +171,8 @@ public class TestDataFactory
 			.mnemonic(MenuExtensions.toMnemonic('U'))
 			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("ctrl pressed U")))
 			.text("Usage").name(TestMenuId.HELP_DIAGNOSTIC_USAGE.propertiesKey())
-			.actionCommand("io.github.astrapi69.awt.action.NoAction").build();
+			.actionCommand("io.github.astrapi69.awt.action.NoAction")
+				.actionClass("io.github.astrapi69.awt.action.NoAction").build();
 		diagnosticUsageTreeNode = BaseTreeNode.<MenuInfo, Long> builder()
 			.id(idGenerator.getNextId()).leaf(true).value(diagnosticUsageMenuInfo).build();
 
@@ -172,7 +180,8 @@ public class TestDataFactory
 			.mnemonic(MenuExtensions.toMnemonic('L'))
 			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("ctrl pressed L")))
 			.text("Licence").name(BaseMenuId.HELP_LICENSE.propertiesKey())
-			.actionCommand("io.github.astrapi69.awt.action.NoAction").build();
+			.actionCommand("io.github.astrapi69.awt.action.NoAction")
+				.actionClass("io.github.astrapi69.awt.action.NoAction").build();
 		licenseTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
 			.value(licenseMenuInfo).build();
 
@@ -180,7 +189,8 @@ public class TestDataFactory
 			.mnemonic(MenuExtensions.toMnemonic('I'))
 			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("ctrl pressed I")))
 			.text("Info").name(BaseMenuId.HELP_INFO.propertiesKey())
-			.actionCommand("io.github.astrapi69.awt.action.NoAction").build();
+			.actionCommand("io.github.astrapi69.awt.action.NoAction")
+				.actionClass("io.github.astrapi69.awt.action.NoAction").build();
 		infoTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
 			.value(infoMenuInfo).build();
 
@@ -219,9 +229,6 @@ public class TestDataFactory
 		MenuInfo licenseMenuInfo;
 		MenuInfo infoMenuInfo;
 		LongIdGenerator idGenerator;
-		String treeNodeAsXml;
-
-		BaseTreeNode<MenuInfo, Long> menuInfoLongBaseTreeNode;
 
 		idGenerator = LongIdGenerator.of(0L);
 
@@ -288,9 +295,6 @@ public class TestDataFactory
 		MenuInfo toggleFullscreenMenuInfo;
 		MenuInfo exitMenuInfo;
 		LongIdGenerator idGenerator;
-		String treeNodeAsXml;
-
-		BaseTreeNode<MenuInfo, Long> menuInfoLongBaseTreeNode;
 
 		// Create a LongIdGenerator starting from 0
 		idGenerator = LongIdGenerator.of(0L);
@@ -347,9 +351,6 @@ public class TestDataFactory
 		MenuInfo menuBarInfo;
 		MenuInfo editMenuInfo;
 		LongIdGenerator idGenerator;
-		String treeNodeAsXml;
-
-		BaseTreeNode<MenuInfo, Long> menuInfoLongBaseTreeNode;
 
 		idGenerator = LongIdGenerator.of(0L);
 
