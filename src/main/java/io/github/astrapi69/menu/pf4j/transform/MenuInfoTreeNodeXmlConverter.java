@@ -46,6 +46,13 @@ public final class MenuInfoTreeNodeXmlConverter
 {
 
 	/**
+	 * Private constructor to prevent instantiation
+	 */
+	private MenuInfoTreeNodeXmlConverter()
+	{
+	}
+
+	/**
 	 * Factory method that creates a {@link BaseTreeNode} object from the given XML {@link String}
 	 * which represents a {@link BaseTreeNode} of {@link MenuInfo} objects
 	 *

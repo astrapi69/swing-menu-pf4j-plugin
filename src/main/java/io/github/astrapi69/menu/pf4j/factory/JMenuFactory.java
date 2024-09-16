@@ -40,8 +40,16 @@ import lombok.NonNull;
 /**
  * A factory {@link JMenuFactory} provides factory methods for creating {@link JMenu} objects.
  */
-public class JMenuFactory
+public final class JMenuFactory
 {
+
+	/**
+	 * Private constructor to prevent instantiation
+	 */
+	private JMenuFactory()
+	{
+	}
+
 
 	/**
 	 * Builds a {@link JMenu} from the given root {@link BaseTreeNode} object.

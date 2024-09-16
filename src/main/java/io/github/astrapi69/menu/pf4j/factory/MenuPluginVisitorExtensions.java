@@ -54,8 +54,15 @@ import lombok.NonNull;
  * {@link MenuInfo} objects to various Swing components such as {@link JMenu}, {@link JMenuBar}, and
  * {@link JMenuItem}.
  */
-public class MenuPluginVisitorExtensions
+public final class MenuPluginVisitorExtensions
 {
+
+	/**
+	 * Private constructor to prevent instantiation
+	 */
+	private MenuPluginVisitorExtensions()
+	{
+	}
 
 	/**
 	 * Visits the given {@link BaseTreeNode} and adds it to the corresponding menu, menu bar, or

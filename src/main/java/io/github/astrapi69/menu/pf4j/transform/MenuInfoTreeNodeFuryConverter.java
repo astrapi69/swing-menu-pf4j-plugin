@@ -43,8 +43,15 @@ import lombok.NonNull;
  * arrays representations of {@link MenuInfo} objects to a single root {@link BaseTreeNode} and vice
  * versa with the Fury Serialization Framework
  */
-public class MenuInfoTreeNodeFuryConverter
+public final class MenuInfoTreeNodeFuryConverter
 {
+
+	/**
+	 * Private constructor to prevent instantiation
+	 */
+	private MenuInfoTreeNodeFuryConverter()
+	{
+	}
 
 	/**
 	 * Factory method that creates a {@link BaseTreeNode} object from the given XML {@link String}
