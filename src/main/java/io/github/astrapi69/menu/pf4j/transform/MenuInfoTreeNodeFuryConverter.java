@@ -24,22 +24,14 @@
  */
 package io.github.astrapi69.menu.pf4j.transform;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.apache.fury.Fury;
-import org.apache.fury.config.Language;
-
-import io.github.astrapi69.collection.list.ListExtensions;
 import io.github.astrapi69.gen.tree.BaseTreeNode;
 import io.github.astrapi69.gen.tree.TreeIdNode;
 import io.github.astrapi69.gen.tree.convert.BaseTreeNodeTransformer;
-import io.github.astrapi69.gen.tree.handler.IBaseTreeNodeHandlerExtensions;
-import io.github.astrapi69.id.generate.LongIdGenerator;
 import io.github.astrapi69.swing.menu.model.MenuInfo;
 import io.github.astrapi69.throwable.RuntimeExceptionDecorator;
 import io.github.astrapisixtynine.fury.BytesToObjectExtensions;
@@ -53,27 +45,6 @@ import lombok.NonNull;
  */
 public class MenuInfoTreeNodeFuryConverter
 {
-	private static final Fury FURY;
-
-	static
-	{
-		FURY = newFury();
-	}
-
-	private static Fury newFury()
-	{
-
-		Fury fury = Fury.builder().withLanguage(Language.JAVA)
-			// Allow to deserialize objects unknown types,
-			// more flexible but less secure.
-			.requireClassRegistration(false).build();
-		return fury;
-	}
-
-	private static Fury getFury()
-	{
-		return FURY;
-	}
 
 	/**
 	 * Factory method that creates a {@link BaseTreeNode} object from the given XML {@link String}
@@ -85,9 +56,8 @@ public class MenuInfoTreeNodeFuryConverter
 	 */
 	public static BaseTreeNode<MenuInfo, Long> toMenuInfoTreeNode(final byte[] bytes)
 	{
-		Fury fury = getFury();
 		Map<Long, TreeIdNode<MenuInfo, Long>> treeIdNodeMap = RuntimeExceptionDecorator
-			.decorate(() -> BytesToObjectExtensions.toObject(fury, bytes));
+			.decorate(() -> BytesToObjectExtensions.toObject(FuryFactory.getFury(), bytes));
 		return BaseTreeNodeTransformer.getRoot(treeIdNodeMap);
 	}
 
@@ -101,10 +71,9 @@ public class MenuInfoTreeNodeFuryConverter
 	 */
 	public static byte[] toBytes(final @NonNull BaseTreeNode<MenuInfo, Long> root)
 	{
-		Fury fury = getFury();
 		Map<Long, TreeIdNode<MenuInfo, Long>> treeIdNodeMap = BaseTreeNodeTransformer
 			.toKeyMap(root);
-		return ObjectToBytesExtensions.toBytes(fury, treeIdNodeMap);
+		return ObjectToBytesExtensions.toBytes(FuryFactory.getFury(), treeIdNodeMap);
 	}
 
 	/**
@@ -119,17 +88,7 @@ public class MenuInfoTreeNodeFuryConverter
 		final byte[]... arrayOfByteArrays)
 	{
 		List<BaseTreeNode<MenuInfo, Long>> treeNodes = toBaseTreeNodes(arrayOfByteArrays);
-
-		BaseTreeNode<MenuInfo, Long> root = mergeTreeNodes(treeNodes);
-
-		List<BaseTreeNode<MenuInfo, Long>> orderedList = new ArrayList<>(root.traverse());
-		orderedList.sort(new BaseTreeNodeByMenuInfoOrdinalComparator());
-		LongIdGenerator idGenerator = LongIdGenerator.of(0L);
-		for (BaseTreeNode<MenuInfo, Long> treeNode : orderedList)
-		{
-			treeNode.setId(idGenerator.getNextId());
-		}
-		return root;
+		return TreeNodeMerger.getBaseTreeNode(treeNodes);
 	}
 
 	private static List<BaseTreeNode<MenuInfo, Long>> toBaseTreeNodes(
@@ -140,21 +99,4 @@ public class MenuInfoTreeNodeFuryConverter
 			.sorted(new BaseTreeNodeByMenuInfoOrdinalComparator()).collect(Collectors.toList());
 	}
 
-	private static <T, K> BaseTreeNode<T, K> mergeTreeNodes(
-		final @NonNull List<BaseTreeNode<T, K>> treeNodes)
-	{
-		return mergeTreeNodes(ListExtensions.removeFirstElement(treeNodes), treeNodes);
-	}
-
-	private static <T, K> BaseTreeNode<T, K> mergeTreeNodes(
-		final @NonNull Optional<BaseTreeNode<T, K>> firstTreeNode,
-		final @NonNull List<BaseTreeNode<T, K>> treeNodes)
-	{
-		BaseTreeNode<T, K> root = null;
-		if (firstTreeNode.isPresent())
-		{
-			root = IBaseTreeNodeHandlerExtensions.mergeTreeNodes(firstTreeNode.get(), treeNodes);
-		}
-		return root;
-	}
 }

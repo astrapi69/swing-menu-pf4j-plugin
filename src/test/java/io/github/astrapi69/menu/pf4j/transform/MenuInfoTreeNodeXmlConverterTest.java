@@ -35,9 +35,9 @@ import io.github.astrapi69.menu.pf4j.test.TestDataFactory;
 import io.github.astrapi69.swing.menu.model.MenuInfo;
 
 /**
- * Test class for {@link MenuInfoTreeNodeConverter}
+ * Test class for {@link MenuInfoTreeNodeXmlConverter}
  */
-class MenuInfoTreeNodeConverterTest
+class MenuInfoTreeNodeXmlConverterTest
 {
 	private String testXml;
 
@@ -45,7 +45,7 @@ class MenuInfoTreeNodeConverterTest
 	void setUp()
 	{
 		// Sample XML data for testing
-		testXml = MenuInfoTreeNodeConverter.toXml(TestDataFactory.getTestFileMenuWithMenubar());
+		testXml = MenuInfoTreeNodeXmlConverter.toXml(TestDataFactory.getTestFileMenuWithMenubar());
 	}
 
 	/**
@@ -54,9 +54,9 @@ class MenuInfoTreeNodeConverterTest
 	 *
 	 * The methods that are tested in this test case include:
 	 * <ul>
-	 * <li>{@link MenuInfoTreeNodeConverter#toXml(BaseTreeNode)} - Converts a tree node to its XML
-	 * representation</li>
-	 * <li>{@link MenuInfoTreeNodeConverter#toMenuInfoTreeNode(String)} - Converts an XML
+	 * <li>{@link MenuInfoTreeNodeXmlConverter#toXml(BaseTreeNode)} - Converts a tree node to its
+	 * XML representation</li>
+	 * <li>{@link MenuInfoTreeNodeXmlConverter#toMenuInfoTreeNode(String)} - Converts an XML
 	 * representation back to a tree node</li>
 	 * </ul>
 	 */
@@ -68,10 +68,10 @@ class MenuInfoTreeNodeConverterTest
 		String treeNodeAsXml;
 
 		// Convert the tree node to XML
-		treeNodeAsXml = MenuInfoTreeNodeConverter.toXml(menuBarTreeNode);
+		treeNodeAsXml = MenuInfoTreeNodeXmlConverter.toXml(menuBarTreeNode);
 
 		// Convert the XML back to a tree node and verify
-		menuInfoLongBaseTreeNode = MenuInfoTreeNodeConverter.toMenuInfoTreeNode(treeNodeAsXml);
+		menuInfoLongBaseTreeNode = MenuInfoTreeNodeXmlConverter.toMenuInfoTreeNode(treeNodeAsXml);
 		assertNotNull(menuInfoLongBaseTreeNode);
 
 		// Verify that the converted tree node matches the original tree node
@@ -79,36 +79,36 @@ class MenuInfoTreeNodeConverterTest
 	}
 
 	/**
-	 * Test for {@link MenuInfoTreeNodeConverter#toMenuInfoTreeNode(String)}
+	 * Test for {@link MenuInfoTreeNodeXmlConverter#toMenuInfoTreeNode(String)}
 	 */
 	@Test
 	void testToMenuInfoTreeNode()
 	{
-		BaseTreeNode<MenuInfo, Long> treeNode = MenuInfoTreeNodeConverter
+		BaseTreeNode<MenuInfo, Long> treeNode = MenuInfoTreeNodeXmlConverter
 			.toMenuInfoTreeNode(testXml);
 		assertNotNull(treeNode);
 	}
 
 	/**
-	 * Test for {@link MenuInfoTreeNodeConverter#toXml(BaseTreeNode)}
+	 * Test for {@link MenuInfoTreeNodeXmlConverter#toXml(BaseTreeNode)}
 	 */
 	@Test
 	void testToXml()
 	{
-		BaseTreeNode<MenuInfo, Long> treeNode = MenuInfoTreeNodeConverter
+		BaseTreeNode<MenuInfo, Long> treeNode = MenuInfoTreeNodeXmlConverter
 			.toMenuInfoTreeNode(testXml);
-		String xml = MenuInfoTreeNodeConverter.toXml(treeNode);
+		String xml = MenuInfoTreeNodeXmlConverter.toXml(treeNode);
 		assertNotNull(xml);
 	}
 
 	/**
-	 * Test for {@link MenuInfoTreeNodeConverter#mergeMenuInfoTreeNode(String...)}
+	 * Test for {@link MenuInfoTreeNodeXmlConverter#mergeMenuInfoTreeNode(String...)}
 	 */
 	@Test
 	void testMergeMenuInfoTreeNode()
 	{
 		String[] xmls = { testXml, testXml };
-		BaseTreeNode<MenuInfo, Long> mergedTreeNode = MenuInfoTreeNodeConverter
+		BaseTreeNode<MenuInfo, Long> mergedTreeNode = MenuInfoTreeNodeXmlConverter
 			.mergeMenuInfoTreeNode(xmls);
 		assertNotNull(mergedTreeNode);
 	}

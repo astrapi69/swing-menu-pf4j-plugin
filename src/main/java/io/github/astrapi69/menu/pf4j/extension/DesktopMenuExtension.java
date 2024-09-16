@@ -34,7 +34,7 @@ import org.pf4j.Extension;
 
 import io.github.astrapi69.menu.pf4j.factory.JMenuBarFactory;
 import io.github.astrapi69.menu.pf4j.factory.JMenuFactory;
-import io.github.astrapi69.menu.pf4j.transform.MenuInfoTreeNodeConverter;
+import io.github.astrapi69.menu.pf4j.transform.MenuInfoTreeNodeXmlConverter;
 import io.github.astrapi69.swing.menu.model.MenuInfo;
 
 /**
@@ -51,7 +51,7 @@ public class DesktopMenuExtension implements DesktopMenuExtensionPoint
 	@Override
 	public JMenuBar buildMenuBar(String xml)
 	{
-		return JMenuBarFactory.buildMenuBar(MenuInfoTreeNodeConverter.toMenuInfoTreeNode(xml));
+		return JMenuBarFactory.buildMenuBar(MenuInfoTreeNodeXmlConverter.toMenuInfoTreeNode(xml));
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class DesktopMenuExtension implements DesktopMenuExtensionPoint
 	@Override
 	public JMenu buildAndAddMenuToExistingJMenuBar(String xml)
 	{
-		return JMenuFactory.buildMenu(MenuInfoTreeNodeConverter.toMenuInfoTreeNode(xml));
+		return JMenuFactory.buildMenu(MenuInfoTreeNodeXmlConverter.toMenuInfoTreeNode(xml));
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class DesktopMenuExtension implements DesktopMenuExtensionPoint
 	 */
 	public JMenuBar buildMenuBar(String xml, Map<String, ActionListener> actionListenerMap)
 	{
-		return JMenuBarFactory.buildMenuBar(MenuInfoTreeNodeConverter.toMenuInfoTreeNode(xml),
+		return JMenuBarFactory.buildMenuBar(MenuInfoTreeNodeXmlConverter.toMenuInfoTreeNode(xml),
 			actionListenerMap);
 	}
 
@@ -79,7 +79,7 @@ public class DesktopMenuExtension implements DesktopMenuExtensionPoint
 	public JMenu buildAndAddMenuToExistingJMenuBar(String xml,
 		Map<String, ActionListener> actionListenerMap)
 	{
-		return JMenuFactory.buildMenu(MenuInfoTreeNodeConverter.toMenuInfoTreeNode(xml),
+		return JMenuFactory.buildMenu(MenuInfoTreeNodeXmlConverter.toMenuInfoTreeNode(xml),
 			actionListenerMap);
 	}
 }

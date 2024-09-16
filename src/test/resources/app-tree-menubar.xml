@@ -18,6 +18,7 @@
         </keyStrokeInfo>
         <type>MENU_ITEM</type>
         <actionCommand>io.github.astrapi69.swing.action.ToggleFullScreenAction</actionCommand>
+        <actionClass>io.github.astrapi69.swing.action.ToggleFullScreenAction</actionClass>
       </value>
       <leaf>true</leaf>
     </io.github.astrapi69.gen.tree.TreeIdNode>
@@ -41,6 +42,7 @@
         </keyStrokeInfo>
         <type>MENU_ITEM</type>
         <actionCommand>io.github.astrapi69.swing.action.ExitApplicationAction</actionCommand>
+        <actionClass>io.github.astrapi69.swing.action.ExitApplicationAction</actionClass>
       </value>
       <leaf>true</leaf>
     </io.github.astrapi69.gen.tree.TreeIdNode>
@@ -67,6 +69,7 @@
         </keyStrokeInfo>
         <type>MENU</type>
         <actionCommand>io.github.astrapi69.awt.action.NoAction</actionCommand>
+        <actionClass>io.github.astrapi69.awt.action.NoAction</actionClass>
       </value>
       <leaf>false</leaf>
     </io.github.astrapi69.gen.tree.TreeIdNode>
@@ -90,6 +93,7 @@
         </keyStrokeInfo>
         <type>MENU_ITEM</type>
         <actionCommand>io.github.astrapi69.awt.action.NoAction</actionCommand>
+        <actionClass>io.github.astrapi69.awt.action.NoAction</actionClass>
       </value>
       <leaf>true</leaf>
     </io.github.astrapi69.gen.tree.TreeIdNode>
@@ -113,6 +117,7 @@
         </keyStrokeInfo>
         <type>MENU_ITEM</type>
         <actionCommand>io.github.astrapi69.awt.action.NoAction</actionCommand>
+        <actionClass>io.github.astrapi69.awt.action.NoAction</actionClass>
       </value>
       <leaf>true</leaf>
     </io.github.astrapi69.gen.tree.TreeIdNode>
@@ -136,6 +141,7 @@
         </keyStrokeInfo>
         <type>CHECK_BOX_MENU_ITEM</type>
         <actionCommand>io.github.astrapi69.awt.action.NoAction</actionCommand>
+        <actionClass>io.github.astrapi69.awt.action.NoAction</actionClass>
       </value>
       <leaf>true</leaf>
     </io.github.astrapi69.gen.tree.TreeIdNode>
@@ -159,6 +165,7 @@
         </keyStrokeInfo>
         <type>RADIO_BUTTON_MENU_ITEM</type>
         <actionCommand>io.github.astrapi69.awt.action.NoAction</actionCommand>
+        <actionClass>io.github.astrapi69.awt.action.NoAction</actionClass>
       </value>
       <leaf>true</leaf>
     </io.github.astrapi69.gen.tree.TreeIdNode>
@@ -182,6 +189,7 @@
         </keyStrokeInfo>
         <type>MENU_ITEM</type>
         <actionCommand>io.github.astrapi69.awt.action.NoAction</actionCommand>
+        <actionClass>io.github.astrapi69.awt.action.NoAction</actionClass>
       </value>
       <leaf>true</leaf>
     </io.github.astrapi69.gen.tree.TreeIdNode>
@@ -203,6 +211,7 @@
         <ordinal>13300</ordinal>
         <type>MENU</type>
         <actionCommand>io.github.astrapi69.awt.action.NoAction</actionCommand>
+        <actionClass>io.github.astrapi69.awt.action.NoAction</actionClass>
       </value>
       <leaf>false</leaf>
     </io.github.astrapi69.gen.tree.TreeIdNode>
@@ -226,6 +235,7 @@
         </keyStrokeInfo>
         <type>MENU_ITEM</type>
         <actionCommand>io.github.astrapi69.awt.action.NoAction</actionCommand>
+        <actionClass>io.github.astrapi69.awt.action.NoAction</actionClass>
       </value>
       <leaf>false</leaf>
     </io.github.astrapi69.gen.tree.TreeIdNode>
@@ -249,6 +259,7 @@
         </keyStrokeInfo>
         <type>MENU_ITEM</type>
         <actionCommand>io.github.astrapi69.awt.action.NoAction</actionCommand>
+        <actionClass>io.github.astrapi69.awt.action.NoAction</actionClass>
       </value>
       <leaf>false</leaf>
     </io.github.astrapi69.gen.tree.TreeIdNode>
@@ -278,6 +289,7 @@
         </keyStrokeInfo>
         <type>MENU</type>
         <actionCommand>io.github.astrapi69.awt.action.NoAction</actionCommand>
+        <actionClass>io.github.astrapi69.awt.action.NoAction</actionClass>
       </value>
       <leaf>false</leaf>
     </io.github.astrapi69.gen.tree.TreeIdNode>
@@ -295,6 +307,7 @@
         <ordinal>100</ordinal>
         <type>MENU_BAR</type>
         <actionCommand>io.github.astrapi69.awt.action.NoAction</actionCommand>
+        <actionClass>io.github.astrapi69.awt.action.NoAction</actionClass>
       </value>
       <leaf>false</leaf>
     </io.github.astrapi69.gen.tree.TreeIdNode>

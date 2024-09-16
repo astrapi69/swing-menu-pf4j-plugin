@@ -24,19 +24,14 @@
  */
 package io.github.astrapi69.menu.pf4j.transform;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
-import io.github.astrapi69.collection.list.ListExtensions;
 import io.github.astrapi69.gen.tree.BaseTreeNode;
 import io.github.astrapi69.gen.tree.TreeIdNode;
 import io.github.astrapi69.gen.tree.convert.BaseTreeNodeTransformer;
-import io.github.astrapi69.gen.tree.handler.IBaseTreeNodeHandlerExtensions;
-import io.github.astrapi69.id.generate.LongIdGenerator;
 import io.github.astrapi69.swing.menu.model.MenuInfo;
 import io.github.astrapi69.throwable.RuntimeExceptionDecorator;
 import io.github.astrapi69.xstream.ObjectToXmlExtensions;
@@ -44,10 +39,10 @@ import io.github.astrapi69.xstream.XmlToObjectExtensions;
 import lombok.NonNull;
 
 /**
- * The class {@link MenuInfoTreeNodeConverter} provides utility methods for converting XML
+ * The class {@link MenuInfoTreeNodeXmlConverter} provides utility methods for converting XML
  * representations of {@link MenuInfo} objects to a single root {@link BaseTreeNode} and vice versa
  */
-public class MenuInfoTreeNodeConverter
+public final class MenuInfoTreeNodeXmlConverter
 {
 
 	/**
@@ -92,39 +87,14 @@ public class MenuInfoTreeNodeConverter
 	{
 		List<BaseTreeNode<MenuInfo, Long>> treeNodes = toBaseTreeNodes(xmls);
 
-		BaseTreeNode<MenuInfo, Long> root = mergeTreeNodes(treeNodes);
-
-		List<BaseTreeNode<MenuInfo, Long>> orderedList = new ArrayList<>(root.traverse());
-		orderedList.sort(new BaseTreeNodeByMenuInfoOrdinalComparator());
-		LongIdGenerator idGenerator = LongIdGenerator.of(0L);
-		for (BaseTreeNode<MenuInfo, Long> treeNode : orderedList)
-		{
-			treeNode.setId(idGenerator.getNextId());
-		}
-		return root;
+		return TreeNodeMerger.getBaseTreeNode(treeNodes);
 	}
+
 
 	private static List<BaseTreeNode<MenuInfo, Long>> toBaseTreeNodes(final @NonNull String[] xmls)
 	{
-		return Arrays.stream(xmls).map(MenuInfoTreeNodeConverter::toMenuInfoTreeNode)
+		return Arrays.stream(xmls).map(MenuInfoTreeNodeXmlConverter::toMenuInfoTreeNode)
 			.sorted(new BaseTreeNodeByMenuInfoOrdinalComparator()).collect(Collectors.toList());
 	}
 
-	private static <T, K> BaseTreeNode<T, K> mergeTreeNodes(
-		final @NonNull List<BaseTreeNode<T, K>> treeNodes)
-	{
-		return mergeTreeNodes(ListExtensions.removeFirstElement(treeNodes), treeNodes);
-	}
-
-	private static <T, K> BaseTreeNode<T, K> mergeTreeNodes(
-		final @NonNull Optional<BaseTreeNode<T, K>> firstTreeNode,
-		final @NonNull List<BaseTreeNode<T, K>> treeNodes)
-	{
-		BaseTreeNode<T, K> root = null;
-		if (firstTreeNode.isPresent())
-		{
-			root = IBaseTreeNodeHandlerExtensions.mergeTreeNodes(firstTreeNode.get(), treeNodes);
-		}
-		return root;
-	}
 }

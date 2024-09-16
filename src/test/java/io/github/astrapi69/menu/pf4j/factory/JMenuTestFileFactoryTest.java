@@ -34,7 +34,7 @@ import io.github.astrapi69.file.search.PathFinder;
 import io.github.astrapi69.file.write.StoreFileExtensions;
 import io.github.astrapi69.gen.tree.BaseTreeNode;
 import io.github.astrapi69.menu.pf4j.test.TestDataFactory;
-import io.github.astrapi69.menu.pf4j.transform.MenuInfoTreeNodeConverter;
+import io.github.astrapi69.menu.pf4j.transform.MenuInfoTreeNodeXmlConverter;
 import io.github.astrapi69.swing.menu.model.MenuInfo;
 import io.github.astrapi69.throwable.RuntimeExceptionDecorator;
 
@@ -55,13 +55,13 @@ public class JMenuTestFileFactoryTest
 		BaseTreeNode<MenuInfo, Long> menuInfoLongBaseTreeNode;
 		String treeNodeAsXml;
 
-		treeNodeAsXml = MenuInfoTreeNodeConverter.toXml(menuBarTreeNode);
+		treeNodeAsXml = MenuInfoTreeNodeXmlConverter.toXml(menuBarTreeNode);
 
 		RuntimeExceptionDecorator.decorate(() -> StoreFileExtensions.toFile(
 			FileFactory.newFileQuietly(PathFinder.getSrcTestResourcesDir(), "app-file-menu.xml"),
 			treeNodeAsXml, "UTF-8"));
 
-		menuInfoLongBaseTreeNode = MenuInfoTreeNodeConverter.toMenuInfoTreeNode(treeNodeAsXml);
+		menuInfoLongBaseTreeNode = MenuInfoTreeNodeXmlConverter.toMenuInfoTreeNode(treeNodeAsXml);
 		assertNotNull(menuInfoLongBaseTreeNode);
 		assertEquals(menuInfoLongBaseTreeNode, menuBarTreeNode);
 	}
@@ -76,13 +76,13 @@ public class JMenuTestFileFactoryTest
 		BaseTreeNode<MenuInfo, Long> menuInfoLongBaseTreeNode;
 		String treeNodeAsXml;
 
-		treeNodeAsXml = MenuInfoTreeNodeConverter.toXml(menuBarTreeNode);
+		treeNodeAsXml = MenuInfoTreeNodeXmlConverter.toXml(menuBarTreeNode);
 
 		RuntimeExceptionDecorator.decorate(() -> StoreFileExtensions.toFile(
 			FileFactory.newFileQuietly(PathFinder.getSrcTestResourcesDir(), "app-edit-menu.xml"),
 			treeNodeAsXml, "UTF-8"));
 
-		menuInfoLongBaseTreeNode = MenuInfoTreeNodeConverter.toMenuInfoTreeNode(treeNodeAsXml);
+		menuInfoLongBaseTreeNode = MenuInfoTreeNodeXmlConverter.toMenuInfoTreeNode(treeNodeAsXml);
 		assertNotNull(menuInfoLongBaseTreeNode);
 		assertEquals(menuInfoLongBaseTreeNode, menuBarTreeNode);
 	}
@@ -97,12 +97,12 @@ public class JMenuTestFileFactoryTest
 		BaseTreeNode<MenuInfo, Long> menuInfoLongBaseTreeNode;
 		String treeNodeAsXml;
 
-		treeNodeAsXml = MenuInfoTreeNodeConverter.toXml(menuBarTreeNode);
+		treeNodeAsXml = MenuInfoTreeNodeXmlConverter.toXml(menuBarTreeNode);
 		RuntimeExceptionDecorator.decorate(() -> StoreFileExtensions.toFile(
 			FileFactory.newFileQuietly(PathFinder.getSrcTestResourcesDir(), "app-help-menu.xml"),
 			treeNodeAsXml, "UTF-8"));
 
-		menuInfoLongBaseTreeNode = MenuInfoTreeNodeConverter.toMenuInfoTreeNode(treeNodeAsXml);
+		menuInfoLongBaseTreeNode = MenuInfoTreeNodeXmlConverter.toMenuInfoTreeNode(treeNodeAsXml);
 		assertNotNull(menuInfoLongBaseTreeNode);
 		assertEquals(menuInfoLongBaseTreeNode, menuBarTreeNode);
 	}

@@ -41,7 +41,7 @@ import io.github.astrapi69.file.read.ReadFileExtensions;
 import io.github.astrapi69.file.search.PathFinder;
 import io.github.astrapi69.gen.tree.BaseTreeNode;
 import io.github.astrapi69.junit.jupiter.callback.before.test.IgnoreHeadlessExceptionExtension;
-import io.github.astrapi69.menu.pf4j.transform.MenuInfoTreeNodeConverter;
+import io.github.astrapi69.menu.pf4j.transform.MenuInfoTreeNodeXmlConverter;
 import io.github.astrapi69.swing.menu.enumeration.BaseMenuId;
 import io.github.astrapi69.swing.menu.model.MenuInfo;
 import io.github.astrapi69.throwable.RuntimeExceptionDecorator;
@@ -93,7 +93,7 @@ public class JMenuFactoryTest
 		BaseTreeNode<MenuInfo, Long> menuInfoLongBaseTreeNode;
 		JMenu menu;
 
-		menuInfoLongBaseTreeNode = MenuInfoTreeNodeConverter.toMenuInfoTreeNode(fileMenuXml);
+		menuInfoLongBaseTreeNode = MenuInfoTreeNodeXmlConverter.toMenuInfoTreeNode(fileMenuXml);
 		assertNotNull(menuInfoLongBaseTreeNode);
 		assertEquals(menuInfoLongBaseTreeNode.getId(), 0);
 
@@ -111,7 +111,7 @@ public class JMenuFactoryTest
 		BaseTreeNode<MenuInfo, Long> menuInfoLongBaseTreeNode;
 		JMenu menu;
 
-		menuInfoLongBaseTreeNode = MenuInfoTreeNodeConverter.toMenuInfoTreeNode(editMenuXml);
+		menuInfoLongBaseTreeNode = MenuInfoTreeNodeXmlConverter.toMenuInfoTreeNode(editMenuXml);
 		assertNotNull(menuInfoLongBaseTreeNode);
 		assertEquals(menuInfoLongBaseTreeNode.getId(), 0);
 
@@ -129,7 +129,7 @@ public class JMenuFactoryTest
 		BaseTreeNode<MenuInfo, Long> menuInfoLongBaseTreeNode;
 		JMenu menu;
 
-		menuInfoLongBaseTreeNode = MenuInfoTreeNodeConverter.toMenuInfoTreeNode(helpMenuXml);
+		menuInfoLongBaseTreeNode = MenuInfoTreeNodeXmlConverter.toMenuInfoTreeNode(helpMenuXml);
 		assertNotNull(menuInfoLongBaseTreeNode);
 		assertEquals(menuInfoLongBaseTreeNode.getId(), 0);
 

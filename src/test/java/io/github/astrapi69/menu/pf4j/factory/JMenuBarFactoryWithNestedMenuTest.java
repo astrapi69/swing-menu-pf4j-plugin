@@ -48,7 +48,7 @@ import io.github.astrapi69.gen.tree.BaseTreeNode;
 import io.github.astrapi69.gen.tree.TreeIdNode;
 import io.github.astrapi69.gen.tree.convert.BaseTreeNodeTransformer;
 import io.github.astrapi69.menu.pf4j.test.TestDataFactory;
-import io.github.astrapi69.menu.pf4j.transform.MenuInfoTreeNodeConverter;
+import io.github.astrapi69.menu.pf4j.transform.MenuInfoTreeNodeXmlConverter;
 import io.github.astrapi69.reflection.InstanceFactory;
 import io.github.astrapi69.swing.action.ToggleFullScreenAction;
 import io.github.astrapi69.swing.menu.enumeration.BaseMenuId;
@@ -84,9 +84,8 @@ public class JMenuBarFactoryWithNestedMenuTest
 		Map<String, ActionListener> actionListenerMap;
 		BaseTreeNode<MenuInfo, Long> menuInfoLongBaseTreeNode;
 
-		menuInfoLongBaseTreeNode = MenuInfoTreeNodeConverter.toMenuInfoTreeNode(xml);
-		actionListenerMap = getActionListenerMap(
-			menuInfoLongBaseTreeNode);
+		menuInfoLongBaseTreeNode = MenuInfoTreeNodeXmlConverter.toMenuInfoTreeNode(xml);
+		actionListenerMap = getActionListenerMap(menuInfoLongBaseTreeNode);
 		// actionListenerMap = new LinkedHashMap<>();
 		//
 		// actionListenerMap.put(BaseMenuId.MENU_BAR.propertiesKey(), new NoAction());
@@ -166,12 +165,12 @@ public class JMenuBarFactoryWithNestedMenuTest
 		BaseTreeNode<MenuInfo, Long> menuInfoLongBaseTreeNode;
 		String treeNodeAsXml;
 
-		treeNodeAsXml = MenuInfoTreeNodeConverter.toXml(menuBarTreeNode);
+		treeNodeAsXml = MenuInfoTreeNodeXmlConverter.toXml(menuBarTreeNode);
 		RuntimeExceptionDecorator.decorate(() -> StoreFileExtensions.toFile(
 			FileFactory.newFileQuietly(PathFinder.getSrcTestResourcesDir(), "app-tree-menubar.xml"),
 			treeNodeAsXml, "UTF-8"));
 
-		menuInfoLongBaseTreeNode = MenuInfoTreeNodeConverter.toMenuInfoTreeNode(xml);
+		menuInfoLongBaseTreeNode = MenuInfoTreeNodeXmlConverter.toMenuInfoTreeNode(xml);
 		assertNotNull(menuInfoLongBaseTreeNode);
 		assertEquals(menuInfoLongBaseTreeNode, menuBarTreeNode);
 	}
