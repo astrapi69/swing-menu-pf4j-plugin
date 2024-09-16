@@ -27,12 +27,16 @@ package io.github.astrapi69.menu.pf4j.factory;
 import java.awt.event.ActionListener;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import io.github.astrapi69.gen.tree.BaseTreeNode;
+import io.github.astrapi69.gen.tree.TreeIdNode;
+import io.github.astrapi69.gen.tree.convert.BaseTreeNodeTransformer;
+import io.github.astrapi69.reflection.InstanceFactory;
 import io.github.astrapi69.swing.menu.enumeration.BaseMenuId;
 import io.github.astrapi69.swing.menu.factory.MenuVisitorExtensions;
 import io.github.astrapi69.swing.menu.model.MenuInfo;
@@ -94,6 +98,36 @@ public final class JMenuBarFactory
 		root.accept(menuInfoLongBaseTreeNode -> MenuPluginVisitorExtensions
 			.visitAndAddToMenu(menuInfoLongBaseTreeNode, menuMap, menuItemMap, menuBarMap));
 		return menuBarMap.get(BaseMenuId.MENU_BAR.propertiesKey());
+	}
+
+	/**
+	 * Factory method for creating a map of action listeners from the given {@link BaseTreeNode}
+	 * object that is the root
+	 *
+	 * @param root
+	 *            the root {@link BaseTreeNode} of {@link MenuInfo} and {@link Long}
+	 * @return the map of action listeners with the menu names as keys
+	 */
+	public static Map<String, ActionListener> newActionListenerMap(
+		BaseTreeNode<MenuInfo, Long> root)
+	{
+		Map<Long, TreeIdNode<MenuInfo, Long>> treeIdNodeMap = BaseTreeNodeTransformer
+			.toKeyMap(root);
+		Map<String, ActionListener> actionListenerMap = new LinkedHashMap<>();
+		treeIdNodeMap.forEach((key, value) -> {
+			MenuInfo menuInfo = value.getValue();
+			String actionClass = menuInfo.getActionClass();
+			Optional<ActionListener> actionListenerOptional = InstanceFactory
+				.newOptionalInstance(actionClass);
+			if (actionListenerOptional.isEmpty())
+			{
+				throw new IllegalArgumentException(
+					"actionListenerClass cannot be instantiated with actionClass:" + actionClass);
+			}
+			ActionListener actionListener = actionListenerOptional.get();
+			actionListenerMap.put(menuInfo.getName(), actionListener);
+		});
+		return actionListenerMap;
 	}
 
 }

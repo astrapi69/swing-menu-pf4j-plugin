@@ -25,19 +25,22 @@
 package io.github.astrapi69.menu.pf4j.factory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Optional;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import io.github.astrapi69.awt.window.adapter.CloseWindow;
 import io.github.astrapi69.file.create.FileFactory;
@@ -45,11 +48,8 @@ import io.github.astrapi69.file.read.ReadFileExtensions;
 import io.github.astrapi69.file.search.PathFinder;
 import io.github.astrapi69.file.write.StoreFileExtensions;
 import io.github.astrapi69.gen.tree.BaseTreeNode;
-import io.github.astrapi69.gen.tree.TreeIdNode;
-import io.github.astrapi69.gen.tree.convert.BaseTreeNodeTransformer;
 import io.github.astrapi69.menu.pf4j.test.TestDataFactory;
 import io.github.astrapi69.menu.pf4j.transform.MenuInfoTreeNodeXmlConverter;
-import io.github.astrapi69.reflection.InstanceFactory;
 import io.github.astrapi69.swing.action.ToggleFullScreenAction;
 import io.github.astrapi69.swing.menu.enumeration.BaseMenuId;
 import io.github.astrapi69.swing.menu.model.MenuInfo;
@@ -85,7 +85,7 @@ public class JMenuBarFactoryWithNestedMenuTest
 		BaseTreeNode<MenuInfo, Long> menuInfoLongBaseTreeNode;
 
 		menuInfoLongBaseTreeNode = MenuInfoTreeNodeXmlConverter.toMenuInfoTreeNode(xml);
-		actionListenerMap = getActionListenerMap(menuInfoLongBaseTreeNode);
+		actionListenerMap = JMenuBarFactory.newActionListenerMap(menuInfoLongBaseTreeNode);
 		// actionListenerMap = new LinkedHashMap<>();
 		//
 		// actionListenerMap.put(BaseMenuId.MENU_BAR.propertiesKey(), new NoAction());
@@ -117,29 +117,6 @@ public class JMenuBarFactoryWithNestedMenuTest
 		frame.addWindowListener(new CloseWindow());
 		frame.setSize(400, 200);
 		frame.setVisible(true);
-	}
-
-	public static Map<String, ActionListener> getActionListenerMap(
-		BaseTreeNode<MenuInfo, Long> root)
-	{
-		Map<Long, TreeIdNode<MenuInfo, Long>> treeIdNodeMap = BaseTreeNodeTransformer
-			.toKeyMap(root);
-		Map<String, ActionListener> actionListenerMap = new LinkedHashMap<>();
-		treeIdNodeMap.forEach((key, value) -> {
-			MenuInfo menuInfo = value.getValue();
-			String actionCommand = menuInfo.getActionCommand();
-			Optional<ActionListener> actionListenerOptional = InstanceFactory
-				.newOptionalInstance(actionCommand);
-			if (actionListenerOptional.isEmpty())
-			{
-				throw new IllegalArgumentException(
-					"actionListenerClass cannot be instantiated with actionCommand:"
-						+ actionCommand);
-			}
-			ActionListener actionListener = actionListenerOptional.get();
-			actionListenerMap.put(menuInfo.getName(), actionListener);
-		});
-		return actionListenerMap;
 	}
 
 	/**
@@ -175,4 +152,49 @@ public class JMenuBarFactoryWithNestedMenuTest
 		assertEquals(menuInfoLongBaseTreeNode, menuBarTreeNode);
 	}
 
+	/**
+	 * Test for {@link JMenuBarFactory#newActionListenerMap(BaseTreeNode)} with valid data
+	 */
+	@Test
+	public void testNewActionListenerMap()
+	{
+		BaseTreeNode<MenuInfo, Long> root = TestDataFactory.getTestFileMenuWithMenubar();
+		Map<String, ActionListener> actionListenerMap = JMenuBarFactory.newActionListenerMap(root);
+
+		assertNotNull(actionListenerMap);
+		assertFalse(actionListenerMap.isEmpty());
+	}
+
+	/**
+	 * Test for {@link JMenuBarFactory#newActionListenerMap(BaseTreeNode)} with an invalid action
+	 * class
+	 */
+	@Test
+	public void testNewActionListenerMapWithInvalidClass()
+	{
+		BaseTreeNode<MenuInfo, Long> root = TestDataFactory.getTestFileMenuWithInvalidActionClass();
+
+		IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+			JMenuBarFactory.newActionListenerMap(root);
+		});
+		assertTrue(exception.getMessage().contains("actionListenerClass cannot be instantiated"));
+	}
+
+	/**
+	 * Parameterized test for {@link JMenuBarFactory#newActionListenerMap(BaseTreeNode)} with
+	 * different tree sizes
+	 *
+	 * @param size
+	 *            the size of the tree
+	 */
+	@ParameterizedTest
+	@ValueSource(ints = { 4, 13 })
+	public void testNewActionListenerMapParameterized(int size)
+	{
+		BaseTreeNode<MenuInfo, Long> root = TestDataFactory.newTestMenuWithSize(size);
+		Map<String, ActionListener> actionListenerMap = JMenuBarFactory.newActionListenerMap(root);
+
+		assertNotNull(actionListenerMap);
+		assertEquals(size, actionListenerMap.size());
+	}
 }

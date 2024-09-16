@@ -403,4 +403,37 @@ public class TestDataFactory
 			return getTestFileAndHelpMenuWithMenubar();
 		}
 	}
+
+	public static BaseTreeNode<MenuInfo, Long> getTestFileMenuWithInvalidActionClass()
+	{
+
+		BaseTreeNode<MenuInfo, Long> menuBarTreeNode;
+		BaseTreeNode<MenuInfo, Long> editTreeNode;
+		MenuInfo menuBarInfo;
+		MenuInfo editMenuInfo;
+		LongIdGenerator idGenerator;
+
+		idGenerator = LongIdGenerator.of(0L);
+
+		menuBarInfo = MenuItemInfoConverter.fromJMenuBar();
+		menuBarInfo.setActionCommand("io.github.astrapi69.awt.action.NoAction");
+		menuBarInfo.setActionClass("io.github.astrapi69.awt.action.NoAction");
+
+		menuBarTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
+			.value(menuBarInfo).build();
+
+		editMenuInfo = MenuInfo.builder().type(MenuType.MENU)
+			.mnemonic(MenuExtensions.toMnemonic('E')).ordinal(1200)
+			.keyStrokeInfo(KeyStrokeInfo.toKeyStrokeInfo(KeyStroke.getKeyStroke("alt pressed E")))
+			.text("Edit").name(BaseMenuId.EDIT.propertiesKey())
+			.actionCommand("io.github.astrapi69.awt.action.InvalidAction")
+			.actionClass("io.github.astrapi69.awt.action.InvalidAction").build();
+
+
+		editTreeNode = BaseTreeNode.<MenuInfo, Long> builder().id(idGenerator.getNextId())
+			.value(editMenuInfo).build();
+
+		menuBarTreeNode.addChild(editTreeNode);
+		return menuBarTreeNode;
+	}
 }
