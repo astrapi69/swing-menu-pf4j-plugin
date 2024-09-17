@@ -50,6 +50,7 @@ import io.github.astrapi69.file.search.PathFinder;
 import io.github.astrapi69.junit.jupiter.callback.before.test.IgnoreHeadlessExceptionExtension;
 import io.github.astrapi69.menu.pf4j.extension.DesktopMenuExtensionPoint;
 import io.github.astrapi69.throwable.RuntimeExceptionDecorator;
+import org.pf4j.PluginWrapper;
 
 /**
  * Test class for the {@link DesktopMenuPlugin} plugin
@@ -86,6 +87,16 @@ public class DesktopMenuPluginTest
 		// start and load all plugins of application
 		pluginManager.loadPlugins();
 		pluginManager.startPlugins();
+
+
+		List<Class<?>> extensionClasses = pluginManager.getExtensionClasses("menu-plugin");
+		// Check if plugins were loaded successfully
+		List<PluginWrapper> plugins = pluginManager.getPlugins();
+		plugins.forEach(plugin -> {
+			System.out.println("Plugin: " + plugin.getPluginId() + " is in state: " +
+					plugin.getPluginState()
+			);
+		});
 
 		// retrieve all extension points for "menu-plugin" extension point
 		List<DesktopMenuExtensionPoint> extensionPoints = pluginManager

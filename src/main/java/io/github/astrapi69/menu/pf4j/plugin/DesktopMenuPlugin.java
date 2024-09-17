@@ -25,6 +25,7 @@
 package io.github.astrapi69.menu.pf4j.plugin;
 
 import org.pf4j.Plugin;
+import org.pf4j.PluginWrapper;
 
 /**
  * Plugin class for the DesktopMenuPlugin, providing lifecycle methods for starting, stopping, and
@@ -36,11 +37,12 @@ public class DesktopMenuPlugin extends Plugin
 	/**
 	 * Constructor for {@link DesktopMenuPlugin}. Provides access to the plugin context, including
 	 * plugin manager, descriptor, etc.
+	 *
+	 * @param wrapper the wrapper
 	 */
-	public DesktopMenuPlugin()
+	public DesktopMenuPlugin(PluginWrapper wrapper)
 	{
-		// you can use "wrapper" to have access to the plugin context (plugin manager, descriptor,
-		// ...)
+		super(wrapper);
 	}
 
 	/**
