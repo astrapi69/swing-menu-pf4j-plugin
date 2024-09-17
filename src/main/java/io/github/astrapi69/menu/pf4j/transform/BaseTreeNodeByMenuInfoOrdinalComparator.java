@@ -39,6 +39,13 @@ public class BaseTreeNodeByMenuInfoOrdinalComparator
 {
 
 	/**
+	 * Instantiates a new {@link BaseTreeNodeByMenuInfoOrdinalComparator} object
+	 */
+	public BaseTreeNodeByMenuInfoOrdinalComparator()
+	{
+	}
+
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override

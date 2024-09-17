@@ -46,6 +46,13 @@ public class DesktopMenuExtension implements DesktopMenuExtensionPoint
 {
 
 	/**
+	 * Instantiates a new {@link DesktopMenuExtension} object
+	 */
+	public DesktopMenuExtension()
+	{
+	}
+
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override

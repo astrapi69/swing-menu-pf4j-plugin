@@ -56,6 +56,19 @@ public final class JMenuBarFactory
 	}
 
 	/**
+	 * Builds a {@link JMenuBar} from the given root {@link BaseTreeNode} object.
+	 *
+	 * @param root
+	 *            the root node of the {@link BaseTreeNode} tree structure
+	 * @return the constructed {@link JMenuBar} object
+	 */
+	public static JMenuBar buildMenuBar(final @NonNull BaseTreeNode<MenuInfo, Long> root)
+	{
+		Map<String, ActionListener> actionListenerMap = newActionListenerMap(root);
+		return buildMenuBar(root, actionListenerMap);
+	}
+
+	/**
 	 * Builds a {@link JMenuBar} from the given root {@link BaseTreeNode} object and a map of
 	 * {@link ActionListener}.
 	 *
@@ -76,26 +89,6 @@ public final class JMenuBarFactory
 		root.accept(menuInfoLongBaseTreeNode -> MenuVisitorExtensions.visitAndAddToMap(
 			menuInfoLongBaseTreeNode, actionListenerMap, menuMap, menuItemMap, menuBarMap));
 		root.accept(menuInfoLongBaseTreeNode -> MenuVisitorExtensions
-			.visitAndAddToMenu(menuInfoLongBaseTreeNode, menuMap, menuItemMap, menuBarMap));
-		return menuBarMap.get(BaseMenuId.MENU_BAR.propertiesKey());
-	}
-
-	/**
-	 * Builds a {@link JMenuBar} from the given root {@link BaseTreeNode} object.
-	 *
-	 * @param root
-	 *            the root node of the {@link BaseTreeNode} tree structure
-	 * @return the constructed {@link JMenuBar} object
-	 */
-	public static JMenuBar buildMenuBar(final @NonNull BaseTreeNode<MenuInfo, Long> root)
-	{
-		final Map<String, JMenu> menuMap = new LinkedHashMap<>();
-		final Map<String, JMenuItem> menuItemMap = new LinkedHashMap<>();
-		final Map<String, JMenuBar> menuBarMap = new LinkedHashMap<>();
-		MenuPluginVisitorExtensions.visitAndAddToMap(root, menuMap, menuItemMap, menuBarMap);
-		root.accept(menuInfoLongBaseTreeNode -> MenuPluginVisitorExtensions
-			.visitAndAddToMap(menuInfoLongBaseTreeNode, menuMap, menuItemMap, menuBarMap));
-		root.accept(menuInfoLongBaseTreeNode -> MenuPluginVisitorExtensions
 			.visitAndAddToMenu(menuInfoLongBaseTreeNode, menuMap, menuItemMap, menuBarMap));
 		return menuBarMap.get(BaseMenuId.MENU_BAR.propertiesKey());
 	}

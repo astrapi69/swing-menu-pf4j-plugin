@@ -48,7 +48,6 @@ public final class TreeNodeMerger
 	{
 	}
 
-
 	/**
 	 * Merges a list of tree nodes by removing the first element from the list and merging the rest
 	 *
