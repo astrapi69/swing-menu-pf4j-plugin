@@ -1,8 +1,7 @@
-import java.text.SimpleDateFormat
-
 jar {
     manifest {
         attributes(
+                "Manifest-Version"      : "1.0",
                 "Plugin-Class"          : "io.github.astrapi69.menu.pf4j.plugin.DesktopMenuPlugin",
                 "Plugin-Id"             : project.name,
                 "Plugin-Version"        : project.version,
