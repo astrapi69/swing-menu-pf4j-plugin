@@ -36,6 +36,7 @@ java {
 
 tasks.withType(JavaCompile).configureEach { javaCompiler ->
     options.encoding = "UTF-8"
+    options.annotationProcessorPath = configurations.annotationProcessor
     // uncomment the next line for build with compiler argument -Xlint:deprecation
     // options.compilerArgs << "-Xlint:deprecation"
     // uncomment the next line for build with compiler argument -Xlint:unchecked

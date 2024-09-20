@@ -89,7 +89,8 @@ public class DesktopMenuPluginTest
 		pluginManager.startPlugins();
 
 
-		List<Class<?>> extensionClasses = pluginManager.getExtensionClasses("menu-plugin");
+		List<Class<?>> extensionClasses = pluginManager
+			.getExtensionClasses("swing-menu-pf4j-plugin");
 		// Check if plugins were loaded successfully
 		List<PluginWrapper> plugins = pluginManager.getPlugins();
 		plugins.forEach(plugin -> {
@@ -97,7 +98,7 @@ public class DesktopMenuPluginTest
 				"Plugin: " + plugin.getPluginId() + " is in state: " + plugin.getPluginState());
 		});
 
-		// retrieve all extension points for "menu-plugin" extension point
+		// retrieve all extension points for "swing-menu-pf4j-plugin" extension point
 		List<DesktopMenuExtensionPoint> extensionPoints = pluginManager
 			.getExtensions(DesktopMenuExtensionPoint.class);
 		Optional<DesktopMenuExtensionPoint> desktopMenuExtensionPointOptional = ListExtensions
