@@ -38,7 +38,8 @@ public class DesktopMenuPlugin extends Plugin
 	 * Constructor for {@link DesktopMenuPlugin}. Provides access to the plugin context, including
 	 * plugin manager, descriptor, etc.
 	 *
-	 * @param wrapper the wrapper
+	 * @param wrapper
+	 *            the wrapper
 	 */
 	public DesktopMenuPlugin(PluginWrapper wrapper)
 	{

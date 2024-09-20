@@ -41,6 +41,7 @@ import org.pf4j.DefaultExtensionFinder;
 import org.pf4j.DefaultPluginManager;
 import org.pf4j.ExtensionFinder;
 import org.pf4j.PluginManager;
+import org.pf4j.PluginWrapper;
 
 import io.github.astrapi69.awt.window.adapter.CloseWindow;
 import io.github.astrapi69.collection.list.ListExtensions;
@@ -50,7 +51,6 @@ import io.github.astrapi69.file.search.PathFinder;
 import io.github.astrapi69.junit.jupiter.callback.before.test.IgnoreHeadlessExceptionExtension;
 import io.github.astrapi69.menu.pf4j.extension.DesktopMenuExtensionPoint;
 import io.github.astrapi69.throwable.RuntimeExceptionDecorator;
-import org.pf4j.PluginWrapper;
 
 /**
  * Test class for the {@link DesktopMenuPlugin} plugin
@@ -93,9 +93,8 @@ public class DesktopMenuPluginTest
 		// Check if plugins were loaded successfully
 		List<PluginWrapper> plugins = pluginManager.getPlugins();
 		plugins.forEach(plugin -> {
-			System.out.println("Plugin: " + plugin.getPluginId() + " is in state: " +
-					plugin.getPluginState()
-			);
+			System.out.println(
+				"Plugin: " + plugin.getPluginId() + " is in state: " + plugin.getPluginState());
 		});
 
 		// retrieve all extension points for "menu-plugin" extension point
